@@ -56,16 +56,18 @@ const Form = () =>  {
         let temp: IQuestionAnswer[] = []
         stkhs.forEach((stkh: IStkh) => {
             stkh.questions.forEach((question) => {
+                let num = Math.floor(Math.random() * 3) + 2
                 temp.push({
                     stkhId: stkh.id,
                     questionId: question.id,
-                    answerId: '',
-                    values: null
+                    answerId: question.answers[num].id,
+                    values: question.answers[num].values
                 })
             })
         })
         setAnswers(temp)
         setLoading(false)
+        setDisabled(false)
     }
 
     //verify form

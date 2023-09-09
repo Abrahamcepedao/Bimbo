@@ -24,30 +24,6 @@ import stkhs from '@/utils/constants/stkhs'
 //dynamic components
 const Radar = dynamic(() => import('@/components/reusable/graphs/Radar'), { ssr: false })
 
-const data = [
-    { "dimension": "Subsidiaridad", "resultado": 7, "promedio": 6 },
-    { "dimension": "Solidaridad", "resultado": 4, "promedio": 2 },
-    { "dimension": "Dignidad de la persona", "resultado": 8, "promedio": 5 },
-    { "dimension": "Destino universal de los bienes", "resultado": 7, "promedio": 9 },
-    { "dimension": "Bien común dentro", "resultado": 7, "promedio": 2 },
-    { "dimension": "Bien común fuera", "resultado": 3, "promedio": 5 },
-]
-
-const data2 = [
-    { "dimension": "Sueldo", "resultado": 7, "promedio": 6 },
-    { "dimension": "Prestaciones", "resultado": 7, "promedio": 6 },
-    { "dimension": "Información", "resultado": 3, "promedio": 6 },
-    { "dimension": "Reconocimiento", "resultado": 7, "promedio": 6 },
-    { "dimension": "Condiciones físicas de trabajo digno", "resultado": 7, "promedio": 6 },
-    { "dimension": "Buen ambiente", "resultado": 7, "promedio":2 },
-    { "dimension": "Equilibrio de vidad", "resultado": 8, "promedio": 6 },
-    { "dimension": "Formación y capacitación", "resultado": 7, "promedio": 6 },
-    { "dimension": "Estabilidad", "resultado": 4, "promedio": 6 },
-    { "dimension": "Oportunidades de crecimiento (visibilidad)", "resultado": 7, "promedio": 6 },
-    { "dimension": "Compartir un propósito trascendente", "resultado": 7, "promedio": 9 },
-    { "dimension": "Múltiplo entre el que más gana y el que menos", "resultado": 7, "promedio": 6 },
-]
-
 const dimensiones = {
     subsidiaridad: 'Subsidiaridad',
     solidaridad: 'Solidaridad',
@@ -109,7 +85,6 @@ const Analysis = () => {
 
     //handle setup data
     const handleSetupData = (arr: IQuestionAnswer[]) => {
-        console.log(arr)
         let tempRdar1: any[] = []
 
         Object.keys(dimensiones).forEach((dim: string) => {
@@ -120,12 +95,11 @@ const Analysis = () => {
             let tempObj = {
                 dimension: dimensiones[dim as 'destino'],
                 resultado: sum,
-                promedio: Math.floor(Math.random() * 10) + 1
+                promedio: Math.floor(Math.random() * 10) + 6
             }
             tempRdar1.push(tempObj)
         })
     
-        console.log(tempRdar1)
         setRadar1(tempRdar1)
 
         //calculate stkh
@@ -136,22 +110,21 @@ const Analysis = () => {
     const handleCalculateStkh = (val: string, arr: IQuestionAnswer[]) => {
         let tempRdar2: any[] = []
         let temp: IQuestionAnswer[] = [...arr].filter(ans => ans.stkhId === val)
-        console.log(temp)
+
         temp.forEach(ans => {
             let sum = 0
             Object.keys(ans.values!).forEach((dim: string) => {
                 sum += ans.values![dim as 'destino'] || 0
             })
             let questionLabel = stkhs.find(stkh => stkh.id === ans.stkhId)?.questions.find(q => q.id === ans.questionId)?.label
-            console.log(questionLabel)
+
             let tempObj = {
                 dimension: questionLabel,
                 resultado: sum,
-                promedio: Math.floor(Math.random() * 10) + 1
+                promedio: Math.floor(Math.random() * 6) + 6
             }
             tempRdar2.push(tempObj)
         })
-        console.log(tempRdar2)
         setRadar2(tempRdar2)
     }
 
