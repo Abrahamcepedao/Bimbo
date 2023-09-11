@@ -11,6 +11,7 @@ import Input from '../../reusable/inputs/Input'
 import Select from '../../reusable/inputs/Select'
 import Check from '../../reusable/inputs/Check'
 import Button from '../../reusable/buttons/Button'
+import Loader from '@/components/reusable/loader/Loader'
 
 //antd
 import { message } from 'antd'
@@ -113,10 +114,44 @@ const Form = () =>  {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if(!validateForm()) return 
+        setLoading(true)
         dispatch(setReduxCompany(formData.find(inp => inp.name === 'company')?.value as string || ''))
         localStorage.setItem('company', formData.find(inp => inp.name === 'company')?.value as string)
-        push('/questions')
 
+        //set loading
+        try {
+            let temp = {
+                name: formData.find(inp => inp.name === 'name')?.value as string,
+                lastname: formData.find(inp => inp.name === 'lastname')?.value as string,
+                mail: formData.find(inp => inp.name === 'mail')?.value as string,
+                phone: formData.find(inp => inp.name === 'phone')?.value as string,
+                company: formData.find(inp => inp.name === 'company')?.value as string,
+                estate: formData.find(inp => inp.name === 'estate')?.value as string,
+                city: formData.find(inp => inp.name === 'city')?.value as string,
+                org: (formData.find(inp => inp.name === 'org')?.value as ICheckItem[]).map(item => item.checked ? item.label : null).filter(item => item !== null)
+            }
+            console.log(temp)
+            const res = await fetch('/api/users/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(temp)
+            })
+            const data = await res.json()
+            console.log(data)
+            if(data.status === 200) {
+                setLoading(false)
+                push('/questions')
+            } else {
+                message.error('Error al guardar los datos')
+                setLoading(false)
+            }
+
+        } catch (error) {
+            message.error('Error al guardar los datos')
+            setLoading(false)
+        }
     }
 
     return (
@@ -142,6 +177,11 @@ const Form = () =>  {
                 <div className='sm:col-span-2'>
                     <Button text='Enviar' type='submit' variant='gradient'/>
                 </div>
+                {loading && (
+                    <div className='sm:col-span-2'>
+                        <Loader/>
+                    </div>
+                )}
             </form>
         </div>
     )
