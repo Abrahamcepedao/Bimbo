@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 
 //components
 import RadioInp from '@/components/reusable/inputs/RadioInp'
-import Button from '../../reusable/buttons/Button'
+import Button from '../../../../reusable/buttons/Button'
 
 //mui
 import Stepper from '@mui/material/Stepper';
@@ -21,7 +21,7 @@ import { useDispatch } from 'react-redux'
 import { setReduxAnswers } from '@/app/GlobalRedux/Features/answers/answersSlice';
 
 //constants
-import stkhs from '@/utils/constants/stkhs'
+import stkhs_short from '@/utils/constants/stkh_short'
 
 //interfaces
 import { IStkh, IQuestionAnswer } from '@/utils/interfaces/types'
@@ -54,14 +54,15 @@ const Form = () =>  {
     const setupAnswers = () => {
         //set answer
         let temp: IQuestionAnswer[] = []
-        stkhs.forEach((stkh: IStkh) => {
+        stkhs_short.forEach((stkh: IStkh) => {
             stkh.questions.forEach((question) => {
-                let num = Math.floor(Math.random() * 3) + 2
+                let num = Math.floor(Math.random() * 3)
                 temp.push({
                     stkhId: stkh.id,
                     questionId: question.id,
+                    dimId: question.dim || '',
                     answerId: question.answers[num].id,
-                    values: question.answers[num].values
+                    value: question.answers[num].value
                 })
             })
         })
@@ -74,20 +75,20 @@ const Form = () =>  {
 
     //handle next
     const handleNext = () => {
-        if(activeStep === stkhs.length - 1) {
+        if(activeStep === stkhs_short.length - 1) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
                 dispatch(setReduxAnswers(answers))
-                localStorage.setItem('answers', JSON.stringify(answers))
-                push('/results')
+                localStorage.setItem('answers_short', JSON.stringify(answers))
+                push('/auto/short/results')
         } else {
-            verifyDisabled(answers, stkhs[activeStep+1].id)
+            verifyDisabled(answers, stkhs_short[activeStep+1].id)
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     };
 
     //handle back
     const handleBack = () => {
-        verifyDisabled(answers, stkhs[activeStep-1].id)
+        verifyDisabled(answers, stkhs_short[activeStep-1].id)
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
 
@@ -96,8 +97,8 @@ const Form = () =>  {
         let temp = [...answers]
         let i = temp.findIndex((item) => item.questionId === question_id)
         temp[i].answerId = e.currentTarget.value
-        let question_index = stkhs[activeStep].questions.findIndex((item) => item.id === question_id)
-        temp[i].values = stkhs[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.values || null
+        let question_index = stkhs_short[activeStep].questions.findIndex((item) => item.id === question_id)
+        temp[i].values = stkhs_short[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.values || null
 
         console.log(temp)
         setAnswers(temp)
@@ -125,16 +126,18 @@ const Form = () =>  {
             <div>
                 {!loading && (
                     <Stepper activeStep={activeStep} orientation="vertical">
-                        {stkhs.map((stkh, index) => (
+                        {stkhs_short.map((stkh, index) => (
                             <Step key={index}>
                                 <StepLabel><p className='bold text-xl opacity-90 text-white_primary'>{stkh.name} ({stkh.id})</p></StepLabel>
                                 <StepContent>
                                     <div>
                                         {stkh.questions.map((question, i) => (
                                             <div key={i} className='mb-4'>
-                                                <div className='question_lbl'>
-                                                    <p className='bold'>{index+1}.{i+1} {question.label}</p>
-                                                </div>
+                                                {question.label && (
+                                                    <div className='question_lbl'>
+                                                        <p className='bold'>{index+1}.{i+1} {question.label}</p>
+                                                    </div>
+                                                )}
                                                 <div>
                                                     <p className='question'>{question.question}</p>
                                                 </div>
@@ -144,7 +147,7 @@ const Form = () =>  {
                                     </div>
                                     <div className='grid grid-cols-2 gap-2 max-w-sm'>
                                         {activeStep !== 0 && (<Button text='Anterior' onClick={handleBack} variant='cancel'/>)}
-                                        <Button onClick={handleNext} text={activeStep !== stkhs.length -1 ? 'Siguiente' : 'Terminar'} disabled={disabled} variant='primary'/>
+                                        <Button onClick={handleNext} text={activeStep !== stkhs_short.length -1 ? 'Siguiente' : 'Terminar'} disabled={disabled} variant='primary'/>
                                     </div>
                                 </StepContent>
                             </Step>

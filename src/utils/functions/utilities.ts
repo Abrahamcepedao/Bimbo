@@ -4,7 +4,18 @@ const validateEmail = (email: string) => {
     return emailPattern.test(email);
 };
 
+/**
+ * Opens a URL in a new browser tab.
+ * 
+ * @param url - The URL to open in the new tab.
+ */
+const openInNewTab = (url: string) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+};
+
 
 export {
-    validateEmail
+    validateEmail,
+    openInNewTab
 }

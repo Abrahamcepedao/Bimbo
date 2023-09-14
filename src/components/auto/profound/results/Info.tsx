@@ -7,8 +7,8 @@ import { useRef } from 'react'
 import Link from "next/link"
 
 //components
-import IndexTable from "./IndexTable"
-import Button from "../reusable/buttons/Button"
+import IndexTable from "../../reusable/IndexTable"
+import Button from '@/components/reusable/buttons/Button'
 
 //pdf canvas
 import html2canvas from 'html2canvas';

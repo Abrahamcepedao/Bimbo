@@ -20,6 +20,8 @@ import { message } from 'antd'
 import form_inputs from '@/utils/constants/form_inputs'
 import estados from '@/utils/constants/estados'
 import municipios from '@/utils/constants/municipios'
+import company_size from '@/utils/constants/company_size'
+import sectors from '@/utils/constants/sectors'
 
 //redux
 import { useDispatch } from 'react-redux'
@@ -56,7 +58,7 @@ const Form = () =>  {
 
         //organizations
         let tempOrgs: ICheckItem[] = []
-        formData[7].options?.forEach(org => {
+        formData[9].options?.forEach(org => {
             tempOrgs.push({ label: org.label, checked: false })
         })
         
@@ -101,13 +103,15 @@ const Form = () =>  {
                 else if(inp.name === 'city') return { ...inp, value: tempMunicipios[1].label, options: tempMunicipios }
                 else return inp
             }))
-        } else if(name === 'city') setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: val } : inp))
+        } else if (name === 'city') setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: val } : inp))
+        else if (name === 'company_size') setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: company_size.find((el) => el.value === val)?.label || '' } : inp))
+        else if (name === 'sector') setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: sectors.find((el) => el.value === val)?.label || '' } : inp))
     }
 
     //handle check change
     const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
         const { checked } = e.target
-        setFormData(prevState => prevState.map(inp => inp.name === 'org' ? { ...inp, value: (prevState[7].value as ICheckItem[]).map((item, index) => index === i ? { ...item, checked } : item) } : inp))
+        setFormData(prevState => prevState.map(inp => inp.name === 'org' ? { ...inp, value: (prevState[9].value as ICheckItem[]).map((item, index) => index === i ? { ...item, checked } : item) } : inp))
     }
 
     //handl submit
@@ -126,6 +130,8 @@ const Form = () =>  {
                 mail: formData.find(inp => inp.name === 'mail')?.value as string,
                 phone: formData.find(inp => inp.name === 'phone')?.value as string,
                 company: formData.find(inp => inp.name === 'company')?.value as string,
+                company_size: formData.find(inp => inp.name === 'company_size')?.value as string,
+                sector: formData.find(inp => inp.name === 'sector')?.value as string,
                 estate: formData.find(inp => inp.name === 'estate')?.value as string,
                 city: formData.find(inp => inp.name === 'city')?.value as string,
                 org: (formData.find(inp => inp.name === 'org')?.value as ICheckItem[]).map(item => item.checked ? item.label : null).filter(item => item !== null)
@@ -142,7 +148,7 @@ const Form = () =>  {
             console.log(data)
             if(data.status === 200) {
                 setLoading(false)
-                push('/questions')
+                push('/checklist')
             } else {
                 message.error('Error al guardar los datos')
                 setLoading(false)

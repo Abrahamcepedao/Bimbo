@@ -6,17 +6,22 @@ interface IValues {
     destino?: number;
     bienDentro?: number;
     bienFuera?: number;
+    etica?: number;
+    calidad?: number;
+    materiales?: number;
 }
 
 interface IAnswer {
     id: string;
     answer: string;
-    values: IValues
+    values?: IValues,
+    value?: number
 }
 
 interface IQuestion {
     id: string;
-    label: string;
+    label?: string;
+    dim?: string;
     question: string;
     answers: IAnswer[];
 }
@@ -30,8 +35,10 @@ interface IStkh {
 interface IQuestionAnswer {
     stkhId: string;
     questionId: string;
+    dimId?: string;
     answerId: string;
-    values: IValues | null;
+    values?: IValues | null;
+    value?: number
 }
 
 /* <-------inputs-------> */
@@ -57,6 +64,54 @@ interface ICheckItem {
     checked: boolean;
 }
 
+interface IChecklistItem {
+    id: string;
+    title: string;
+    answer: number;
+}
+
+interface IChecklistAnswer {
+    id: number;
+    answer: string;
+}
+
+
+/* <-------table-------> */
+interface ITable {
+    data: ITableData[];
+    sum_etica: number;
+    sum_etica_max?: number;
+    sum_calidad: number;
+    sum_calidad_max?: number;
+    sum_riqueza: number;
+    sum_riqueza_max?: number;
+    sum_total: number;
+    sum_total_max?: number;
+}
+
+interface ITableData {
+    stkh: string;
+    riqueza: number;
+    riqueza_max?: number;
+    etica: number;
+    etica_max?: number;
+    calidad: number;
+    calidad_max?: number;
+    sum_total: number;
+    sum_total_max?: number;
+}
+
+/* <-------text-------> */
+interface IPointsList {
+    title: string;
+    points: IPoint[];
+    text: string;
+}
+interface IPoint {
+    title: string;
+    text: string;
+}
+
 export type {
     IQuestion,
     IAnswer,
@@ -65,5 +120,11 @@ export type {
     IQuestionAnswer,
     IInput,
     IOption,
-    ICheckItem
+    ICheckItem,
+    IChecklistItem,
+    IChecklistAnswer,
+    IPointsList,
+    IPoint,
+    ITable,
+    ITableData
 }

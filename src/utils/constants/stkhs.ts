@@ -1,6 +1,638 @@
 import { IStkh } from '../interfaces/types';
 
 const stkhs: IStkh[] = [
+    { id: 'AI', name: 'Socios y Accionistas', questions: [
+        { id: 'AI_1', dim: 'etica', question: '¿Los dueños o accionistas participan en la definición de los principios y valores de la empresa, y en la evaluación de cómo se viven?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_2', dim: 'etica', question: '¿La Asamblea de accionistas ha entregado al consejo de administración o CEO el “Mandato de Accionistas” a mediano / largo plazo indicando expectativas y límites en los temas estratégicos clave?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_3', dim: 'etica', question: '¿Existe y tiene vida un código de conducta/ética, acorde a los valores y principios de la empresa, que guie y comprometa la actuación de los accionistas y regule la relación entre dueños y el manejo de la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_4', dim: 'etica', question: '¿Existe un mecanismo de solución de conflictos relativos a la vivencia de los valores y principios entre la dirección general y el accionista?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_5', dim: 'etica', question: '¿Tienen los accionistas acceso a la información del negocio de manera regular, oportuna y suficiente que asegure la confianza en la actuación integral de la dirección?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_6', dim: 'etica', question: '¿El consejo de administración participa y aprueba  la planeación estratégica de la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_7', dim: 'etica', question: '¿Se cuenta con un mecanismo periódico de revisión y solución de posibles conflictos de interés de accionistas?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_8', dim: 'etica', question: '¿La congruencia e impacto con que se viven los principios y valores de la empresa son motivo de orgullo para los accionistas e inversionistas?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_', dim: 'etica', question: 'A través del cumplimiento de nuestro propósito y de nuestro modelo de gestión, damos motivos para que los accionistas se sientan orgullosos, más allá de la generación de valor económico', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_10', dim: 'calidad', question: '¿La Empresa cuenta con una estrategia de vinculación aentre los Accionistas e inversionistas y los grupos relacionados de la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_11', dim: 'calidad', question: '¿Se tiene establecido un programa de diálogo permanente con Accionistas e inversionistas para involucrarlos y comprometerlos en el proceso de RSE?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_12', dim: 'calidad', question: '¿Existe un programa de Evaluación del impacto en la calidad de vida de sus grupos relacionados y se informa a los accionistas e inversionistas?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_13', dim: 'calidad', question: 'Contamos con una robusta estrategia de negocio y tenemos identificados y cubiertos todos los posibles riesgos a los que la sociedad se puede someter', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_14', dim: 'riqueza', question: '¿Existen programas/eventos, en la empresa, que involucren la formación/concientización de los accionistas e inversionistas respecto de la responsabilidad de reducir la desigualdad?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_15', dim: 'riqueza', question: '¿Cuentan con programas de Inducción a los objetivos económicos, sociales, ambientales y de gobierno?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_16', dim: 'riqueza', question: '¿Existe una política de reparto de dividendos que  retribuya a los inversionistas según lo acordado parte del valor económico agregado?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_17', dim: 'riqueza', question: '¿Se realizan reuniones periódicas para informar a los inversionistas de la marcha y resultados de la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_18', dim: 'riqueza', question: '¿La situación económica, los estados financieros de la organización son informados a los Accionistas e inversionistas de manera adecuada y periódica?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_19', dim: 'riqueza', question: '¿Se asegura que eno exista información privilegiada que beneficie a unos accionistas e inversionistas con menoscabo de los intereses de otros, o incluso de la propia empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_20', dim: 'riqueza', question: '¿Se desarrollan Planes de inversión de innovación y/o de rentabilidad?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'AI_21', dim: 'riqueza', question: 'La rentabilidad de la empresa es competitiva y certeramente superior al tipo de interés de inversiones financieras sin riesgo', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+    ]},
+    { id: 'CB', name: 'Colaboradores', questions: [
+        { id: 'CB_1', dim: 'etica', question: 'La misión, visión, valores y el código de ética de la organización son difundidos a todo el personal a través de charlas, inducción de nuevas contrataciones, estrategias y planes de comunicación?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_2', dim: 'etica', question: '¿Los directivos y colaboradores comparten y viven  los valores, el código de ética y conducta en sus actividades, sobre todo ante dilemas, situaciones conflictivas?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_3', dim: 'etica', question: '¿La empresa cuenta con una política que vela por la promoción el respeto de los derechos humanos universales en la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_4', dim: 'etica', question: '¿La dirección aplica mecanismos de información, planeación, avance, resultados y retroalimentación, hacia y desde los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_5', dim: 'etica', question: '¿La organización cuenta con mecanismos concretos para medir la congruencia entre el decir y hacer del grupo ejecutivo?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_6', dim: 'etica', question: '¿La empresa respeta la libertad de credo de sus colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_7', dim: 'etica', question: '¿La organización forma a sus colaboradores en los valores de la empresa para ayudar a vivirlos en el trabajo?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_8', dim: 'etica', question: 'La empresa motiva a través de la formación y la coherencia entre los valores y principios éticos de la misma y promueve la actitud positiva y proactiva individual de todos sus colaboradores.', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_9', dim: 'etica', question: '¿El principio de respeto a la "dignidad de la persona" es comprendido y ampliamente promovido y vivido en la organización?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_10', dim: 'etica', question: '¿Los colaboradores participan en la planeación estratégica de la empresa, incluyendo los aspectos relacionados con su dimensión trascendente?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_11', dim: 'etica', question: '¿Se brindan estímulos para vivir los valores institucionales en la emepresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_12', dim: 'etica', question: '¿Se realiza un censo sobre la calidad de vida para los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_13', dim: 'etica', question: '¿Sientes que la empresa le da importancia a la vida familiar y te ayuda a ser un mejor padre o madre en tu casa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_14', dim: 'etica', question: 'La comunicación a mis colaboradores', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_15', dim: 'etica', question: 'En mi empresa se brinda la capacitación necesaria para el buen desempeño y desarrollo de los colaboradores', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_16', dim: 'etica', question: 'Me aseguro que se difunda la filosofía y los valores que le dan un sustento a su razón de ser', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_17', dim: 'calidad', question: '¿Existen programas/eventos, que permitan a su organización estar al tanto y cumplir con la legislación laboral y los cambios que en ésta se presenten?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_18', dim: 'calidad', question: '¿Existe un Sistema de Evaluación del Potencial de desarrollo y plan de vida y carrera de los colaboradores que propicie el auto crecimiento?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_19', dim: 'calidad', question: '¿Tiene la empresa una política de selección y contratación con procesos claros y transparentes?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_20', dim: 'calidad', question: '¿Cuenta la empresa con una política de no discriminación, definida formalmente al interior de la organización, e incluyente de todo tipo de personas?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_21', dim: 'calidad', question: '¿La empresa cuenta con un sistema evaluación y reconocimiento del desempeño de sus colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_22', dim: 'calidad', question: '¿Cuentan con mecanismos que permitan incentivar la participación y la productividad de los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_23', dim: 'calidad', question: '¿Cuenta la empresa con políticas que promueven el respeto a la dignidad e integridad de las personas?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_24', dim: 'calidad', question: '¿La empresa tiene programas de apoyo a la maternidad/paternidad y al cuidado de los hijos de los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_25', dim: 'calidad', question: '¿Cuentan con esquemas (como un buzón de sugerencias) que promuevan la participación de sus colaboradores en la gestión de la empresa, y reconoce las iniciativas de los mismos?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_26', dim: 'calidad', question: '¿La empresa cuenta con espacios y mecanismos de diálogo transparentes entre administración y colaboradores en lo particular, y con la representación sindical, en su caso?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_27', dim: 'calidad', question: '¿La empresa procura la calidad de vida de sus colaboradores a través de programas que ayuden al balance de la vida laboral con la vida e integración familiar?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_28', dim: 'calidad', question: '¿La empresa realiza estudios  de ambiente  laboral (anónimo), y se promueve un clima laboral positivo??', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_29', dim: 'calidad', question: 'Las condiciones de trabajo de mi empresa son seguras, ergonómicas y promueven un buen ambiente para los colaboradores', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_30', dim: 'calidad', question: 'En mi empresa hago lo necesario para que mis colaboradores  cuentan con un trabajo seguro y estable', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_31', dim: 'riqueza', question: '¿La dirección desarrolla programas para formar en economía, finanzas personanles y familiares a las personas que integran la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_32', dim: 'riqueza', question: '¿La empresa posee una política integral, justa y transparente de remuneraciones que mejora año a año?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_33', dim: 'riqueza', question: '¿La empresa cuenta con un sistema de bonos por cumplimiento de metas/productividad/participación de utilidades?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_34', dim: 'riqueza', question: '¿Cuenta la empresa con un sistema de beneficios al personal más allá de lo legal que sea aplicado con justicia y equidad para todos y no discriminatorio?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_35', dim: 'riqueza', question: '¿Existe algún tablero de control y seguimiento con indicadores sobre el avance en la satisfacción de las necesidades de sus colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_36', dim: 'riqueza', question: '¿Se lleva a cabo una auditoría en asuntos laborales revisando los temas legales y las prácticas y lineamientos señalados por los accionistas? remuneraciones, inclusión, capacitación, promociones, trabajo en equipos, delegación, participación, etc.', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_37', dim: 'riqueza', question: '¿Existe un plan de formación de patrimonio para los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_38', dim: 'riqueza', question: '¿Existe un plan de participación en el capital para los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_39', dim: 'riqueza', question: '¿Existe un sistema de contabilidad por stakeholders sobre el Estado de Distribución de Riqueza generado por la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_40', dim: 'riqueza', question: '¿Existe un semáforo del bienestar de los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_41', dim: 'riqueza', question: '¿Existe una política de compensación extraordinaria ligada a resultados para los colaboradores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_42', dim: 'riqueza', question: 'El sueldo que otorgo a los colaboradores de mi empresa es:', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_43', dim: 'riqueza', question: 'El paquete de prestaciones y beneficios que otorgo a los colaboradores de mi empresa es:', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'CB_44', dim: 'riqueza', question: 'En mi empresa procuro que la brecha salarial sea menor entre las posiciones operativas y gerenciales', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+    ]},
+    { id: 'PV', name: 'Provedores', questions: [
+        { id: 'PV_1', dim: 'etica', question: '¿La organización cuenta con un programa para difundir los valores y principios de la organización en la cadena de proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_2', dim: 'etica', question: 'En general, nos aseguramos que las personas que conforman nuestros proveedores sean afines a nosotros, relacionándose con sus grupos de interés de forma similar a la nuestra y compartiendo nuestros principios y valoes', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_3', dim: 'etica', question: '¿Se generan condiciones de competenca leal, transparente y de respeto, sin importar el poder económico o presencia de mercado de cada uno de los proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_4', dim: 'etica', question: '¿Cuenta la empresa con instrumentos que aseguran el respeto de la propiedad intelectual de los proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_5', dim: 'etica', question: '¿Existen programas de trabajo con proveedores para el mejoramiento mutuo y la congruencia con sus principios y códigos de conducta?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_6', dim: 'etica', question: '¿Existe  un plan de innovación y productividad de mediano plazo para proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_7', dim: 'etica', question: '¿Se realizan evaluaciones comparativas de las ofertas de proveedores para elegir y transparentar las decisiones de compra?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_8', dim: 'calidad', question: '¿Cuenta la empresa con mecanismos, transparentes y legales que le permitan conocer las prácticas laborales de sus proveedores', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_9', dim: 'calidad', question: '¿Existen reglas sobre las atenciones o regalos que los colaboradores pueden aceptar de los proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_10', dim: 'calidad', question: '¿La empresa cuenta con reglas precisas y documentadas para el trato respetuoso con sus proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_11', dim: 'calidad', question: '¿Se tienen establecidos mecanismos precisos para la conciliación de diferendos con sus proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_12', dim: 'calidad', question: '¿Existen programas o estrategias que incentiven las buenas prácticas laborales entre sus proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_13', dim: 'calidad', question: '¿Cuenta la empresa con procesos claros y transparentes para la selección, contratación y evaluación de proveedores', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_14', dim: 'calidad', question: '¿Se rechaza la posibilidad de trabajar con proveedores que tengan  malas prácticas laborales o ambientales?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_15', dim: 'calidad', question: '¿Se aplica una encuesta anual (anónima) a provedores, respecto a la relación comercial con la empresa?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_16', dim: 'riqueza', question: '¿Cuenta a empresa con políticas de negociación justa y equilibrada con sus proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_17', dim: 'riqueza', question: '¿La empresa posee y cumple una política de pago a sus proveedores, con indicadores, que obligue al respeto de lo pactado y les permita su sustentabilidad económica en el tiempo?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_18', dim: 'riqueza', question: '¿Cuenta la empresa con programas y/o eventos que involucren el desarrollo de sus proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_19', dim: 'riqueza', question: '¿Privilegia la empresala contratación de proveedores locales con el fin de contribuir al desarrollo de la misma comunidad?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_20', dim: 'riqueza', question: '¿Se desarrollan sistemáticamente acciones proactivas y recurrentes para detectar las necesidades de sus proveedores y contribuir a su desarrollo?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_21', dim: 'riqueza', question: '¿Existen mecanismos que le permitan a la empresa conocer Óomo es evaluada por sus proveedores?', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_22', dim: 'riqueza', question: 'Pagamos en condiciones y plazos exigentes pero razonables y de mercado', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+        { id: 'PV_23', dim: 'riqueza', question: 'Sin excepción, honramos nuestra palabra y respetamos todo lo que ofrecemos y acordamos con nuestros proveedores', answers: [ 
+            {id: '5', value: 5, answer: 'Superior' }, 
+            {id: '4', value: 4, answer: 'Superior' }, 
+            {id: '3', value: 3, answer: 'Superior' }, 
+            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '1', value: 1, answer: 'Inferior' } 
+        ]},
+    ]},
+]
+/* 
+
+
+
+
+*/
+
+
+/* const stkhs: IStkh[] = [
     { id: 'CB', name: 'Colaboradores', questions: [
         { id: 'CB_1', label: 'Sueldo', question: 'El sueldo que otorgo a los colaboradores de mi empresa es:', answers: [
             { id: '1', answer: 'El salario mínimo', values: { subsidiaridad: -1, solidaridad: -1, dignidad: -1, destino: -1, bienDentro: -1, bienFuera: -1 } },
@@ -168,7 +800,7 @@ const stkhs: IStkh[] = [
             { id: '5', answer: 'Resp5', values: { subsidiaridad: 1, solidaridad: 2, dignidad: 2, destino: 2 } }]
         }
     ]}
-]
+] */
 
 
 /* 

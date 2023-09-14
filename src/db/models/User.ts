@@ -6,6 +6,8 @@ export interface User extends mongoose.Document {
     phone: string,
     mail: string,
     company: string,
+    company_size: string,
+    sector: string,
     position: string,
     org: string[],
     estate: string,
@@ -32,6 +34,14 @@ const userSchema = new mongoose.Schema<User>({
         required: false,
     },
     company: {
+        type: String,
+        required: false,
+    },
+    company_size: {
+        type: String,
+        required: false,
+    },
+    sector: {
         type: String,
         required: false,
     },

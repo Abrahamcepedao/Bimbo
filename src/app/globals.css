@@ -17,16 +17,19 @@
     @apply text-xs sm:text-sm text-white_primary bold opacity-60 mb-2;
   }
   .bold {
-    @apply font-bold;
+    @apply !font-bold;
   }
   .question {
     @apply text-lg text-white_primary bold;
   }
   .text {
-    @apply text-base text-white_primary mb-2;
+    @apply text-base font-light text-white_primary mb-2;
   }
   .icon {
     @apply text-white_primary scale;
+  }
+  .dark_icon {
+    @apply text-dark_primary scale;
   }
   .link {
     @apply text-xs sm:text-sm text-blue-500 bold underline;
@@ -47,20 +50,35 @@
   }
   
   /* <-------index table--------> */
+  .table_header {
+    @apply text-xs sm:text-sm bg-trans_gray text-white_primary bold opacity-60 p-4 rounded-md;
+  }
+  .table_td {
+    @apply bold p-2 text-white_primary text-xs sm:text-sm rounded-md;
+  }
+  /* <-------index table--------> */
   .i_tbl_header {
-    @apply text-xs sm:text-sm bg-trans_gray text-white_primary bold opacity-60 p-4 flex justify-center items-center rounded-md;
+    @apply table_header flex_c_center;
   }
   .i_tbl_td {
-    @apply bold p-2 text-white_primary text-xs sm:text-sm flex justify-center flex-col items-center rounded-md;
+    @apply table_td flex justify-center flex-col items-center;
   }
   .i_tbl_td_1 {
-    @apply bg-trans_red text-red_primary; 
+    @apply bg-trans_red !text-red_primary; 
   }
   .i_tbl_td_2 {
-    @apply bg-trans_yellow text-yellow_primary; 
+    @apply bg-trans_yellow !text-yellow_primary; 
   }
   .i_tbl_td_3 {
-    @apply bg-trans_green text-green_primary; 
+    @apply bg-trans_green !text-green_primary; 
+  }
+
+  /* <-------matrix table--------> */
+  .m_tbl_header {
+    @apply table_header;
+  }
+  .m_tbl_td {
+    @apply table_td text-center;
   }
 
   /* <-------container--------> */
@@ -74,6 +92,9 @@
   /* <-------flex--------> */
   .flex_b_center {
     @apply flex justify-between items-center;
+  }
+  .flex_c_center {
+    @apply flex justify-center items-center;
   }
 
 

@@ -29,6 +29,7 @@ const config: Config = {
       },
       colors: {
         'white_primary': '#f5f5f5',
+        'dark_primary': '#02192B',
         'green_primary': '#4fd078',
         'red_primary': '#d3193e',
         'yellow_primary': '#ffc107',
