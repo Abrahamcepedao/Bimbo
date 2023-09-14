@@ -18,7 +18,7 @@ import StepContent from '@mui/material/StepContent';
 
 //redux
 import { useDispatch } from 'react-redux'
-import { setReduxAnswers } from '@/app/GlobalRedux/Features/answers/answersSlice';
+import { setReduxAnswersShort, setReduxAnswersIdShort } from '@/app/GlobalRedux/Features/answers/answersSlice';
 
 //constants
 import stkhs_short from '@/utils/constants/stkh_short'
@@ -77,8 +77,10 @@ const Form = () =>  {
     const handleNext = () => {
         if(activeStep === stkhs_short.length - 1) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                dispatch(setReduxAnswers(answers))
+                dispatch(setReduxAnswersShort(answers))
+                dispatch(setReduxAnswersIdShort(Date.now()))
                 localStorage.setItem('answers_short', JSON.stringify(answers))
+                localStorage.setItem('answers_id_short', Date.now().toString())
                 push('/auto/short/results')
         } else {
             verifyDisabled(answers, stkhs_short[activeStep+1].id)

@@ -48,6 +48,9 @@
   .circle_2 {
     @apply bg-blue_primary;
   }
+  .circle_3 {
+    @apply bg-blue_navy;
+  }
   
   /* <-------index table--------> */
   .table_header {

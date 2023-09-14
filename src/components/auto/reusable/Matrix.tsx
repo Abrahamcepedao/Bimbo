@@ -83,7 +83,7 @@ const Matrix = ({ table, scale }: Props) => {
                         <th className="m_tbl_header">Ética y transparencia</th>
                         <th className="m_tbl_header">Calidad de vida</th>
                         <th/>
-                        <th className="m_tbl_header">Índice de sostenibilidad {scale === 0 && '(max(: 9)'}</th>
+                        <th className="m_tbl_header">Índice de sostenibilidad {scale === 0 && '(max: 9)'}</th>
                         <th/>
                     </tr>
                 </thead>
@@ -102,13 +102,13 @@ const Matrix = ({ table, scale }: Props) => {
                     ))}
                     <tr>
                         <td/>
-                        <td className="m_tbl_header">Índice de congruencia {scale === 0 && '(max(: 24)'}</td>
+                        <td className="m_tbl_header">Índice de congruencia {scale === 0 && '(max: 24)'}</td>
                         <td className={`m_tbl_td ${calculateCongruencia(table.sum_riqueza, table.sum_riqueza_max)}`}>{table.sum_riqueza}{scale === 1 && `/${table.sum_riqueza_max}`}</td>
                         <td className={`m_tbl_td ${calculateCongruencia(table.sum_etica, table.sum_etica_max)}`}>{table.sum_etica}{scale === 1 && `/${table.sum_etica_max}`}</td>
                         <td className={`m_tbl_td ${calculateCongruencia(table.sum_calidad, table.sum_calidad_max)}`}>{table.sum_calidad}{scale === 1 && `/${table.sum_calidad_max}`}</td>
                         <td/>
                         <td className={`m_tbl_td ${calculateTotal(table.sum_total, table.sum_total_max)}`}>{table.sum_total}{scale === 1 && `/${table.sum_total_max}`}</td>
-                        <td className="m_tbl_header">Índice de bien común {scale === 0 && '(max(: 100)'}</td>
+                        <td className="m_tbl_header">Índice de bien común {scale === 0 && '(max: 100)'}</td>
                     </tr>
                 </tbody>
             </table>

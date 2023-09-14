@@ -25,10 +25,10 @@ import sectors from '@/utils/constants/sectors'
 
 //redux
 import { useDispatch } from 'react-redux'
-import { setReduxCompany } from '@/app/GlobalRedux/Features/data/dataSlice'
+import { setReduxCompany, setReduxUser } from '@/app/GlobalRedux/Features/data/dataSlice'
 
 //interfaces
-import { IInput, IOption, ICheckItem } from '@/utils/interfaces/types'
+import { IInput, IOption, ICheckItem, IUser } from '@/utils/interfaces/types'
 
 const Form = () =>  {
     //redux
@@ -38,7 +38,10 @@ const Form = () =>  {
     const { push } = useRouter()
 
     //useState - loading
-    const [loading, setLoading] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(false)
+
+    //useState - loading form
+    const [loadingForm, setLoadingForm] = useState<boolean>(true)
 
     //useState - form data
     const [formData, setFormData] = useState<IInput[]>(form_inputs)
@@ -69,7 +72,7 @@ const Form = () =>  {
             else return inp
         }))
 
-        setLoading(false)
+        setLoadingForm(false)
     }
 
     //validate form
@@ -124,19 +127,22 @@ const Form = () =>  {
 
         //set loading
         try {
-            let temp = {
+            let temp: IUser = {
                 name: formData.find(inp => inp.name === 'name')?.value as string,
                 lastname: formData.find(inp => inp.name === 'lastname')?.value as string,
                 mail: formData.find(inp => inp.name === 'mail')?.value as string,
                 phone: formData.find(inp => inp.name === 'phone')?.value as string,
+                position: formData.find(inp => inp.name === 'position')?.value as string,
                 company: formData.find(inp => inp.name === 'company')?.value as string,
-                company_size: formData.find(inp => inp.name === 'company_size')?.value as string,
-                sector: formData.find(inp => inp.name === 'sector')?.value as string,
+                company_size: company_size.find((el) => el.label === formData.find(inp => inp.name === 'company_size')?.value)?.value as string,
+                sector: sectors.find((el) => el.label === formData.find(inp => inp.name === 'sector')?.value)?.value as string,
                 estate: formData.find(inp => inp.name === 'estate')?.value as string,
                 city: formData.find(inp => inp.name === 'city')?.value as string,
-                org: (formData.find(inp => inp.name === 'org')?.value as ICheckItem[]).map(item => item.checked ? item.label : null).filter(item => item !== null)
+                org: (formData.find(inp => inp.name === 'org')?.value as ICheckItem[]).map(item => item.checked ? item.label : null).filter(item => item !== null) as string[],
+                createdAt: Date.now(), 
+                type: 'test',
+                checklist: []
             }
-            console.log(temp)
             const res = await fetch('/api/users/create', {
                 method: 'POST',
                 headers: {
@@ -147,6 +153,8 @@ const Form = () =>  {
             const data = await res.json()
             console.log(data)
             if(data.status === 200) {
+                dispatch(setReduxUser(temp))
+                localStorage.setItem('user', JSON.stringify(data.data))
                 setLoading(false)
                 push('/checklist')
             } else {
@@ -164,7 +172,7 @@ const Form = () =>  {
         <div className='max-w-xl m-auto pb-12'>
             <h5 className='subtitle_2 text-left'>Datos de contacto</h5>
             <form className='grid grid-cols-2 gap-4' onSubmit={handleSubmit}>
-                {!loading && formData.map((inp, i) => (
+                {!loadingForm && formData.map((inp, i) => (
                     <div key={i} className={`${inp.colSpan}`}>
                         {i === 5 && (
                             <div className='sm:col-span-2'>

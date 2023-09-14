@@ -1,7 +1,7 @@
 'use client'
 
 //react
-import { useState, ChangeEvent } from "react"
+import { useEffect, useState, ChangeEvent } from "react"
 
 //next
 import { useRouter } from "next/navigation"
@@ -9,21 +9,26 @@ import { useRouter } from "next/navigation"
 //components
 import RadioCheck from "../reusable/inputs/RadioCheck"
 import Button from "../reusable/buttons/Button"
+import Loader from "../reusable/loader/Loader"
 
 //redux
 import { useSelector, useDispatch } from "react-redux"
-import { selectChecklist, setReduxChecklist } from "@/app/GlobalRedux/Features/data/dataSlice"
+import { selectUser, setReduxChecklist, setReduxUser } from "@/app/GlobalRedux/Features/data/dataSlice"
 
 //constants
 import { checklist, checklist_answers } from "@/utils/constants/checklist"
 
+//antd
+import { message } from "antd"
+
 //interfaces
-import { IChecklistItem } from "@/utils/interfaces/types"
+import { IChecklistItem, IUser } from "@/utils/interfaces/types"
 
 
 const Form = () => {
     //redux
     const dispatch = useDispatch()
+    const reduxUser: IUser | null = useSelector(selectUser)
 
     //router
     const { push } = useRouter()
@@ -31,6 +36,24 @@ const Form = () => {
     //checklist
     const [checklistData, setCheckListData] = useState<IChecklistItem[]>(checklist)
 
+    //useState - loading
+    const [loading, setLoading] = useState<boolean>(false)
+
+    //useEffect 
+    useEffect(() => {
+        verifyUser()
+    }, [])
+
+    //verify user
+    const verifyUser = () => {
+        if (!reduxUser) {
+            let temp: IUser | null = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null
+            if (temp) {
+                dispatch(setReduxUser(temp))
+                setLoading(false)
+            } else push('/')
+        }
+    }
 
     //handle select checklist
     const handleSelectChecklist = (e: ChangeEvent<HTMLInputElement>, id: string) => {
@@ -41,12 +64,48 @@ const Form = () => {
         setCheckListData(newChecklist)
     }
 
+    //validate form
+    const validateForm = () => {
+        let flag = true
+        checklistData.forEach(item => {
+            if (item.answer === -1) flag = false
+        })
+        return flag
+    }
+
     //handle save checklist
-    const handleSaveChecklist = () => {
+    const handleSaveChecklist = async () => {
         console.log(checklistData)
+
+        if (!validateForm()) return message.error('Debes responder todas las preguntas')
+            
+
         localStorage.setItem('checklist', JSON.stringify(checklistData))
         dispatch(setReduxChecklist(checklistData))
-        push('/auto/short')
+        try {
+            setLoading(true)
+            const res = await fetch('/api/users/checklist/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ checklist: checklistData, mail: reduxUser?.mail})
+            })
+            const data = await res.json()
+            console.log(data)
+            if(data.status === 200) {
+                dispatch(setReduxUser({...reduxUser!, checklist: checklistData}))
+                localStorage.setItem('user', JSON.stringify({...reduxUser!, checklist: checklistData}))
+                setLoading(false)
+                push('/auto/short')
+            } else {
+                message.error('Error al guardar los datos')
+                setLoading(false)
+            }
+        } catch (error) {
+            message.error('Error al guardar los datos')
+            setLoading(false)
+        }
     }
 
     return (
@@ -76,7 +135,7 @@ const Form = () => {
                 <div className="mt-6">
                     <Button onClick={handleSaveChecklist} text="Continuar" variant='gradient'/>
                 </div>
-                
+                {loading && (<Loader/>)}
             </div>
         </div>
     )

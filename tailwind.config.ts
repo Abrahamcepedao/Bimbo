@@ -26,6 +26,7 @@ const config: Config = {
         'trans_green': 'rgba(79, 208, 120, 0.2)',
         'green_primary': '#4fd078',
         'blue_primary': '#139E9F',
+        'blue_navy': '#2270e5',
       },
       colors: {
         'white_primary': '#f5f5f5',

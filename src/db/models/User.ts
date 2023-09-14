@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import { IChecklistItem } from '@/utils/interfaces/types';
+
 export interface User extends mongoose.Document {
     name: string,
     lastname: string,
@@ -14,6 +16,7 @@ export interface User extends mongoose.Document {
     city: string,
     createdAt: number,
     type: string,
+    checklist: IChecklistItem[],
 }
 
 const userSchema = new mongoose.Schema<User>({
@@ -67,6 +70,10 @@ const userSchema = new mongoose.Schema<User>({
     },
     type: {
         type: String,
+        required: false,
+    },
+    checklist: {
+        type: [Object],
         required: false,
     },
 }, { collection: 'users'});

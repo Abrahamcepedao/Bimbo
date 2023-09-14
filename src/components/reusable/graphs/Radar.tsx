@@ -20,6 +20,7 @@ const CustomTooltip = ({ data }: {data: any}) => {
             <h3><b style={{color: '#02192B', fontSize: 20}}>{data.index}</b></h3>
             <p style={{color: data.data[0].color, fontWeight: 'bold'}}>{data.data[0].id}: {data.data[0].value}</p>
             <p style={{color: data.data[1].color, fontWeight: 'bold'}}>{data.data[1].id}: {data.data[1].value}</p>
+            <p style={{color: data.data[2].color, fontWeight: 'bold'}}>{data.data[2].id}: {data.data[2].value}</p>
         </div>
     );
 };
@@ -68,7 +69,7 @@ const Radar = ({ data }: Props) => {
       <ResponsiveRadar
           theme={theme}
           data={data}
-          keys={[ 'resultado', 'promedio' ]}
+          keys={[ 'resultado', 'promedio', 'ideal' ]}
           indexBy="dimension"
           valueFormat=">-.2f"
           margin={{ top: 100, right: 80, bottom: 100, left: 80 }}
@@ -77,7 +78,7 @@ const Radar = ({ data }: Props) => {
           dotSize={8}
           dotColor={{ theme: 'background' }}
           dotBorderWidth={2}
-          colors={[ '#4fd078', '#139E9F' ]}
+          colors={[ '#4fd078', '#139E9F', '#2270e5' ]}
           motionConfig="wobbly"
           gridLevels={0}
           curve="cardinalClosed"

@@ -27,7 +27,7 @@ export default function RadioCheck({ answer, answers, onChange }: Props) {
         >
             {/* <FormControlLabel value="0" control={<Radio style={{ color: formData.type === "0" ? "rgb(36, 153, 239)" : '#F0F5FE' }} />} label="Administrador" /> */}
             {answers.map((item, i) => (
-                <div className='flex_c_center'>
+                <div key={i} className='flex_c_center'>
                     <Radio value={item.id} style={{ color: answer.answer === item.id ? "rgb(36, 153, 239)" : '#F0F5FE' }} />
                 </div>
             ))}

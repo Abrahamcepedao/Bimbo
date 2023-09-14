@@ -64,17 +64,6 @@ interface ICheckItem {
     checked: boolean;
 }
 
-interface IChecklistItem {
-    id: string;
-    title: string;
-    answer: number;
-}
-
-interface IChecklistAnswer {
-    id: number;
-    answer: string;
-}
-
 
 /* <-------table-------> */
 interface ITable {
@@ -112,6 +101,47 @@ interface IPoint {
     text: string;
 }
 
+/* <-------user-------> */
+interface IUser {
+    name: string,
+    lastname: string,
+    phone: string,
+    mail: string,
+    company: string,
+    company_size: string,
+    sector: string,
+    position: string,
+    org: string[],
+    estate: string,
+    city: string,
+    createdAt: number,
+    type: string,
+    checklist: IChecklistItem[],
+}
+
+interface IChecklistItem {
+    id: string;
+    title: string;
+    answer: number;
+}
+
+interface IChecklistAnswer {
+    id: number;
+    answer: string;
+}
+
+/* <-------results-------> */
+interface IResults {
+    id: string;
+    mail: string;
+    type: string;
+    company_size: string;
+    sector: string;
+    createdAt: number;
+    results: ITable;
+}
+
+
 export type {
     IQuestion,
     IAnswer,
@@ -126,5 +156,7 @@ export type {
     IPointsList,
     IPoint,
     ITable,
-    ITableData
+    ITableData,
+    IUser,
+    IResults
 }

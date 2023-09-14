@@ -3,11 +3,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 //interfaces
-import { IChecklistItem } from '@/utils/interfaces/types'
+import { IChecklistItem, IUser } from '@/utils/interfaces/types'
 
 //initialState
 const initialState = {
     company: '',
+    user: null as IUser | null,
     checklist: [] as IChecklistItem[],
     selectedStkhs: [] as string[]
 }
@@ -20,6 +21,9 @@ export const dataSlice = createSlice({
         setReduxCompany: (state, action: PayloadAction<string>) => {
             state.company = action.payload
         },
+        setReduxUser: (state, action: PayloadAction<IUser>) => {
+            state.user = action.payload
+        },
         setReduxChecklist: (state, action: PayloadAction<IChecklistItem[]>) => {
             state.checklist = action.payload
         },
@@ -30,10 +34,11 @@ export const dataSlice = createSlice({
 })
 
 //actions
-export const { setReduxCompany, setReduxChecklist, setReduxSelectedStkhs } = dataSlice.actions
+export const { setReduxCompany, setReduxUser, setReduxChecklist, setReduxSelectedStkhs } = dataSlice.actions
 
 //selectors
 export const selectCompany = (state: any) => state.data.company
+export const selectUser = (state: any) => state.data.user
 export const selectChecklist = (state: any) => state.data.checklist
 export const selectSelectedStkhs = (state: any) => state.data.selectedStkhs
 

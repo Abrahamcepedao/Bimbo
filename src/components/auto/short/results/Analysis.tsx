@@ -9,15 +9,20 @@ import dynamic from 'next/dynamic'
 
 //redux
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAnswers, setReduxAnswers } from '@/app/GlobalRedux/Features/answers/answersSlice'
+import { selectAnswersShort, selectAnswersIdShort, setReduxAnswersShort, setReduxAnswersIdShort } from '@/app/GlobalRedux/Features/answers/answersSlice'
+import { selectUser, setReduxUser } from '@/app/GlobalRedux/Features/data/dataSlice'
 
 //components
 import Select from '../../../reusable/inputs/Select'
 import Legend from '../../reusable/Legend'
 import Matrix from '../../reusable/Matrix'
+import Loader from '@/components/reusable/loader/Loader'
+
+//antd
+import { message } from 'antd'
 
 //interfaces
-import { IInput, IQuestionAnswer, ITable, ITableData } from '@/utils/interfaces/types'
+import { IUser, IInput, IQuestionAnswer, ITable, ITableData, IResults } from '@/utils/interfaces/types'
 
 //constants
 import stkhs_short from '@/utils/constants/stkh_short'
@@ -31,10 +36,18 @@ const dimensiones = {
     calidad: 'Calidad de vida',
 }
 
+const dimensionesSum = {
+    riqueza: 'sum_riqueza',
+    etica: 'sum_etica',
+    calidad: 'sum_calidad',
+}
+
 const Analysis = () => {
     //redux
     const dispatch = useDispatch()
-    const reduxAnswers: IQuestionAnswer[] = useSelector(selectAnswers)
+    const reduxAnswers: IQuestionAnswer[] = useSelector(selectAnswersShort)
+    const reduxAnswersId: number = useSelector(selectAnswersIdShort)
+    const reduxUser: IUser | null = useSelector(selectUser)
 
     //router
     const { push } = useRouter()
@@ -62,6 +75,12 @@ const Analysis = () => {
     //useState - loading
     const [loading, setLoading] = useState<boolean>(true)
 
+    //useState - results
+    const [results, setResults] = useState<IResults[]>([])
+
+    //useState - results list
+    const [resultsList, setResultsList] = useState<IResults[]>([])
+
     //useState - table
     const [table, setTable] = useState<ITable>({ data: [], sum_etica: 0, sum_calidad: 0, sum_riqueza: 0, sum_total: 0,})
 
@@ -72,25 +91,129 @@ const Analysis = () => {
 
     //useEffect
     useEffect(() => {
-        handleVerifyAnswers()
-    }, [])
+        verifyAnswersId()
+        verifyUser()
+        verifyAnswers()
+        console.log(results)
+        if(reduxAnswers.length !== 0 && reduxUser !== null && reduxAnswersId !== -1 && table.data.length === 0) {
+            createTableData(reduxAnswers)
+        }
+    }, [reduxAnswers, reduxUser, reduxAnswersId])
+
+    //verify user
+    const verifyUser = () => {
+        if (!reduxUser) {
+            let temp: IUser | null = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null
+            if (temp) {
+                dispatch(setReduxUser(temp))
+            } else push('/')
+        } 
+    }
 
     //handle verify answers
-    const handleVerifyAnswers = () => {
-        if(reduxAnswers.length > 0) handleSetupData(reduxAnswers)
-        else {
+    const verifyAnswers = () => {
+        if(reduxAnswers.length === 0){
             let temp: IQuestionAnswer[] = JSON.parse(localStorage.getItem('answers_short') as string) || []
             console.log(temp)
             if(temp.length !== 0) {
-                dispatch(setReduxAnswers(temp))
-                handleSetupData(temp)
+                dispatch(setReduxAnswersShort(temp))
             } else push('/')
         }
     }
 
+    //verify answers id
+    const verifyAnswersId = () => {
+        if(reduxAnswersId === -1) {
+            let temp: number = Number(localStorage.getItem('answers_id_short'))
+            if(temp) {
+                dispatch(setReduxAnswersIdShort(temp))
+            }
+        } 
+    }
+
+    //handle add results to database
+    const handleAddResults = async (tempTable: ITable) => {
+        try {
+            let temp = {
+                id: reduxUser!.mail + '_' + reduxAnswersId.toString(),
+                mail: reduxUser!.mail,
+                type: 'short',
+                company_size: reduxUser!.company_size,
+                sector: reduxUser!.sector,
+                createdAt: reduxAnswersId,
+                results: tempTable,
+            }
+            console.log(temp)
+            const res = await fetch('/api/results/short/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(temp)
+            })
+            const data = await res.json()
+            console.log(data)
+            if(data.status === 200) {
+                return message.success('Resultados guardados')
+            }
+
+            if(data.status === 400) {
+                return message.success('Resultados ya guardados')
+            }
+
+            if(data.status === 500) {
+                return message.error('Error al guardar los resultados')
+            }
+            
+
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    //get average results
+    const getAverageResults = async () => {
+        try {
+            const res = await fetch('/api/results/short', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            const data = await res.json()
+            console.log(data)
+            if(data.status === 200) {
+                return data.data
+            }
+            return []
+        } catch(err) {
+            console.log(err)
+            return []
+        }
+    }
+
+    //calculate avg results by dimension
+    const calculateAvgResults = (dim: string, arr: IResults[]) => {
+        let sum = 0
+        
+        arr.forEach((res) => {
+            sum += res.results[dimensionesSum[dim as 'riqueza'] as 'sum_riqueza']
+        })
+        console.log(sum)
+        return sum / arr.length
+    }
+
     //handle setup data
-    const handleSetupData = (arr: IQuestionAnswer[]) => {
+    const handleSetupData = async (arr: IQuestionAnswer[]) => {
+        console.log(reduxUser)
         let tempRdar1: any[] = []
+
+        //get promedio
+        const res = await getAverageResults()
+        console.log(res)
+        setResults(res)
+        setResultsList(res)
+        if(res.length !== 0) message.success('Resultados promedio obtenidos')
 
         Object.keys(dimensiones).forEach((dim: string) => {
             let sum = 0
@@ -101,19 +224,19 @@ const Analysis = () => {
             let tempObj = {
                 dimension: dimensiones[dim as 'riqueza'],
                 resultado: sum,
-                promedio: Math.floor(Math.random() * 10) + 6
+                promedio: res.length !== 0 ? calculateAvgResults(dim, res) : 0,
+                ideal: 24,
             }
             tempRdar1.push(tempObj)
         })
-    
+        console.log(tempRdar1)
         setRadar1(tempRdar1)
-        createTableData(arr)
-        //calculate stkh
-        //handleCalculateStkh('CB', arr)
+        setLoading(false)
     }
 
     //create table data
-    const createTableData = (arr: IQuestionAnswer[]) => {
+    const createTableData = async(arr: IQuestionAnswer[]) => {
+        setLoading(true)
         let data: ITableData[] = []
         stkhs_short.forEach((stkh) => {
             data.push({
@@ -133,7 +256,11 @@ const Analysis = () => {
         }
         console.log(temp)
         setTable(temp)
+        await handleAddResults(temp)
+        handleSetupData(arr)
     }
+
+    if(loading) return <Loader />
 
     return (
         <div className='py-16'>

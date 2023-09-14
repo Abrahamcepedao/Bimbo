@@ -7,9 +7,9 @@ connectDB()
 export async function POST(req: NextRequest) {
   try {
 
-    const { name, lastname, phone, mail, company, company_size, sector, position, org, estate, city } = await req.json();
-
-    const user = new User({ name, lastname, phone, mail, company, company_size, sector, position, org, estate, city, createdAt: Date.now(), type: 'test' })
+    const { name, lastname, phone, mail, company, company_size, sector, position, org, estate, city, createdAt, type, checklist } = await req.json();
+    console.log(name, lastname, phone, mail, company, company_size, sector, position, org, estate, city, createdAt, type, checklist)
+    const user = new User({ name, lastname, phone, mail, company, company_size, sector, position, org, estate, city, createdAt, type, checklist })
     console.log(user)
     await user.save()
     return NextResponse.json({ status: 200, message: 'success' });
