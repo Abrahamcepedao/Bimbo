@@ -249,11 +249,14 @@ const Analysis = () => {
     //calculate avg results by stkh
     const calculateAvgResultsStkh = (stkh: string, arr: IResults[]) => {
         let sum = 0
-        
+        let count = 0
         arr.forEach((res) => {
-            sum += res.results.data.filter((el) => el.stkh === stkh)[0]?.sum_total || 0
+            if(res.results.data.filter((el) => el.stkh === stkh).length !== 0){
+                count++
+                sum += res.results.data.filter((el) => el.stkh === stkh)[0]?.sum_total || 0
+            }
         })
-        return sum / arr.length
+        return count !== 0 ? sum / count : 0
     }
 
     //handle setup data
@@ -274,8 +277,8 @@ const Analysis = () => {
             let sum = 0
             arr.forEach((ans) => {
                 ans.dimId === dim ? sum += ans.value || 0 : null
-
             })
+
             let tempObj = {
                 dimension: dimensiones[dim as 'riqueza'],
                 promedio: res.length !== 0 ? calculateAvgResults(dim, res) : 0,
@@ -284,7 +287,7 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
-    
+        console.log(tempRdar1)
         setRadar1(tempRdar1)
         handleSetupStkh(arr, res, stkhs_short)
     }
@@ -302,6 +305,7 @@ const Analysis = () => {
             }
             tempRdar2.push(tempObj)
         })
+        console.log(tempRdar2)
         setRadar2(tempRdar2)
         setLoading(false)
     }

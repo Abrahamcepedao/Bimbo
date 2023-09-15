@@ -93,7 +93,7 @@ const Form = () =>  {
 
     //handle next
     const handleNext = () => {
-        if(activeStep === stkhs.length - 1) {
+        if(activeStep === selectedStkhs.length - 1) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
                 dispatch(setReduxAnswers(answers))
                 dispatch(setReduxAnswersId(Date.now()))
@@ -101,14 +101,14 @@ const Form = () =>  {
                 localStorage.setItem('answers_id', Date.now().toString())
                 push('/auto/profound/results')
         } else {
-            verifyDisabled(answers, stkhs[activeStep+1].id)
+            verifyDisabled(answers, selectedStkhs[activeStep+1].id)
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     };
 
     //handle back
     const handleBack = () => {
-        verifyDisabled(answers, stkhs[activeStep-1].id)
+        verifyDisabled(answers, selectedStkhs[activeStep-1].id)
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
 
@@ -117,12 +117,10 @@ const Form = () =>  {
         let temp = [...answers]
         let i = temp.findIndex((item) => item.questionId === question_id)
         temp[i].answerId = e.currentTarget.value
-        let question_index = stkhs[activeStep].questions.findIndex((item) => item.id === question_id)
-        temp[i].value = stkhs[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.value || 0
+        let question_index = selectedStkhs[activeStep].questions.findIndex((item) => item.id === question_id)
+        temp[i].value = selectedStkhs[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.value || 0
 
-        console.log(temp)
         setAnswers(temp)
-
         verifyDisabled(temp, temp[i].stkhId)
     }
 
