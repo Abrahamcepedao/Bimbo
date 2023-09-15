@@ -18,7 +18,7 @@ import StepContent from '@mui/material/StepContent';
 
 //redux
 import { useDispatch, useSelector } from 'react-redux'
-import { setReduxAnswers } from '@/app/GlobalRedux/Features/answers/answersSlice';
+import { setReduxAnswers, setReduxAnswersId } from '@/app/GlobalRedux/Features/answers/answersSlice';
 import { selectSelectedStkhs, setReduxSelectedStkhs } from '@/app/GlobalRedux/Features/data/dataSlice'
 
 //constants
@@ -74,7 +74,7 @@ const Form = () =>  {
         let temp: IQuestionAnswer[] = []
         stkhs.filter((el) => arr.includes(el.id)).forEach((stkh: IStkh) => {
             stkh.questions.forEach((question) => {
-                let num = Math.floor(Math.random() * 3) + 2
+                let num = Math.floor(Math.random() * 3)
                 temp.push({
                     stkhId: stkh.id,
                     questionId: question.id,
@@ -96,7 +96,9 @@ const Form = () =>  {
         if(activeStep === stkhs.length - 1) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
                 dispatch(setReduxAnswers(answers))
+                dispatch(setReduxAnswersId(Date.now()))
                 localStorage.setItem('answers', JSON.stringify(answers))
+                localStorage.setItem('answers_id', Date.now().toString())
                 push('/auto/profound/results')
         } else {
             verifyDisabled(answers, stkhs[activeStep+1].id)

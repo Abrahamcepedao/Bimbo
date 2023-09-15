@@ -102,7 +102,7 @@ const SelectStkhs = () =>  {
                     </div>
                 ))}
                 <div className='sm:col-span-2'>
-                    <Button text='Enviar' type='submit' variant='gradient'/>
+                    <Button text='Continuar' type='submit' variant='gradient'/>
                 </div>
                 {loading && (
                     <div className='sm:col-span-2'>

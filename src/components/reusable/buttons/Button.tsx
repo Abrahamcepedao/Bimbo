@@ -2,19 +2,21 @@ interface Props {
     text: string,
     onClick?: () => void,
     disabled?: boolean,
-    variant: 'gradient' | 'primary' | 'cancel',
+    variant: 'gradient' | 'primary' | 'filled' | 'cancel',
     type?: 'button' | 'submit' | 'reset'
 }
 
 let variants = {
     'gradient': 'bg-grad_primary',
     'primary': 'bg-primary',
+    'filled': 'bg-white_primary',
     'cancel': 'bg-cancel',
 }
 
 let texts = {
     'gradient': 'text-white_primary',
-    'primary': 'text-white',
+    'primary': 'text-white_primary',
+    'filled': 'text-dark_primary',
     'cancel': 'text-white',
 }
 

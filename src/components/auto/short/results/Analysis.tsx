@@ -12,6 +12,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAnswersShort, selectAnswersIdShort, setReduxAnswersShort, setReduxAnswersIdShort } from '@/app/GlobalRedux/Features/answers/answersSlice'
 import { selectUser, setReduxUser } from '@/app/GlobalRedux/Features/data/dataSlice'
 
+//mui
+import { IconButton, Tooltip } from '@mui/material'
+
+//mui - icons
+import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
+
 //components
 import Select from '../../../reusable/inputs/Select'
 import Legend from '../../reusable/Legend'
@@ -26,6 +32,8 @@ import { IUser, IInput, IQuestionAnswer, ITable, ITableData, IResults } from '@/
 
 //constants
 import stkhs_short from '@/utils/constants/stkh_short'
+import company_size from '@/utils/constants/company_size'
+import sectors from "@/utils/constants/sectors";
 
 //dynamic components
 const Radar = dynamic(() => import('@/components/reusable/graphs/Radar'), { ssr: false })
@@ -72,6 +80,12 @@ const Analysis = () => {
         required: false,
     })
 
+    //useState - formData
+    const [formData, setFormData] = useState<IInput[]>([
+        { name: 'company_size', label: 'Tamaño de empresa', placeholder: 'Tamaño', required: true, variant: 'outlined', colSpan: '', type: 'select', options: company_size, value: '' },
+        { name: 'sector', label: 'Sector de empresa', placeholder: 'Sector', required: true, variant: 'outlined', colSpan: '', type: 'select', options: sectors, value: '' },
+    ])
+
     //useState - loading
     const [loading, setLoading] = useState<boolean>(true)
 
@@ -88,6 +102,7 @@ const Analysis = () => {
     const [radar1, setRadar1] = useState<any[]>([])
 
     //useState - radar2
+    const [radar2, setRadar2] = useState<any[]>([])
 
     //useEffect
     useEffect(() => {
@@ -129,6 +144,37 @@ const Analysis = () => {
                 dispatch(setReduxAnswersIdShort(temp))
             }
         } 
+    }
+
+    //handle select change
+    const handleSelectChange = (val: string, name: string) => {
+        let temp = [...results]
+        if (name === 'company_size') {
+            setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: company_size.find((el) => el.value === val)?.label || '' } : inp))
+            //filter results
+            temp = temp.filter((el) => el.company_size === val)
+
+            //filter by sector if any
+            if(formData[1].value !== '') temp = temp.filter((el) => el.sector === sectors.find((el) => el.label === formData[1].value)?.value || '')
+        } else if (name === 'sector'){
+            setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: sectors.find((el) => el.value === val)?.label || '' } : inp))
+            //filter results
+            temp = temp.filter((el) => el.sector === val)
+
+            //filter by company size if any
+            if(formData[0].value !== '') temp = temp.filter((el) => el.company_size === company_size.find((el) => el.label === formData[0].value)?.value || '')
+        }
+
+        setResultsList(temp)
+        handleSetupDimensions(reduxAnswers, temp)
+    }
+
+    //handle clear filters
+    const handleClearFilters = () => {
+        setFormData(prevState => prevState.map(inp => inp.name === 'company_size' ? { ...inp, value: '' } : inp))
+        setFormData(prevState => prevState.map(inp => inp.name === 'sector' ? { ...inp, value: '' } : inp))
+        setResultsList(results)
+        handleSetupDimensions(reduxAnswers, results)
     }
 
     //handle add results to database
@@ -199,22 +245,22 @@ const Analysis = () => {
         arr.forEach((res) => {
             sum += res.results[dimensionesSum[dim as 'riqueza'] as 'sum_riqueza']
         })
-        console.log(sum)
         return sum / arr.length
     }
 
-    //handle setup data
-    const handleSetupData = async (arr: IQuestionAnswer[]) => {
-        console.log(reduxUser)
+    //calculate avg results by stkh
+    const calculateAvgResultsStkh = (stkh: string, arr: IResults[]) => {
+        let sum = 0
+        
+        arr.forEach((res) => {
+            sum += res.results.data.filter((el) => el.stkh === stkh)[0]?.sum_total || 0
+        })
+        return sum / arr.length
+    }
+
+    //handle setup dimensions
+    const handleSetupDimensions = (arr: IQuestionAnswer[], res: IResults[]) => {
         let tempRdar1: any[] = []
-
-        //get promedio
-        const res = await getAverageResults()
-        console.log(res)
-        setResults(res)
-        setResultsList(res)
-        if(res.length !== 0) message.success('Resultados promedio obtenidos')
-
         Object.keys(dimensiones).forEach((dim: string) => {
             let sum = 0
             arr.forEach((ans) => {
@@ -229,9 +275,35 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
-        console.log(tempRdar1)
         setRadar1(tempRdar1)
+        handleSetupStkh(arr, res)
+    }
+
+    //handle setup stakeholders
+    const handleSetupStkh = (arr: IQuestionAnswer[], res: IResults[]) => {
+        let tempRdar2: any[] = []
+
+        stkhs_short.forEach((stkh) => {
+            let tempObj = {
+                dimension: stkh.name,
+                promedio: res.length !== 0 ? calculateAvgResultsStkh(stkh.name, res) : 0,
+                resultado: arr.filter((ans) => ans.stkhId === stkh.id).reduce((a, b) => a + (b.value || 0), 0),
+                ideal: 9,
+            }
+            tempRdar2.push(tempObj)
+        })
+        setRadar2(tempRdar2)
         setLoading(false)
+    }
+
+    //handle setup data
+    const handleSetupData = async (arr: IQuestionAnswer[]) => {
+        //get promedio
+        const res = await getAverageResults()
+        setResults(res)
+        setResultsList(res)
+
+        handleSetupDimensions(arr, res)
     }
 
     //create table data
@@ -264,8 +336,32 @@ const Analysis = () => {
 
     return (
         <div className='py-16'>
-            <div className='grid xl:grid-cols-1 gap-8'>
+            <div className='grid grid-cols-1 gap-8'>
                 <Matrix table={table} scale={0}/>
+
+                <div className='filters_container'>
+                    <div className='flex_b_center'>
+                        <div>
+                            <h4 className='subtitle_2 mb-2'>Comparando contra promedio de: {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'}</h4>
+                        </div>
+                        <div>
+                            <Tooltip title='Limpiar filtros' placement='top'>
+                                <IconButton className='icon' onClick={handleClearFilters}>
+                                    <HighlightOffRoundedIcon />
+                                </IconButton>
+                            </Tooltip>
+                        </div>
+                    </div>
+                    <div className='grid md:grid-cols-2 gap-4'>
+                        <div>
+                            <Select inp={formData[0]} onChange={handleSelectChange}/>
+                        </div>
+                        <div>
+                            <Select inp={formData[1]} onChange={handleSelectChange}/>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     <div className='flex justify-center items-center max-w-md m-auto mb-4'>
                         <h4 className='subtitle mr-2'>Dimensioness</h4>
@@ -276,6 +372,18 @@ const Analysis = () => {
                     <Legend />
                     <div className='radar_container mb-8'>
                         <Radar data={radar1} />
+                    </div>
+                </div>
+                <div>
+                    <div className='flex justify-center items-center max-w-md m-auto mb-4'>
+                        <h4 className='subtitle mr-2'>Stakeholders</h4>
+                        <div>
+                            
+                        </div>
+                    </div>
+                    <Legend />
+                    <div className='radar_container mb-8'>
+                        <Radar data={radar2} />
                     </div>
                 </div>
             </div>

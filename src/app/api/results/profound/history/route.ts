@@ -4,10 +4,11 @@ import Results from '@/db/models/Results';
 
 connectDB()
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
+    const { mail } = await req.json();
     //check if results exists with id
-    let tempResult = await Results.find({ type: 'profound' })
+    let tempResult = await Results.find({ type: 'profound', mail: mail })
 
     //check if results exists
     if (!tempResult) {

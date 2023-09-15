@@ -81,7 +81,7 @@
     @apply table_header;
   }
   .m_tbl_td {
-    @apply table_td text-center;
+    @apply opacity-75 table_td text-center;
   }
 
   /* <-------container--------> */
@@ -90,6 +90,9 @@
   }
   .radar_container {
     @apply w-full h-[400px] lg:h-[600px];
+  }
+  .filters_container {
+    @apply bg-trans_gray opacity-60 p-4 rounded-md max-w-2xl m-auto w-full;
   }
 
   /* <-------flex--------> */
