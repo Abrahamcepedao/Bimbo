@@ -1,7 +1,7 @@
 'use client'
 
 //react
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 //next
 import Link from "next/link"
@@ -11,16 +11,44 @@ import { useRouter } from 'next/navigation'
 import IndexTable from "../../reusable/IndexTable"
 import Button from '@/components/reusable/buttons/Button'
 
+//redux
+import { useSelector, useDispatch } from 'react-redux'
+import { selectIsAnalisis, setReduxIsAnalisis } from '@/app/GlobalRedux/Features/results/resultsSlice'
+
 //pdf canvas
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 const Info = () => {
+    //redux
+    const dispatch = useDispatch()
+    const reduxIsAnalisis: boolean = useSelector(selectIsAnalisis)
+
     //router
     const { push } = useRouter()
 
     //pdf
     const contentRef = useRef(null);
+
+    //useState - isAnalysis
+    const [isAnalysis, setIsAnalysis] = useState<boolean>(false)
+
+    //useEffect 
+    useEffect(() => {
+        verifyIsAnalysis()
+    }, [reduxIsAnalisis])
+
+    //verify is analysis
+    const verifyIsAnalysis = () => {
+        console.log('reduxIsAnalisis', reduxIsAnalisis)
+        if(!reduxIsAnalisis) {
+            let temp: boolean = localStorage.getItem('is_analysis') === 'true' ? true : false
+            if(temp) {
+                dispatch(setReduxIsAnalisis(temp))
+                setIsAnalysis(temp)
+            }
+        } else setIsAnalysis(reduxIsAnalisis)
+    }
 
     const captureScreenAndDownloadPDF = async () => {
         const canvas = await html2canvas(document.body);
@@ -66,16 +94,11 @@ const Info = () => {
 
                 <div className="pt-8">
                     {/* <Button text="Descargar resultados" variant="gradient" onClick={captureScreenAndDownloadPDF}/> */}
-                    <Button text="Continuar" variant="gradient" onClick={() => push('/auto/profound/select_stkhs')}/>
+                    <Button text="Continuar" variant="gradient" onClick={() => push(isAnalysis ? '/auto/profound/results' : '/auto/profound/select_stkhs')}/>
                 </div>
             </div>
         </div>
     )
 }
-
-/* 
-
-
-*/
 
 export default Info

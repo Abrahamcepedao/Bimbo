@@ -29,7 +29,7 @@ const Header = () => {
     return (
         <div className="bg-white_primary flex_b_center p-4">
             <div>
-                <Image src="/img/uniapac.png" width={200} height={200} alt="Uniapac" />
+                <Image src="/img/uniapac.png" width={200} height={200} className="w-[150px] sm:w-[250px]" alt="Uniapac" />
             </div>
             <div>
                 {icons.map((item, index) => (

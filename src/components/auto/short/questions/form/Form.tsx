@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 //components
 import RadioInp from '@/components/reusable/inputs/RadioInp'
 import Button from '../../../../reusable/buttons/Button'
+import Loader from '@/components/reusable/loader/Loader'
 
 //mui
 import Stepper from '@mui/material/Stepper';
@@ -16,19 +17,27 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepContent from '@mui/material/StepContent';
 
+//antd
+import { message } from 'antd'
+
 //redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setReduxAnswersShort, setReduxAnswersIdShort } from '@/app/GlobalRedux/Features/answers/answersSlice';
+import { selectHasHistory, setReduxHasHistory, selectShortResults, setReduxShortResults } from '@/app/GlobalRedux/Features/results/resultsSlice'
+import { selectUser, setReduxUser } from '@/app/GlobalRedux/Features/data/dataSlice'
 
 //constants
 import stkhs_short from '@/utils/constants/stkh_short'
 
 //interfaces
-import { IStkh, IQuestionAnswer } from '@/utils/interfaces/types'
+import { IStkh, IQuestionAnswer, IResults, ITable, ITableData, IUser } from '@/utils/interfaces/types'
 
 const Form = () =>  {
     //redux
     const dispatch = useDispatch()
+    const reduxResults: IResults[] = useSelector(selectShortResults)
+    const reduxHasHistory: boolean = useSelector(selectHasHistory)
+    const reduxUser: IUser | null = useSelector(selectUser)
 
     //router
     const { push } = useRouter()
@@ -48,7 +57,40 @@ const Form = () =>  {
     //useEffect - set form data
     useEffect(() => {
         setupAnswers()
+        verifyUser()
+        verifyHasHistory()
+        verifyShortResults()
     }, [])
+
+    //verify has history
+    const verifyHasHistory = () => {
+        if(!reduxHasHistory) {
+            let temp: boolean = localStorage.getItem('has_history') === 'true' ? true : false
+            if(temp) {
+                dispatch(setReduxHasHistory(temp))
+            }
+        }
+    }
+
+    //verify short results
+    const verifyShortResults = () => {
+        if(reduxResults.length === 0) {
+            let temp: IResults[] = JSON.parse(localStorage.getItem('short_results') as string) || []
+            if(temp.length !== 0) {
+                dispatch(setReduxShortResults(temp))
+            }
+        }
+    }
+
+    //verify user
+    const verifyUser = () => {
+        if (!reduxUser) {
+            let temp: IUser | null = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null
+            if (temp) {
+                dispatch(setReduxUser(temp))
+            } else push('/')
+        } 
+    }
 
     //setup form
     const setupAnswers = () => {
@@ -71,22 +113,111 @@ const Form = () =>  {
         setDisabled(false)
     }
 
-    //verify form
-
     //handle next
     const handleNext = () => {
         if(activeStep === stkhs_short.length - 1) {
                 setActiveStep((prevActiveStep) => prevActiveStep + 1);
-                dispatch(setReduxAnswersShort(answers))
-                dispatch(setReduxAnswersIdShort(Date.now()))
-                localStorage.setItem('answers_short', JSON.stringify(answers))
-                localStorage.setItem('answers_id_short', Date.now().toString())
-                push('/auto/short/results')
+                handleIncludeAnswers(answers)
         } else {
             verifyDisabled(answers, stkhs_short[activeStep+1].id)
             setActiveStep((prevActiveStep) => prevActiveStep + 1)
         }
     };
+
+    //handle add results to database
+    const handleAddResults = async (result: IResults) => {
+        try {
+            console.log(result)
+            const res = await fetch('/api/results/short/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(result)
+            })
+            const data = await res.json()
+            console.log(data)
+            if(data.status === 200) {
+                return message.success('Resultados guardados')
+            }
+
+            if(data.status === 400) {
+                return message.success('Resultados ya guardados')
+            }
+
+            if(data.status === 500) {
+                return message.error('Error al guardar los resultados')
+            }
+            
+
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    //handle include answers
+    const handleIncludeAnswers = async (arr: IQuestionAnswer[]) => {
+        let id: number = Date.now()
+        if(reduxHasHistory) {
+            setLoading(true)
+            let temp: ITable = createTableData(arr)
+            let temp2: IResults[] = [...reduxResults]
+            let result = {
+                id: reduxUser!.mail + '_' + id.toString(),
+                mail: reduxUser!.mail,
+                type: 'short',
+                company_size: reduxUser!.company_size,
+                sector: reduxUser!.sector,
+                createdAt: id,
+                results: temp
+            }
+            temp2.push(result)
+            console.log(temp2)
+
+            let res = await handleAddResults(result)
+            if(res) {
+                dispatch(setReduxShortResults(temp2))
+                localStorage.setItem('short_results', JSON.stringify(temp2))
+                localStorage.setItem('answers_short', JSON.stringify([]))
+                localStorage.setItem('answers_id_short', '-1')
+            } else {
+                message.error('Ocurrió un error al guardar los resultados')
+                return
+            }
+            setLoading(false)
+        } else {
+            localStorage.setItem('answers_short', JSON.stringify(answers))
+            localStorage.setItem('answers_id_short', id.toString())
+            dispatch(setReduxAnswersShort(answers))
+            dispatch(setReduxAnswersIdShort(id))
+        }
+        
+        push('/auto/short/results')
+    }
+
+    //create table data
+    const createTableData = (arr: IQuestionAnswer[]) => {
+        setLoading(true)
+        let data: ITableData[] = []
+        stkhs_short.forEach((stkh) => {
+            data.push({
+                stkh: stkh.name,
+                riqueza: arr.filter((ans) => ans.stkhId === stkh.id && ans.dimId === 'riqueza')[0].value!,
+                etica: arr.filter((ans) => ans.stkhId === stkh.id && ans.dimId === 'etica')[0].value!,
+                calidad: arr.filter((ans) => ans.stkhId === stkh.id && ans.dimId === 'calidad')[0].value!,
+                sum_total: arr.filter((ans) => ans.stkhId === stkh.id).reduce((a, b) => a + (b.value || 0), 0),
+            })
+        })
+        let temp: ITable = {
+            data,
+            sum_etica: data.reduce((a, b) => a + (b.etica || 0), 0),
+            sum_calidad: data.reduce((a, b) => a + (b.calidad || 0), 0),
+            sum_riqueza: data.reduce((a, b) => a + (b.riqueza || 0), 0),
+            sum_total: data.reduce((a, b) => a + (b.sum_total || 0), 0),
+        }
+        console.log(temp)
+        return temp
+    }
 
     //handle back
     const handleBack = () => {
@@ -126,7 +257,7 @@ const Form = () =>  {
     return (
         <div className='max-w-2xl m-auto'>
             <div>
-                {!loading && (
+                {!loading ? (
                     <Stepper activeStep={activeStep} orientation="vertical">
                         {stkhs_short.map((stkh, index) => (
                             <Step key={index}>
@@ -155,6 +286,10 @@ const Form = () =>  {
                             </Step>
                         ))}
                     </Stepper>
+                ) : (
+                    <div className='py-16'>
+                        <Loader/>
+                    </div>
                 )}
             </div>
         </div>

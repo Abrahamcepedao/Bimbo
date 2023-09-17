@@ -11,6 +11,9 @@ import RadioCheck from "../reusable/inputs/RadioCheck"
 import Button from "../reusable/buttons/Button"
 import Loader from "../reusable/loader/Loader"
 
+//mui - icons
+import ArrowRightAltRoundedIcon from '@mui/icons-material/ArrowRightAltRounded';
+
 //redux
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, setReduxChecklist, setReduxUser } from "@/app/GlobalRedux/Features/data/dataSlice"
@@ -111,28 +114,38 @@ const Form = () => {
     return (
         <div className="p-4">
             <div className="max-w-2xl m-auto">
-                {/* header */}
-                <div className="grid grid-cols-6 gap-4">
-                    <div></div>
-                    {checklist_answers.map((item, i) => (
-                        <div key={i} className="flex_c_center text-center">
-                            <p className="text mb-0">{item.answer}</p>
+                <div className="overflow-x-scroll">
+                    {/* header */}
+                    <div className="min-w-[500px]">
+                        <div className="grid grid-cols-6 gap-4">
+                            <div></div>
+                            {checklist_answers.map((item, i) => (
+                                <div key={i} className="flex_c_center text-center">
+                                    <p className="text text-xs mb-0">{item.answer}</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
 
-                {/* body */}
-                {checklistData.map((item, i) => (
-                    <div key={i} className="grid grid-cols-6 gap-4 mt-4">
-                        <div  className="flex_b_center ">
-                            <p className="text bold">{item.title}</p>
-                        </div>
-                        <div className="col-span-5">
-                            <RadioCheck answer={item} answers={checklist_answers} onChange={handleSelectChecklist}/>
-                        </div>
+                        {/* body */}
+                        {checklistData.map((item, i) => (
+                            <div key={i} className="grid grid-cols-6 gap-4 mt-4">
+                                <div  className="flex_b_center ">
+                                    <p className="text bold text-xs">{item.title}</p>
+                                </div>
+                                <div className="col-span-5">
+                                    <RadioCheck answer={item} answers={checklist_answers} onChange={handleSelectChecklist}/>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
-                <div className="mt-6">
+                </div>
+                <div className="w-full mb-12 sm:hidden">
+                    <div className="flex justify-start items-center text-white_primary float-right">
+                        <p className="mr-2">Scroll</p>
+                        <ArrowRightAltRoundedIcon/>
+                    </div>
+                </div>
+                <div className="w-full">
                     <Button onClick={handleSaveChecklist} text="Continuar" variant='gradient'/>
                 </div>
                 {loading && (<Loader/>)}

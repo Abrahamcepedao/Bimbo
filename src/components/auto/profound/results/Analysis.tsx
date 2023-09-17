@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAnswers, setReduxAnswers, selectAnswersId, setReduxAnswersId } from '@/app/GlobalRedux/Features/answers/answersSlice'
 import { selectUser, selectSelectedStkhs, setReduxSelectedStkhs, setReduxUser } from '@/app/GlobalRedux/Features/data/dataSlice'
+import { selectIsAnalisis, selectHasHistory, selectProfoundResults, setReduxIsAnalisis, setReduxHasHistory, setReduxProfoundResults } from '@/app/GlobalRedux/Features/results/resultsSlice'
 
 //mui
 import { IconButton, Tooltip } from '@mui/material'
@@ -35,6 +36,9 @@ import stkhs from '@/utils/constants/stkhs'
 import company_size from '@/utils/constants/company_size'
 import sectors from "@/utils/constants/sectors";
 
+//Utils
+import { formatDateToYYYYMMDD } from '@/utils/functions/utilities'
+
 //dynamic components
 const Radar = dynamic(() => import('@/components/reusable/graphs/Radar'), { ssr: false })
 
@@ -50,6 +54,12 @@ const dimensionesSum = {
     calidad: 'sum_calidad',
 }
 
+const dimensionesTotal = {
+    riqueza: 'sum_riqueza_max',
+    etica: 'sum_etica_max',
+    calidad: 'sum_calidad_max',
+}
+
 const Analysis = () => {
     //redux
     const dispatch = useDispatch()
@@ -57,11 +67,12 @@ const Analysis = () => {
     const reduxSelectedstkhs: string[] = useSelector(selectSelectedStkhs)
     const reduxAnswersId: number = useSelector(selectAnswersId)
     const reduxUser: IUser | null = useSelector(selectUser)
+    const reduxIsAnalisis: boolean = useSelector(selectIsAnalisis)
+    const reduxHasHistory: boolean = useSelector(selectHasHistory)
+    const reduxResults: IResults[] = useSelector(selectProfoundResults)
 
     //router
     const { push } = useRouter()
-
-    //useState - stkh
 
     //useState - stkhs
     const [selectedStkhs, setSelectedStkhs] = useState<IStkh[]>([])
@@ -70,6 +81,7 @@ const Analysis = () => {
     const [formData, setFormData] = useState<IInput[]>([
         { name: 'company_size', label: 'Tamaño de empresa', placeholder: 'Tamaño', required: true, variant: 'outlined', colSpan: '', type: 'select', options: company_size, value: '' },
         { name: 'sector', label: 'Sector de empresa', placeholder: 'Sector', required: true, variant: 'outlined', colSpan: '', type: 'select', options: sectors, value: '' },
+        { name: 'analysis', label: 'Selecciona el análisis', placeholder: 'Análisis', required: true, variant: 'outlined', colSpan: '', type: 'select', options: [], value: ''}
     ])
 
     //useState - loading
@@ -90,17 +102,30 @@ const Analysis = () => {
     //useState - table
     const [table, setTable] = useState<ITable>({ data: [], sum_etica: 0, sum_calidad: 0, sum_riqueza: 0, sum_total: 0,})
 
+    //useState - hasHistory
+    const [hasHistory, setHasHistory] = useState<boolean>(false)
 
     //useEffect
     useEffect(() => {
+        verifyIsAnalysis()
+        verifyHasHistory()
         verifyAnswersId()
+        verifyProfoundResults()
         verifyUser()
         verifyAnswers()
         verifySelectedStkhs()
-        if(reduxAnswers.length !== 0 && reduxSelectedstkhs.length !== 0 && reduxUser !== null && reduxAnswersId !== -1 && table.data.length === 0) {
+        console.log(reduxHasHistory, reduxResults, reduxUser, table.data)
+        if(reduxResults.length !== 0 && reduxIsAnalisis && table.data.length === 0) {
+            console.log('here1')
+            setupHistorySelect()
+        } else if(reduxHasHistory && reduxResults.length !== 0 && reduxUser !== null && table.data.length === 0) {
+            console.log('here2')
+            setupHistorySelect()
+        } else if(reduxAnswers.length !== 0 && reduxSelectedstkhs.length !== 0 && reduxUser !== null && reduxAnswersId !== -1 && table.data.length === 0) {
+            console.log('here3')
             createTableData(reduxAnswers, stkhs.filter((el) => reduxSelectedstkhs.includes(el.id)))
         }
-    }, [reduxAnswersId, reduxUser, reduxAnswers, reduxSelectedstkhs])
+    }, [reduxAnswers, reduxUser, reduxAnswersId, reduxIsAnalisis, reduxHasHistory, reduxResults])
 
     //verify user
     const verifyUser = () => {
@@ -116,10 +141,9 @@ const Analysis = () => {
     const verifyAnswers = () => {
         if(reduxAnswers.length === 0){
             let temp: IQuestionAnswer[] = JSON.parse(localStorage.getItem('answers') as string) || []
-            console.log(temp)
             if(temp.length !== 0) {
                 dispatch(setReduxAnswers(temp))
-            } else push('/')
+            }
         }
     }
 
@@ -140,8 +164,38 @@ const Analysis = () => {
             console.log(temp)
             if(temp.length !== 0) {
                 dispatch(setReduxSelectedStkhs(temp))
-            } else push('/')
+            } 
         } 
+    }
+
+    //verify is analysis
+    const verifyIsAnalysis = () => {
+        if(!reduxIsAnalisis) {
+            let temp: boolean = localStorage.getItem('is_analysis') === 'true' ? true : false
+            if(temp) {
+                dispatch(setReduxIsAnalisis(temp))
+            }
+        }
+    }
+
+    //verify has history
+    const verifyHasHistory = () => {
+        if(!reduxHasHistory) {
+            let temp: boolean = localStorage.getItem('has_history') === 'true' ? true : false
+            if(temp) {
+                dispatch(setReduxHasHistory(temp))
+            }
+        }
+    }
+
+    //verify profound results
+    const verifyProfoundResults = () => {
+        if(reduxResults.length === 0) {
+            let temp: IResults[] = JSON.parse(localStorage.getItem('profound_results') as string) || []
+            if(temp.length !== 0) {
+                dispatch(setReduxProfoundResults(temp))
+            }
+        }
     }
 
     //handle select change
@@ -164,7 +218,10 @@ const Analysis = () => {
         }
 
         setResultsList(temp)
-        handleSetupDimensions(reduxAnswers, temp, selectedStkhs)
+        if(reduxIsAnalisis) {
+            let num: number = formData[2].options!.findIndex((item, i) => `Análisis ${i+1} - ${formatDateToYYYYMMDD(Number(item.value))}` === formData[2].value) || 0
+            handleSetupHistoryDimensions(reduxResults[num].results, temp, selectedStkhs)
+        } else handleSetupDimensions(reduxAnswers, temp, selectedStkhs)
     }
 
     //handle clear filters
@@ -237,13 +294,17 @@ const Analysis = () => {
     }
 
     //calculate avg results by dimension
-    const calculateAvgResults = (dim: string, arr: IResults[]) => {
+    const calculateAvgResults = (dim: string, arr: IResults[], stkhs_short: IStkh[]) => {
         let sum = 0
-        
+        let count = 0
+        let tempStkhs: string[] = stkhs_short.map((el) => el.name)
         arr.forEach((res) => {
-            sum += res.results[dimensionesSum[dim as 'riqueza'] as 'sum_riqueza']
+            if(res.results.data.filter((el) => tempStkhs.includes(el.stkh)).length !== 0){
+                count++
+                sum += res.results.data.filter((el) => tempStkhs.includes(el.stkh)).reduce((a, b) => a + (b[dim as 'riqueza']) || 0, 0)
+            }
         })
-        return sum / arr.length
+        return sum / count
     }
 
     //calculate avg results by stkh
@@ -281,7 +342,7 @@ const Analysis = () => {
 
             let tempObj = {
                 dimension: dimensiones[dim as 'riqueza'],
-                promedio: res.length !== 0 ? calculateAvgResults(dim, res) : 0,
+                promedio: res.length !== 0 ? calculateAvgResults(dim, res, stkhs_short) : 0,
                 resultado: sum,
                 ideal: arr.filter((ans) => ans.dimId === dim).length * 5,
             }
@@ -308,6 +369,94 @@ const Analysis = () => {
         console.log(tempRdar2)
         setRadar2(tempRdar2)
         setLoading(false)
+    }
+
+    //handle analysis select
+    const handleAnalysisSelect = (val: string, name: string) => {
+        let index = reduxResults.findIndex((item) => item.createdAt.toString() === val)
+        if(index !== -1) {
+            let temp = [...formData]
+            temp[2].value = `Análisis ${index+1} - ${formatDateToYYYYMMDD(reduxResults[index].createdAt)}`
+            setFormData(temp)
+            setupTableHistory(index)
+        }
+    }
+
+    //setup up history select
+    const setupHistorySelect = () => {
+        let temp = [...formData]
+        temp[2].options = reduxResults.map((item, i) => {
+            return {
+                label: `Análisis ${i+1} - ${formatDateToYYYYMMDD(item.createdAt)}` ,
+                value: item.createdAt.toString(),
+            }
+        })
+        temp[2].value = `Análisis ${reduxResults.length} - ${formatDateToYYYYMMDD(reduxResults[reduxResults.length - 1].createdAt)}`
+        setHasHistory(true)
+        setFormData(temp)
+        setupTableHistory(reduxResults.length - 1)
+    }
+
+    //setup table with results history
+    const setupTableHistory = (num: number) => {
+        console.log(reduxResults[num])
+        setTable(reduxResults[num].results)
+        let tempStkhs: string[] = []
+        reduxResults[num].results.data.forEach((el) => {
+            if(!tempStkhs.includes(el.stkh)) tempStkhs.push(el.stkh)
+        })
+        console.log(tempStkhs)
+        let stkhs_short = stkhs.filter((el) => tempStkhs.includes(el.name))
+        console.log(stkhs_short)
+        setSelectedStkhs(stkhs_short)
+        handleSetupHistoryData(reduxResults[num].results, stkhs_short)
+    }
+
+    //handle setup dimensions
+    const handleSetupHistoryDimensions = (table: ITable, res: IResults[], stkhs_short: IStkh[]) => {
+        let tempRdar1: any[] = []
+        console.log(table)
+        Object.keys(dimensiones).forEach((dim: string) => {
+            let tempObj = {
+                dimension: dimensiones[dim as 'riqueza'],
+                resultado: table[dimensionesSum[dim as 'riqueza'] as 'sum_riqueza'],
+                promedio: res.length !== 0 ? calculateAvgResults(dim, res, stkhs_short) : 0,
+                ideal: table[dimensionesTotal[dim as 'riqueza'] as 'sum_riqueza_max'],
+            }
+            tempRdar1.push(tempObj)
+        })
+        console.log(tempRdar1)
+        setRadar1(tempRdar1)
+        handleSetupHistoryStkh(table, res, stkhs_short)
+    }
+
+    //handle setup stakeholders
+    const handleSetupHistoryStkh = (table: ITable, res: IResults[], stkhs_short: IStkh[]) => {
+
+        let tempRdar2: any[] = []
+        console.log(stkhs_short)
+        stkhs_short.forEach((stkh) => {
+            let tempObj = {
+                dimension: stkh.name,
+                promedio: res.length !== 0 ? calculateAvgResultsStkh(stkh.name, res) : 0,
+                resultado: table.data.filter((el) => el.stkh === stkh.name)[0]?.sum_total || 0,
+                ideal: table.data.filter((el) => el.stkh === stkh.name)[0]?.sum_total_max || 0,
+            }
+            tempRdar2.push(tempObj)
+        })
+        console.log(tempRdar2)
+        setRadar2(tempRdar2)
+        setLoading(false)
+    }
+
+    //handle setup history data
+    const handleSetupHistoryData = async (table: ITable, stkhs_short: IStkh[]) => {
+        //get promedio
+        const res = await getAverageResults()
+        setResults(res)
+        setResultsList(res)
+
+        handleSetupHistoryDimensions(table, res, stkhs_short)
     }
 
     //create table data
@@ -347,7 +496,15 @@ const Analysis = () => {
 
     return (
         <div className='py-8'>
-            <div className='grid xl:grid-cols-1 gap-8'>
+            <div className='grid xl:grid-cols-1 gap-8 p-2'>
+                {hasHistory && (
+                    <div className='filters_container'>
+                        <div>
+                            <Select inp={formData[2]} onChange={handleAnalysisSelect}/>
+                        </div>
+                    </div>
+                )}
+
                 <Matrix table={table} scale={1}/>
 
                 <div className='filters_container'>
@@ -381,8 +538,10 @@ const Analysis = () => {
                         </div>
                     </div>
                     <Legend />
-                    <div className='radar_container mb-4'>
-                        <Radar data={radar1} />
+                    <div className='overflow-x-scroll p-2'>
+                        <div className='radar_container mb-8'>
+                            <Radar data={radar1} />
+                        </div>
                     </div>
                 </div>
 
@@ -394,8 +553,10 @@ const Analysis = () => {
                         </div>
                     </div>
                     <Legend />
-                    <div className='radar_container'>
-                        <Radar data={radar2} />
+                    <div className='overflow-x-scroll p-2'>
+                        <div className='radar_container mb-8'>
+                            <Radar data={radar2} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ const initialState = {
     company: '',
     user: null as IUser | null,
     checklist: [] as IChecklistItem[],
-    selectedStkhs: [] as string[]
+    selectedStkhs: [] as string[],
 }
 
 //slice
@@ -29,7 +29,7 @@ export const dataSlice = createSlice({
         },
         setReduxSelectedStkhs: (state, action: PayloadAction<string[]>) => {
             state.selectedStkhs = action.payload
-        }
+        },
     }
 })
 

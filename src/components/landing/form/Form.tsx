@@ -123,6 +123,7 @@ const Form = () =>  {
         if(!validateForm()) return 
         setLoading(true)
         dispatch(setReduxCompany(formData.find(inp => inp.name === 'company')?.value as string || ''))
+        localStorage.clear()
         localStorage.setItem('company', formData.find(inp => inp.name === 'company')?.value as string)
 
         //set loading
@@ -169,9 +170,9 @@ const Form = () =>  {
     }
 
     return (
-        <div className='max-w-xl m-auto pb-12'>
+        <div className='max-w-xl m-auto p-2 pb-12'>
             <h5 className='subtitle_2 text-left'>Datos de contacto</h5>
-            <form className='grid grid-cols-2 gap-4' onSubmit={handleSubmit}>
+            <form className='grid sm:grid-cols-2 gap-4' onSubmit={handleSubmit}>
                 {!loadingForm && formData.map((inp, i) => (
                     <div key={i} className={`${inp.colSpan}`}>
                         {i === 5 && (

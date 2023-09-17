@@ -65,8 +65,8 @@ const Matrix = ({ table, scale }: Props) => {
     }
 
     return (
-        <div className="max-w-5xl m-auto">
-            <table className="border-separate border-spacing-1">
+        <div className="max-w-5xl m-auto w-full overflow-x-scroll">
+            <table className="border-separate border-spacing-1 min-w-[1000px]">
                 <thead>
                     <tr>
                         <th className="w-4"/>
