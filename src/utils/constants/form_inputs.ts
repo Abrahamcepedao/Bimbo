@@ -13,6 +13,7 @@ const form_inputs: IInput[] = [
     { name: 'position', label: 'Cargo', placeholder: 'Cargo', required: false, variant: 'outlined', colSpan: 'cols-span-1 sm:col-span-2', type: 'text', value: '' },
     { name: 'company_size', label: 'Tamaño de empresa', placeholder: 'Tamaño', required: true, variant: 'outlined', colSpan: '', type: 'select', options: company_size, value: '' },
     { name: 'sector', label: 'Sector de empresa', placeholder: 'Sector', required: true, variant: 'outlined', colSpan: '', type: 'select', options: sectors, value: '' },
+    { name: 'sector_label', label: 'Especifica el sector', placeholder: 'Sector', required: true, variant: 'outlined', colSpan: 'cols-span-1 sm:col-span-2', type: 'text', value: '' },
     { name: 'org', label: 'Organismo empresarial al que pertenece', placeholder: '', required: false, variant: 'outlined', colSpan: 'cols-span-1 sm:col-span-2', type: 'check', value: [], options: org_options },
     { name: 'estate', label: 'Estado', placeholder: 'Estado', required: true, variant: 'outlined', colSpan: '', type: 'select', value: '', options: [] },
     { name: 'city', label: 'Ciudad', placeholder: 'Ciudad', required: true, variant: 'outlined', colSpan: '', type: 'select', value: '', options: [] },

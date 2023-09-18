@@ -25,7 +25,7 @@ export default function Button ({ text, disabled, onClick, variant, type }: Prop
         <button 
             type={type ? type : 'button'} 
             disabled={disabled}
-            className={`w-full scale p-2 rounded-md bold ${texts[variant]} ${variants[variant]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} 
+            className={`w-full text-base sm:text-lg scale p-2 rounded-md bold ${texts[variant]} ${variants[variant]} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`} 
             onClick={onClick}>{text}
         </button>
     )

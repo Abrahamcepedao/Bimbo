@@ -66,7 +66,7 @@ const Radar = ({ data }: Props) => {
               style={{
                 fontSize: 24,
                 fontWeight: 'bold',
-                fill: status !== 200 ? '#d3193e' : percentage > 0 ? '#4fd078' : '#ffc107',
+                fill: status !== 200 ? '#f7f70b' : percentage > 0 ? '#0fec0f' : '#e61111',
               }}
             >
               {status !== 200 ? '-' : percentage > 0 ? '+' + percentage + '%' : '' + percentage + '%'}
@@ -89,7 +89,8 @@ const Radar = ({ data }: Props) => {
           dotSize={8}
           dotColor={{ theme: 'background' }}
           dotBorderWidth={2}
-          colors={[ '#4fd078', '#139E9F', '#2270e5' ]}
+          colors={[ '#15ea4a', '#15eaea', '#153fea' ]}
+          blendMode="color-dodge"
           motionConfig="wobbly"
           gridLevels={0}
           curve="cardinalClosed"

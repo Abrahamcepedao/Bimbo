@@ -61,7 +61,7 @@ const Form = () =>  {
 
         //organizations
         let tempOrgs: ICheckItem[] = []
-        formData[9].options?.forEach(org => {
+        formData[10].options?.forEach(org => {
             tempOrgs.push({ label: org.label, checked: false })
         })
         
@@ -78,9 +78,10 @@ const Form = () =>  {
     //validate form
     const validateForm = () => {
         let valid = true
-        formData.forEach(inp => {
+        formData.forEach((inp, i) => {
             if (inp.required && !inp.value && valid) {
-                message.error(`El campo ${inp.label} es obligatorio`)
+                if(i === 9 && formData[8].value !== 'Otro') return
+                message.error(`El campo "${inp.label}" es obligatorio`)
                 valid = false
             }
         })
@@ -114,7 +115,7 @@ const Form = () =>  {
     //handle check change
     const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
         const { checked } = e.target
-        setFormData(prevState => prevState.map(inp => inp.name === 'org' ? { ...inp, value: (prevState[9].value as ICheckItem[]).map((item, index) => index === i ? { ...item, checked } : item) } : inp))
+        setFormData(prevState => prevState.map(inp => inp.name === 'org' ? { ...inp, value: (prevState[10].value as ICheckItem[]).map((item, index) => index === i ? { ...item, checked } : item) } : inp))
     }
 
     //handl submit
@@ -137,6 +138,7 @@ const Form = () =>  {
                 company: formData.find(inp => inp.name === 'company')?.value as string,
                 company_size: company_size.find((el) => el.label === formData.find(inp => inp.name === 'company_size')?.value)?.value as string,
                 sector: sectors.find((el) => el.label === formData.find(inp => inp.name === 'sector')?.value)?.value as string,
+                sector_label: formData.find(inp => inp.name === 'sector')?.value as string,
                 estate: formData.find(inp => inp.name === 'estate')?.value as string,
                 city: formData.find(inp => inp.name === 'city')?.value as string,
                 org: (formData.find(inp => inp.name === 'org')?.value as ICheckItem[]).map(item => item.checked ? item.label : null).filter(item => item !== null) as string[],
@@ -171,16 +173,21 @@ const Form = () =>  {
 
     return (
         <div className='max-w-xl m-auto p-2 pb-12'>
-            <h5 className='subtitle_2 text-left'>Datos de contacto</h5>
+            <h3 className='subtitle_2'>¿Primera vez que realizas el autodiagnóstico?</h3>
+            <h5 className='label text-base'>Llena el siguiente formulario</h5>
             <form className='grid sm:grid-cols-2 gap-4' onSubmit={handleSubmit}>
                 {!loadingForm && formData.map((inp, i) => (
                     <div key={i} className={`${inp.colSpan}`}>
-                        {i === 5 && (
+                        {/* {i === 5 && (
                             <div className='sm:col-span-2'>
                                 <h5 className='subtitle_2 text-left'>Datos de la Empresa / Institución</h5>
                             </div>
-                        )}
-                        {(inp.type === 'email' || inp.type === 'text') ? (
+                        )} */}
+                        {(i === 9 && formData[8].value === 'Otro') ? (
+                            <Input inp={inp} onChange={handleInputChange} />
+                        ) : (i === 9 && formData[8].value !== 'Otro') ? (
+                            null
+                        ) : (inp.type === 'email' || inp.type === 'text') ? (
                             <Input inp={inp} onChange={handleInputChange} />
                         ) : inp.type === 'select' ?  (
                             <Select inp={inp} onChange={handleSelectChange} />

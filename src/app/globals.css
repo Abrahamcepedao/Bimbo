@@ -54,10 +54,10 @@
   
   /* <-------index table--------> */
   .table_header {
-    @apply text-xs sm:text-sm bg-trans_gray text-white_primary bold opacity-60 p-4 rounded-md;
+    @apply text-xs sm:text-base bg-trans_gray text-white_primary bold opacity-60 p-4 rounded-md;
   }
   .table_td {
-    @apply bold p-2 text-white_primary text-xs sm:text-sm rounded-md;
+    @apply bold p-2 text-white_primary text-xs sm:text-lg rounded-md;
   }
   /* <-------index table--------> */
   .i_tbl_header {
@@ -81,7 +81,7 @@
     @apply table_header;
   }
   .m_tbl_td {
-    @apply opacity-75 table_td text-center;
+    @apply opacity-80 table_td text-center;
   }
 
   /* <-------container--------> */

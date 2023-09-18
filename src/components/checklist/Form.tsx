@@ -121,7 +121,7 @@ const Form = () => {
                             <div></div>
                             {checklist_answers.map((item, i) => (
                                 <div key={i} className="flex_c_center text-center">
-                                    <p className="text text-xs mb-0">{item.answer}</p>
+                                    <p className="text text-xs sm:text-base mb-0">{item.answer}</p>
                                 </div>
                             ))}
                         </div>
@@ -130,7 +130,7 @@ const Form = () => {
                         {checklistData.map((item, i) => (
                             <div key={i} className="grid grid-cols-6 gap-4 mt-4">
                                 <div  className="flex_b_center ">
-                                    <p className="text bold text-xs">{item.title}</p>
+                                    <p className="text bold text-xs sm:text-base">{item.title}</p>
                                 </div>
                                 <div className="col-span-5">
                                     <RadioCheck answer={item} answers={checklist_answers} onChange={handleSelectChecklist}/>
@@ -145,7 +145,7 @@ const Form = () => {
                         <ArrowRightAltRoundedIcon/>
                     </div>
                 </div>
-                <div className="w-full">
+                <div className="w-full sm:mt-4">
                     <Button onClick={handleSaveChecklist} text="Continuar" variant='gradient'/>
                 </div>
                 {loading && (<Loader/>)}

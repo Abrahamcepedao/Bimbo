@@ -161,8 +161,8 @@ const Question = () =>  {
     //handle new analysis
 
     return (
-        <div className='max-w-xl m-auto p-2 pb-12'>
-            <h3 className='subtitle_2'>¿Ya habías llenado el autodiagnóstico antes?</h3>
+        <div className='max-w-xl m-auto p-2 pb-12 h-full'>
+            <h3 className='subtitle_2'>¿Ya habías realizado el autodiagnóstico anteriormente?</h3>
             <div>
                 <div className='grid grid-cols-1 gap-4'>
                     <Input inp={formData[0]} onChange={handleInputChange}/>

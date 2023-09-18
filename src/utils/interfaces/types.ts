@@ -110,6 +110,7 @@ interface IUser {
     company: string,
     company_size: string,
     sector: string,
+    sector_label?: string,
     position: string,
     org: string[],
     estate: string,

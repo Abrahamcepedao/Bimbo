@@ -23,6 +23,7 @@ import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import Select from '../../../reusable/inputs/Select'
 import Legend from '../../reusable/Legend'
 import Matrix from '../../reusable/Matrix'
+import AnalysisText from './AnalysisText'
 import Loader from '@/components/reusable/loader/Loader'
 
 //antd
@@ -125,13 +126,10 @@ const Analysis = () => {
         verifyShortResults()
         console.log(results)
         if(reduxResults.length !== 0 && reduxIsAnalisis && table.data.length === 0) {
-            console.log('here1')
             setupHistorySelect()
         } else if(reduxHasHistory && reduxResults.length !== 0 && reduxUser !== null && table.data.length === 0) {
-            console.log('here2')
             setupHistorySelect()
         } else if(reduxAnswers.length !== 0 && reduxUser !== null && reduxAnswersId !== -1 && table.data.length === 0) {
-            console.log('here3')
             createTableData(reduxAnswers)
         } 
     }, [reduxAnswers, reduxUser, reduxAnswersId, reduxIsAnalisis, reduxHasHistory, reduxResults])
@@ -228,7 +226,11 @@ const Analysis = () => {
         setFormData(prevState => prevState.map(inp => inp.name === 'company_size' ? { ...inp, value: '' } : inp))
         setFormData(prevState => prevState.map(inp => inp.name === 'sector' ? { ...inp, value: '' } : inp))
         setResultsList(results)
-        handleSetupDimensions(reduxAnswers, results)
+
+        if(reduxIsAnalisis) {
+            let num: number = formData[2].options!.findIndex((item, i) => `Análisis ${i+1} - ${formatDateToYYYYMMDD(Number(item.value))}` === formData[2].value) || 0
+            handleSetupHistoryDimensions(reduxResults[num].results, results)
+        } else handleSetupDimensions(reduxAnswers, results)
     }
 
     //handle add results to database
@@ -454,12 +456,19 @@ const Analysis = () => {
             sum_etica: data.reduce((a, b) => a + (b.etica || 0), 0),
             sum_calidad: data.reduce((a, b) => a + (b.calidad || 0), 0),
             sum_riqueza: data.reduce((a, b) => a + (b.riqueza || 0), 0),
-            sum_total: data.reduce((a, b) => a + (b.sum_total || 0), 0),
+            sum_total: Math.round(data.reduce((a, b) => a + (b.sum_total || 0), 0) / 72 * 100),
         }
         console.log(temp)
         setTable(temp)
         await handleAddResults(temp)
         handleSetupData(arr)
+    }
+
+    //calculate result
+    const calculateResult = (value: number) => {
+        if(value < 59) return '0'
+        if(value < 79) return '1'
+        return '2'
     }
 
     if(loading) return <Loader />
@@ -526,6 +535,9 @@ const Analysis = () => {
                             <Radar data={radar2} />
                         </div>
                     </div>
+                </div>
+                <div>
+                    <AnalysisText isAnalysis={reduxIsAnalisis} results={calculateResult(table.sum_total)}/>
                 </div>
             </div>
         </div>

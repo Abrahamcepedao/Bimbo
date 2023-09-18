@@ -1113,28 +1113,28 @@ const stkhs: IStkh[] = [
             {id: '2', value: 2, answer: 'Promedio' }, 
             {id: '1', value: 1, answer: 'Inferior' } 
         ]},
-        { id: 'CP_7', dim: 'etica', question: '¿Tiene la empresa establecidos mecanismos de acercamiento sanos con sus competidores y las autoridades para evitar prácticas monopólicas?', answers: [ 
+        { id: 'CP_7', dim: 'calidad', question: '¿Tiene la empresa establecidos mecanismos de acercamiento sanos con sus competidores y las autoridades para evitar prácticas monopólicas?', answers: [ 
             {id: '5', value: 5, answer: 'Superior5' }, 
             {id: '4', value: 4, answer: 'Superior4' }, 
             {id: '3', value: 3, answer: 'Superior3' }, 
             {id: '2', value: 2, answer: 'Promedio' }, 
             {id: '1', value: 1, answer: 'Inferior' } 
         ]},
-        { id: 'CP_8', dim: 'etica', question: '¿Cuenta la empresa con estudios comparativos de sus prácticas laborales, respecto a sus competidores?', answers: [ 
+        { id: 'CP_8', dim: 'calidad', question: '¿Cuenta la empresa con estudios comparativos de sus prácticas laborales, respecto a sus competidores?', answers: [ 
             {id: '5', value: 5, answer: 'Superior5' }, 
             {id: '4', value: 4, answer: 'Superior4' }, 
             {id: '3', value: 3, answer: 'Superior3' }, 
             {id: '2', value: 2, answer: 'Promedio' }, 
             {id: '1', value: 1, answer: 'Inferior' } 
         ]},
-        { id: 'CP_9', dim: 'etica', question: '¿La empresa participa en gremios profesionales y sectoriales relacionados?', answers: [ 
+        { id: 'CP_9', dim: 'calidad', question: '¿La empresa participa en gremios profesionales y sectoriales relacionados?', answers: [ 
             {id: '5', value: 5, answer: 'Superior5' }, 
             {id: '4', value: 4, answer: 'Superior4' }, 
             {id: '3', value: 3, answer: 'Superior3' }, 
             {id: '2', value: 2, answer: 'Promedio' }, 
             {id: '1', value: 1, answer: 'Inferior' } 
         ]},
-        { id: 'CP_10', dim: 'etica', question: '¿Existe un mecanismo que permita conocer cómo los evalúa su competencia?', answers: [ 
+        { id: 'CP_10', dim: 'calidad', question: '¿Existe un mecanismo que permita conocer cómo los evalúa su competencia?', answers: [ 
             {id: '5', value: 5, answer: 'Superior5' }, 
             {id: '4', value: 4, answer: 'Superior4' }, 
             {id: '3', value: 3, answer: 'Superior3' }, 

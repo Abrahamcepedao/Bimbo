@@ -1,14 +1,12 @@
 //components
 import Info from "./Info"
-import Analysis from "./Analysis"
 
-const Results = () => {
+const Intro = () => {
     return (
         <div>
             <Info />
-            <Analysis />
         </div>
     )
 }
 
-export default Results
+export default Intro

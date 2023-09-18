@@ -1,5 +1,5 @@
-import Questions from "@/components/auto/short/questions/Questions"
+import Intro from "@/components/auto/short/intro/Intro"
 
 export default function Index() {
-  return <Questions />
+  return <Intro />
 }
