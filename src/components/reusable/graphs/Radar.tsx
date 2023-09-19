@@ -66,7 +66,7 @@ const Radar = ({ data }: Props) => {
               style={{
                 fontSize: 24,
                 fontWeight: 'bold',
-                fill: status !== 200 ? '#f7f70b' : percentage > 0 ? '#0fec0f' : '#e61111',
+                fill: status !== 200 ? '#f7f70b' : percentage > 0 ? '#0fec0f' : percentage < 0 ? '#e61111' : '#f7f70b',
               }}
             >
               {status !== 200 ? '-' : percentage > 0 ? '+' + percentage + '%' : '' + percentage + '%'}

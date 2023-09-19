@@ -492,6 +492,16 @@ const Analysis = () => {
         handleSetupData(arr, stkhs_short)
     }
 
+    //get percentage of change
+    const getPercentage = (num: number, avg: number) => avg === 0 ? 0 : (num - avg) / avg * 100
+
+    //get label color
+    const getLabelColor = (num: number) => {
+        if(num < 0) return 'text-red_primary'
+        else if(num === 0) return 'text-yellow_primary'
+        return 'text-green_primary'
+    }
+
     if(loading) return <Loader />
 
     return (
@@ -506,6 +516,10 @@ const Analysis = () => {
                 )}
 
                 <Matrix table={table} scale={1}/>
+
+                <div className='filters_container'>
+                    <p className='text'>A continuación se muestra una comparación de tus resultados tanto con el promedio de otras empresas y la puntuación "ideal." En esta sección, puedes filtrar las empresas utilizadas para obtener el promedio con base a su tamaño y/o sector.</p>
+                </div>
 
                 <div className='filters_container'>
                     <div className='flex_b_center'>
@@ -543,6 +557,18 @@ const Analysis = () => {
                             <Radar data={radar1} />
                         </div>
                     </div>
+                    {/* explanation of graph1 */}
+                    {radar1.length !== 0 && (
+                        <div className='filters_container opacity-100'>
+                            <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de dimensiones</p>
+                            <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
+                            <ul className='pl-4'>
+                                {Object.keys(dimensiones).map((dim: string, i: number) => (
+                                    <li key={i} className='text list-disc text-justify'>En la dimensión <span className='bold'>"{dimensiones[dim as 'riqueza']},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(radar1[i].resultado, radar1[i].promedio))}`}>{getPercentage(radar1[i].resultado, radar1[i].promedio)}%</span> superior al promedio, (resultado: <span className='bold'>{radar1[i].resultado}</span>; promedio: <span className='bold'>{radar1[i].promedio}</span>).</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
 
                 <div>
@@ -558,6 +584,32 @@ const Analysis = () => {
                             <Radar data={radar2} />
                         </div>
                     </div>
+                    {/* explanation of graph2 */}
+                    {radar2.length !== 0 && (
+                        <div className='filters_container opacity-100'>
+                            <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de stakeholders</p>
+                            <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
+                            <ul className='pl-4'>
+                                {radar2.map((dim: any, i: number) => (
+                                    <li key={i} className='text list-disc text-justify'>En el stakeholder <span className='bold'>"{dim.dimension},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(dim.resultado, dim.promedio))}`}>{getPercentage(dim.resultado, dim.promedio)}%</span> superior al promedio, (resultado: <span className='bold'>{dim.resultado}</span>; promedio: <span className='bold'>{dim.promedio}</span>).</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    {/* {radar2.length !== 0 && (
+                        <div className='filters_container opacity-100'>
+                            <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de stakeholders</p>
+                            <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
+                            
+                            {radar2.map((dim: any, i: number) => (
+                                <div>
+                                    <p className='text bold'>{dim.dimension}</p>
+                                </div>
+                            ))}
+                            
+                        </div>
+                    )} */}
                 </div>
             </div>
         </div>
