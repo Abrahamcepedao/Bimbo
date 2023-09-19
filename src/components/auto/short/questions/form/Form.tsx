@@ -213,7 +213,7 @@ const Form = () =>  {
             sum_etica: data.reduce((a, b) => a + (b.etica || 0), 0),
             sum_calidad: data.reduce((a, b) => a + (b.calidad || 0), 0),
             sum_riqueza: data.reduce((a, b) => a + (b.riqueza || 0), 0),
-            sum_total: data.reduce((a, b) => a + (b.sum_total || 0), 0),
+            sum_total: Math.round(data.reduce((a, b) => a + (b.sum_total || 0), 0) / 72 * 100),
         }
         console.log(temp)
         return temp

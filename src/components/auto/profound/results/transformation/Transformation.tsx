@@ -2,17 +2,9 @@
 
 //next
 import { useRouter } from "next/navigation"
-import Link from "next/link"
 
 //components
 import Button from '@/components/reusable/buttons/Button'
-
-//formation links
-const formationLinks = [
-    { url: 'https://bit.ly/3dEqt28', text: 'DIFOSO', desc: 'Diplomado Internacional para Dirigentes de Empresa' },
-    { url: 'https://bit.ly/3dEqt28', text: 'CISO', desc: 'Curso de Iniciación Social' },
-    { url: 'https://bit.ly/3dEqt28', text: 'TE', desc: 'Taller de Empresa' },
-]
 
 const points: string[] = [
     'Construye un sistema de gestión orientado a generar valor a tus grupos de interés, mediante los propios procesos de negocio.',
@@ -31,7 +23,7 @@ const Transformation = () => {
                 {points.map((point: string, i) => (
                     <p className="text" key={i}>{point}</p>
                 ))}
-                <Button text="Volver a inicio" variant="gradient" onClick={() => push('/')}/>
+                <Button text="Volver al inicio" variant="gradient" onClick={() => push('/')}/>
             </div>
         </div>
     )

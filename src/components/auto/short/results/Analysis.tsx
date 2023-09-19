@@ -42,6 +42,7 @@ import { formatDateToYYYYMMDD } from '@/utils/functions/utilities'
 
 //dynamic components
 const Radar = dynamic(() => import('@/components/reusable/graphs/Radar'), { ssr: false })
+const Bar = dynamic(() => import('@/components/reusable/graphs/Bar'), { ssr: false })
 
 const dimensiones = {
     riqueza: 'Generación y distribución de riqueza',
@@ -107,6 +108,9 @@ const Analysis = () => {
     //useState - table
     const [table, setTable] = useState<ITable>({ data: [], sum_etica: 0, sum_calidad: 0, sum_riqueza: 0, sum_total: 0,})
 
+    //useState - bar data
+    const [barData, setBarData] = useState<any[]>([])
+
     //useState - radar1
     const [radar1, setRadar1] = useState<any[]>([])
 
@@ -133,6 +137,11 @@ const Analysis = () => {
             createTableData(reduxAnswers)
         } 
     }, [reduxAnswers, reduxUser, reduxAnswersId, reduxIsAnalisis, reduxHasHistory, reduxResults])
+
+    //useEffect - bar data
+    useEffect(() => {
+        if(table.data.length !== 0) calculateBarData(table)
+    }, [table, resultsList])
 
     //verify user
     const verifyUser = () => {
@@ -471,6 +480,31 @@ const Analysis = () => {
         return '2'
     }
 
+    //calculate avg total
+    const calculateAvgTotal = (arr: IResults[]) => {
+        if(arr.length === 0) return 0
+        let sum = 0
+        arr.forEach((res) => { sum += res.results.sum_total })
+        return sum / arr.length
+    }
+
+    //calculate bar data
+    const calculateBarData = (table: ITable) => setBarData([
+            { "dimension": "resultado", "value": table.sum_total, "valueColor": "20, 234, 74" },
+            { "dimension": "promedio", "value": calculateAvgTotal(resultsList), "valueColor": "20, 234, 234" },
+            { "dimension": "ideal", "value": 100, "valueColor": "22, 63, 234" }])
+
+
+    //get percentage of change
+    const getPercentage = (num: number, avg: number) => avg === 0 ? 0 : (num - avg) / avg * 100
+
+    //get label color
+    const getLabelColor = (num: number) => {
+        if(num < 0) return 'text-red_primary'
+        else if(num === 0) return 'text-yellow_primary'
+        return 'text-green_primary'
+    }
+
     if(loading) return <Loader />
 
     return (
@@ -485,6 +519,11 @@ const Analysis = () => {
                 )}
 
                 <Matrix table={table} scale={0}/>
+
+                <div className='filters_container'>
+                    <p className='text'>A continuación se muestra una comparación de tus resultados tanto con el promedio de otras empresas y la puntuación "ideal." En esta sección, puedes filtrar las empresas utilizadas para obtener el promedio con base a su tamaño y/o sector.</p>
+                </div>
+
                 <div className='filters_container'>
                     <div className='flex_b_center'>
                         <div>
@@ -508,12 +547,9 @@ const Analysis = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className='overflow-hidden'>
                     <div className='flex justify-center items-center max-w-md m-auto mb-4'>
                         <h4 className='subtitle mr-2'>Dimensiones: Índice de congruencia</h4>
-                        <div>
-                            
-                        </div>
                     </div>
                     <Legend />
                     <div className='overflow-x-scroll p-2'>
@@ -521,13 +557,21 @@ const Analysis = () => {
                             <Radar data={radar1} />
                         </div>
                     </div>
+                    {radar1.length !== 0 && (
+                        <div className='filters_container opacity-100 mb-4'>
+                            <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de dimensiones</p>
+                            <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
+                            <ul className='pl-4'>
+                                {Object.keys(dimensiones).map((dim: string, i: number) => (
+                                    <li key={i} className='text list-disc text-justify'>En la dimensión <span className='bold'>"{dimensiones[dim as 'riqueza']},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(radar1[i].resultado, radar1[i].promedio))}`}>{getPercentage(radar1[i].resultado, radar1[i].promedio).toFixed(0)}%</span> superior al promedio, (resultado: <span className='bold'>{radar1[i].resultado}</span>; promedio: <span className='bold'>{radar1[i].promedio.toFixed(0)}</span>).</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
-                <div>
+                <div className='overflow-hidden'>
                     <div className='flex justify-center items-center max-w-md m-auto mb-4'>
                         <h4 className='subtitle mr-2'>Stakeholders: Índice de sostenibilidad</h4>
-                        <div>
-                            
-                        </div>
                     </div>
                     <Legend />
                     <div className='overflow-x-scroll p-2'>
@@ -535,7 +579,28 @@ const Analysis = () => {
                             <Radar data={radar2} />
                         </div>
                     </div>
+                    {radar2.length !== 0 && (
+                        <div className='filters_container opacity-100'>
+                            <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de stakeholders</p>
+                            <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
+                            <ul className='pl-4'>
+                                {radar2.map((dim: any, i: number) => (
+                                    <li key={i} className='text list-disc text-justify'>En el stakeholder <span className='bold'>"{dim.dimension},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(dim.resultado, dim.promedio))}`}>{getPercentage(dim.resultado, dim.promedio).toFixed(0)}%</span> superior al promedio, (resultado: <span className='bold'>{dim.resultado}</span>; promedio: <span className='bold'>{dim.promedio.toFixed(0)}</span>).</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )} 
                 </div>
+                {barData.length !== 0 && (
+                    <div className='overflow-hidden'>
+                        <Legend />
+                        <div className='overflow-x-scroll p-2'>
+                            <div className='bar_container'>
+                                <Bar data={barData} />
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div>
                     <AnalysisText isAnalysis={reduxIsAnalisis} results={calculateResult(table.sum_total)}/>
                 </div>
