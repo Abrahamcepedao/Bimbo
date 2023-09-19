@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import Check from '@/components/reusable/inputs/Check'
 import Button from '@/components/reusable/buttons/Button'
 import Loader from '@/components/reusable/loader/Loader'
+import Info from './Info'
 
 //antd
 import { message } from 'antd'
@@ -94,6 +95,7 @@ const SelectStkhs = () =>  {
 
     return (
         <div className='max-w-xl m-auto pb-12'>
+            <Info/>
             <h5 className='subtitle_2 text-left'>Selecciona los grupos de interés</h5>
             <form className='grid grid-cols-2 gap-4' onSubmit={handleSubmit}>
                 {(!loading && formData.length !== 0) && formData.map((inp, i) => (

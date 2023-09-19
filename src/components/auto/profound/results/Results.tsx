@@ -5,8 +5,8 @@ import Analysis from "./Analysis"
 const Results = () => {
     return (
         <div>
-            <Analysis />
             <Info />
+            <Analysis />
         </div>
     )
 }

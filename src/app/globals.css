@@ -23,7 +23,7 @@
     @apply text-lg text-white_primary bold;
   }
   .text {
-    @apply text-base font-light text-white_primary mb-2;
+    @apply text-base lg:text-lg font-light text-white_primary mb-2;
   }
   .icon {
     @apply text-white_primary scale;
@@ -89,7 +89,7 @@
     @apply flex justify-between items-center bg-gray rounded-lg mb-2 text-xs px-2 py-1 w-fit;
   }
   .radar_container {
-    @apply w-full min-w-[500px] h-[400px] lg:h-[600px];
+    @apply w-full min-w-[500px] h-[350px] sm:h-[400px] lg:h-[600px];
   }
   .filters_container {
     @apply bg-trans_gray opacity-60 p-4 rounded-md max-w-2xl m-auto w-full;

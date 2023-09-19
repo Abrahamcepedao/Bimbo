@@ -24,9 +24,15 @@ import Select from '../../../reusable/inputs/Select'
 import Legend from '../../reusable/Legend'
 import Matrix from '../../reusable/Matrix'
 import Loader from '@/components/reusable/loader/Loader'
+import AnalysisText from './AnalysisText'
+import Button from '@/components/reusable/buttons/Button'
 
 //antd
 import { message } from 'antd'
+
+//pdf canvas
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 //interfaces
 import { IInput, IQuestionAnswer, IUser, IStkh, IResults, ITable, ITableData } from '@/utils/interfaces/types'
@@ -492,6 +498,13 @@ const Analysis = () => {
         handleSetupData(arr, stkhs_short)
     }
 
+    //calculate result
+    const calculateResult = (value: number, max: number) => {
+        if(value < max! / 3) return '0'
+        if(value < max! / 3 * 2) return '1'
+        return '2'
+    }
+
     //get percentage of change
     const getPercentage = (num: number, avg: number) => avg === 0 ? 0 : (num - avg) / avg * 100
 
@@ -501,6 +514,32 @@ const Analysis = () => {
         else if(num === 0) return 'text-yellow_primary'
         return 'text-green_primary'
     }
+
+    //downnload results pdf
+    const captureScreenAndDownloadPDF = async () => {
+        const canvas = await html2canvas(document.body);
+
+        const contentWidth = canvas.width;
+        const contentHeight = canvas.height;
+
+        const pdf = new jsPDF('p', 'mm', [contentWidth, contentHeight]);
+
+        const imgData = canvas.toDataURL('image/png');
+        
+        // Calculate the number of pages required based on the content's aspect ratio
+        const pageHeight = pdf.internal.pageSize.height;
+        const totalPages = Math.ceil(contentHeight / pageHeight);
+
+        for (let pageNum = 0; pageNum < totalPages; pageNum++) {
+            if (pageNum > 0) {
+            pdf.addPage();
+            }
+            const startY = -pageHeight * pageNum;
+            pdf.addImage(imgData, 'PNG', 0, startY, contentWidth, contentHeight);
+        }
+
+        pdf.save('resultados_autodiagnostico.pdf');
+    };
 
     if(loading) return <Loader />
 
@@ -544,12 +583,9 @@ const Analysis = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className='overflow-hidden'>
                     <div className='flex justify-center items-center max-w-md m-auto mb-4'>
                         <h4 className='subtitle mr-2'>Dimensiones: Índice de congruencia</h4>
-                        <div>
-                            
-                        </div>
                     </div>
                     <Legend />
                     <div className='overflow-x-scroll p-2'>
@@ -557,7 +593,6 @@ const Analysis = () => {
                             <Radar data={radar1} />
                         </div>
                     </div>
-                    {/* explanation of graph1 */}
                     {radar1.length !== 0 && (
                         <div className='filters_container opacity-100'>
                             <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de dimensiones</p>
@@ -571,12 +606,9 @@ const Analysis = () => {
                     )}
                 </div>
 
-                <div>
+                <div className='overflow-hidden'>
                     <div className='flex justify-center items-center max-w-md m-auto mb-4'>
                         <h4 className='subtitle mr-2'>Stakeholders: Índice de sostenibilidad</h4>
-                        <div>
-                            
-                        </div>
                     </div>
                     <Legend />
                     <div className='overflow-x-scroll p-2'>
@@ -584,7 +616,6 @@ const Analysis = () => {
                             <Radar data={radar2} />
                         </div>
                     </div>
-                    {/* explanation of graph2 */}
                     {radar2.length !== 0 && (
                         <div className='filters_container opacity-100'>
                             <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de stakeholders</p>
@@ -595,21 +626,14 @@ const Analysis = () => {
                                 ))}
                             </ul>
                         </div>
-                    )}
-
-                    {/* {radar2.length !== 0 && (
-                        <div className='filters_container opacity-100'>
-                            <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de stakeholders</p>
-                            <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
-                            
-                            {radar2.map((dim: any, i: number) => (
-                                <div>
-                                    <p className='text bold'>{dim.dimension}</p>
-                                </div>
-                            ))}
-                            
-                        </div>
-                    )} */}
+                    )} 
+                </div>
+                <div>
+                    <AnalysisText results={calculateResult(table.sum_total, table.sum_total_max!)}/>
+                    <div className="pt-8 max-w-2xl m-auto grid sm:grid-cols-2 gap-4">
+                        <Button text="Descargar resultados" variant="filled" onClick={captureScreenAndDownloadPDF}/>
+                        <Button text="Continuar" variant="gradient" onClick={() => push('/auto/profound/results/formation')}/>
+                    </div>
                 </div>
             </div>
         </div>
