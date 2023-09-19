@@ -173,7 +173,7 @@ const Form = () =>  {
 
     return (
         <div className='max-w-xl m-auto p-2 pb-12'>
-            <h3 className='subtitle_2'>¿Primera vez que realizas el autodiagnóstico?</h3>
+            <h3 className='subtitle_2'>¿Primera vez que realizas el protocolo?</h3>
             <h5 className='label text-base'>Llena el siguiente formulario</h5>
             <form className='grid sm:grid-cols-2 gap-4' onSubmit={handleSubmit}>
                 {!loadingForm && formData.map((inp, i) => (

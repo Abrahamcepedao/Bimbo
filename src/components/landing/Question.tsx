@@ -162,7 +162,7 @@ const Question = () =>  {
 
     return (
         <div className='max-w-xl m-auto p-2 pb-12 h-full'>
-            <h3 className='subtitle_2'>¿Ya habías realizado el autodiagnóstico anteriormente?</h3>
+            <h3 className='subtitle_2'>¿Ya habías participado en el protocolo anteriormente?</h3>
             <div>
                 <div className='grid grid-cols-1 gap-4'>
                     <Input inp={formData[0]} onChange={handleInputChange}/>

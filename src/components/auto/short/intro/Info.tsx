@@ -16,6 +16,7 @@ const Info = () => {
     return (
         <div className="py-8 px-4">
             <div className="max-w-2xl m-auto text-justify">
+                <p className="subtitle_2">Introducción</p>
                 <p className="text">Las preguntas del autodiagnóstico hacen referencia al tipo de relación que lleva la empresa con sus grupos de interés, en cada una de las tres dimensiones o ámbitos de toda persona, según Aristóteles: TENER, SER y TRASCENDER (Ver Documento <Link href='https://bit.ly/3dEqt28' target="_blank" className="link">“La Rentabilidad de los Valores”</Link>):</p>
                 <ul>
                     <li>TENER Necesidades materiales: Generación y Distribución de la Riqueza.</li>

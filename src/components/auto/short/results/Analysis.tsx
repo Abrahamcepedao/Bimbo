@@ -69,26 +69,6 @@ const Analysis = () => {
     //router
     const { push } = useRouter()
 
-    //useState - stkh
-    const [stkh, setStkh] = useState<IInput>({
-        name: 'stkh',
-        type: 'select',
-        options: [
-            { label: 'Socios y Accionistas', value: 'AI' },
-            { label: 'Colaboradores', value: 'CB' },
-            { label: 'Proveedores', value: 'PV' },
-            { label: 'Clientes', value: 'CL' },
-            { label: 'Comunidad', value: 'CO' },
-            { label: 'Competencia', value: 'CP' },
-            { label: 'Generaciones futuras', value: 'GF' },
-            { label: 'Gobierno', value: 'GO' },
-        ],
-        variant: 'outlined',
-        colSpan: '',
-        value: 'Colaboradores',
-        required: false,
-    })
-
     //useState - formData
     const [formData, setFormData] = useState<IInput[]>([
         { name: 'company_size', label: 'Tamaño de empresa', placeholder: 'Tamaño', required: true, variant: 'outlined', colSpan: '', type: 'select', options: company_size, value: '' },
@@ -205,8 +185,10 @@ const Analysis = () => {
     }
 
     //handle select change
-    const handleSelectChange = (val: string, name: string) => {
+    const handleSelectChange = async(val: string, name: string) => {
         let temp = [...results]
+        const res = await getAverageResults()
+        console.log(res)
         if (name === 'company_size') {
             setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: company_size.find((el) => el.value === val)?.label || '' } : inp))
             //filter results
@@ -223,9 +205,11 @@ const Analysis = () => {
             if(formData[0].value !== '') temp = temp.filter((el) => el.company_size === company_size.find((el) => el.label === formData[0].value)?.value || '')
         }
 
+        console.log(temp)
         setResultsList(temp)
         if(reduxIsAnalisis) {
             let num: number = formData[2].options!.findIndex((item, i) => `Análisis ${i+1} - ${formatDateToYYYYMMDD(Number(item.value))}` === formData[2].value) || 0
+            console.log(num)
             handleSetupHistoryDimensions(reduxResults[num].results, temp)
         } else handleSetupDimensions(reduxAnswers, temp)
     }
@@ -328,7 +312,6 @@ const Analysis = () => {
             let sum = 0
             arr.forEach((ans) => {
                 ans.dimId === dim ? sum += ans.value || 0 : null
-
             })
             let tempObj = {
                 dimension: dimensiones[dim as 'riqueza'],
@@ -338,6 +321,7 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
+        console.log(tempRdar1)
         setRadar1(tempRdar1)
         handleSetupStkh(arr, res)
     }
@@ -396,10 +380,10 @@ const Analysis = () => {
     }
 
     //setup table with results history
-    const setupTableHistory = (num: number) => {
+    const setupTableHistory = (num: number, res?: IResults[]) => {
         console.log(reduxResults[num])
         setTable(reduxResults[num].results)
-        handleSetupHistoryData(reduxResults[num].results)
+        handleSetupHistoryData(reduxResults[num].results, res)
     }
 
     //handle setup dimensions
@@ -438,13 +422,18 @@ const Analysis = () => {
     }
 
     //handle setup history data
-    const handleSetupHistoryData = async (table: ITable) => {
+    const handleSetupHistoryData = async (table: ITable, res2?: IResults[]) => {
         //get promedio
         const res = await getAverageResults()
-        setResults(res)
-        setResultsList(res)
+        if(res2 !== undefined) {
+            //setResults(res2)
+            setResultsList(res2)
+        } else {
+            setResults(res)
+            setResultsList(res)
+        }
 
-        handleSetupHistoryDimensions(table, res)
+        handleSetupHistoryDimensions(table, res2 ? res : res)
     }
 
     //create table data
@@ -552,11 +541,13 @@ const Analysis = () => {
                         <h4 className='subtitle mr-2'>Dimensiones: Índice de congruencia</h4>
                     </div>
                     <Legend />
-                    <div className='overflow-x-scroll p-2'>
-                        <div className='radar_container mb-8'>
-                            <Radar data={radar1} />
+                    {radar1.length !== 0 && (
+                        <div className='overflow-x-scroll p-2'>
+                            <div className='radar_container mb-8'>
+                                <Radar data={radar1} />
+                            </div>
                         </div>
-                    </div>
+                    )}
                     {radar1.length !== 0 && (
                         <div className='filters_container opacity-100 mb-4'>
                             <p className='subtitle_2 text-center mb-4'>Interpretación - Gráfica de dimensiones</p>
@@ -593,6 +584,9 @@ const Analysis = () => {
                 </div>
                 {barData.length !== 0 && (
                     <div className='overflow-hidden'>
+                        <div className='flex justify-center items-center max-w-md m-auto mb-4'>
+                            <h4 className='subtitle mr-2'>Índice de bien común</h4>
+                        </div>
                         <Legend />
                         <div className='overflow-x-scroll p-2'>
                             <div className='bar_container'>

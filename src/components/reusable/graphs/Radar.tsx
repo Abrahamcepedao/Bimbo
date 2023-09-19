@@ -54,12 +54,12 @@ const Radar = ({ data }: Props) => {
 
     const LabelComponent = ({ id, x, y, anchor }: GridLabelProps) => {
       const { percentage, status } = getPercentage(id);
-
+      console.log(id, x, y, anchor);
       return (
         <g transform={`translate(${x}, ${y})`}>
-          <g transform={`translate(${anchor === 'end' ? -80 : anchor === 'middle' ? -40 : 0}, -20)`}>
+          <g transform={`translate(${anchor === 'end' ? -100 : anchor === 'middle' ? -40 : 0}, -20)`}>
             <text style={{ fill: '#f5f5f5', fontSize: 14, fontWeight: 'bold' }}>
-              {id.length > 15 ? id.substring(0, 13) + '...' : id}
+              {id}
             </text>
             <text
               y={24}
@@ -90,12 +90,13 @@ const Radar = ({ data }: Props) => {
           dotColor={{ theme: 'background' }}
           dotBorderWidth={2}
           colors={[ '#15ea4a', '#15eaea', '#153fea' ]}
-          blendMode="color-dodge"
-          motionConfig="wobbly"
+          blendMode="normal"
+          motionConfig='default'
           gridLevels={0}
           curve="cardinalClosed"
           sliceTooltip={(slice) => <CustomTooltip data={slice} />}
           gridLabel={LabelComponent}
+          animate={false}
       />
     )
 }

@@ -653,6 +653,9 @@ const Analysis = () => {
                 </div>
                 {barData.length !== 0 && (
                     <div className='overflow-hidden'>
+                        <div className='flex justify-center items-center max-w-md m-auto mb-4'>
+                            <h4 className='subtitle mr-2'>Índice de bien común</h4>
+                        </div>
                         <Legend />
                         <div className='overflow-x-scroll p-2'>
                             <div className='bar_container'>

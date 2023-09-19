@@ -29,25 +29,27 @@ const points: IPointsList[] = [
 
 const Info = () => {
     return (
-        <div className="p-4 mb-8">
+        <div className="p-4">
             <div className="max-w-xl m-auto text-justify">
                 <p className="text">La vocación del empresario es una noble vocación cuando se deja interpelar por un sentido trascendente de la vida, cuando además de agregar valor y generar utilidades de forma sostenible, busca desarrollar íntegramente a los hombres y mujeres que conforman su empresa y con los que se relaciona.</p>
                 <p className="text">Esta forma de Gestión Empresarial Centrada en la Persona, además de ser responsable y contribuir al bien común, reduce riesgos y favorece relaciones sostenibles con los grupos de interés, confirmando la rentabilidad de los valores. No es tarea sólo de un departamento en la empresa, sino una visión y gestión integral, tiene que ser asimilada como parte de su cultura y hacerse vida orenetando cada decisión, política y proceso. Tiene que reflejar el ser de la empresa, su identidad y estar acorde a los valores que tiene definidos.</p>
                 <p className="text">La USEM (UNIAPAC México), inspirada en el pensamiento social cristiano, propone este Protocolo como un camino de transformación permanente, siguiendo principios de reflexión, criterios de juicio y directrices de acción viables para el mejoramiento de la empresa comprometida con su responsabilidad social, atendiendo a  tres grandes etapas:</p>
                 <p className="text mb-6"><b className="bold">DIAGNÓSTICO, FORMACIÓN y TRANSFORMACIÓN,</b> que se pueden atender de forma flexible y abarcando las circunstancias internas y externas de la empresa. La decisión de mejorar la empresa, la velocidad o ritmo del proceso y la implementación de las acciones conducentes le competen a cada empresario. </p>
-                
-                {points.map((point: IPointsList, i) => (
-                    <div key={i}>
-                        <h4 className="subtitle_2 underline mb-4">{point.title}:</h4>
-                        <ul className="pl-4">
-                            {point.points.map((p: IPoint, j) => (
-                                <li key={j} className="mb-2 list-disc">
-                                    <b>{p.title}</b>: {p.text}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                <div className="mb-8">
+                    {points.map((point: IPointsList, i) => (
+                        <div key={i}>
+                            <h4 className="subtitle_2 underline mb-4">{point.title}:</h4>
+                            <ul className="pl-4">
+                                {point.points.map((p: IPoint, j) => (
+                                    <li key={j} className="mb-2 list-disc">
+                                        <b>{p.title}</b>: {p.text}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+                <p className="text">Cómo un primer paso de este protocolo, se sugiere verificar el nivel de madurez en la aplicación de diversos elementos que son esperados en una empresa formal y bien gestionada:</p>
             </div>
         </div>
     )
