@@ -29,6 +29,7 @@ export default function Check({ inp, onChange }: Props) {
                     key={i}
                     control={<Checkbox icon={<RadioButtonUncheckedRoundedIcon className='text-white_primary'/>} checkedIcon={<CheckCircleRoundedIcon className='text-green_primary'/>} checked={(inp.value as ICheckItem[])[i].checked} onChange={(e) => {onChange(e, i)}} name={option.label} />}
                     label={option.label}
+                    className='text-white_primary'
                 />
             ))}
             </FormGroup>

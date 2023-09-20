@@ -43,7 +43,7 @@ const Select = ({ inp, onChange }: Props) => {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <p className='text-base'>{inp.value as string}</p>
+                    <p className='text-base text-white_primary'>{inp.value as string}</p>
                     <ArrowDropDownRoundedIcon/>
                 </div>
             </div>

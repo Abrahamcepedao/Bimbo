@@ -27,9 +27,9 @@ export default function RadioInp({ answer, answers, onChange }: Props) {
             >
                 {/* <FormControlLabel value="0" control={<Radio style={{ color: formData.type === "0" ? "rgb(36, 153, 239)" : '#F0F5FE' }} />} label="Administrador" /> */}
                 {answers.map((item, i) => (
-                    <div key={i} className='flex justify-start items-center'>
+                    <div key={i} className='flex justify-start items-start mb-4'>
                         <Radio value={item.id} style={{ color: answer.answerId === item.id ? "rgb(36, 153, 239)" : '#F0F5FE' }} />
-                        <p>{item.answer}</p>
+                        <p className='pt-2'>{item.answer}</p>
                     </div>
                 ))}
 
