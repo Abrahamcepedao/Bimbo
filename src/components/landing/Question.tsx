@@ -1,7 +1,7 @@
 'use client'
 
 //react
-import { useState, useEffect, FormEvent } from 'react'
+import { useState, useEffect } from 'react'
 
 //next
 import { useRouter } from 'next/navigation'
@@ -23,7 +23,7 @@ import { setReduxIsAnalisis, setReduxHasHistory, setReduxShortResults, setReduxP
 import { validateEmail } from '@/utils/functions/utilities'
 
 //interfaces
-import { IInput, IOption, IResults, IUser } from '@/utils/interfaces/types'
+import { IInput, IResults, IUser } from '@/utils/interfaces/types'
 
 const Question = () =>  {
     //redux
@@ -154,7 +154,8 @@ const Question = () =>  {
         } else {
             dispatch(setReduxIsAnalisis(false))
             localStorage.setItem('is_analysis', 'false')
-            push('/auto/short')
+            if(shortResults.length > profoundResults.length) push('/auto/select')
+            else push('/auto/short')
         }
     }
 

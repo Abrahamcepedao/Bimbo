@@ -38,7 +38,7 @@ import company_size from '@/utils/constants/company_size'
 import sectors from "@/utils/constants/sectors";
 
 //Utils
-import { formatDateToYYYYMMDD } from '@/utils/functions/utilities'
+import { formatDateToYYYYMMDD, formatNumber } from '@/utils/functions/utilities'
 
 //dynamic components
 const Radar = dynamic(() => import('@/components/reusable/graphs/Radar'), { ssr: false })
@@ -187,8 +187,6 @@ const Analysis = () => {
     //handle select change
     const handleSelectChange = async(val: string, name: string) => {
         let temp = [...results]
-        const res = await getAverageResults()
-        console.log(res)
         if (name === 'company_size') {
             setFormData(prevState => prevState.map(inp => inp.name === name ? { ...inp, value: company_size.find((el) => el.value === val)?.label || '' } : inp))
             //filter results
@@ -205,11 +203,9 @@ const Analysis = () => {
             if(formData[0].value !== '') temp = temp.filter((el) => el.company_size === company_size.find((el) => el.label === formData[0].value)?.value || '')
         }
 
-        console.log(temp)
         setResultsList(temp)
-        if(reduxIsAnalisis) {
+        if(reduxHasHistory) {
             let num: number = formData[2].options!.findIndex((item, i) => `Análisis ${i+1} - ${formatDateToYYYYMMDD(Number(item.value))}` === formData[2].value) || 0
-            console.log(num)
             handleSetupHistoryDimensions(reduxResults[num].results, temp)
         } else handleSetupDimensions(reduxAnswers, temp)
     }
@@ -554,7 +550,7 @@ const Analysis = () => {
                             <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
                             <ul className='pl-4'>
                                 {Object.keys(dimensiones).map((dim: string, i: number) => (
-                                    <li key={i} className='text list-disc text-justify'>En la dimensión <span className='bold'>"{dimensiones[dim as 'riqueza']},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(radar1[i].resultado, radar1[i].promedio))}`}>{getPercentage(radar1[i].resultado, radar1[i].promedio).toFixed(0)}%</span> superior al promedio, (resultado: <span className='bold'>{radar1[i].resultado}</span>; promedio: <span className='bold'>{radar1[i].promedio.toFixed(0)}</span>).</li>
+                                    <li key={i} className='text list-disc text-justify'>En la dimensión <span className='bold'>"{dimensiones[dim as 'riqueza']},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(radar1[i].resultado, radar1[i].promedio))}`}>{formatNumber(getPercentage(radar1[i].resultado, radar1[i].promedio))}%</span> superior al promedio, (resultado: <span className='bold'>{radar1[i].resultado}</span>; promedio: <span className='bold'>{formatNumber(radar1[i].promedio)}</span>).</li>
                                 ))}
                             </ul>
                         </div>
@@ -576,7 +572,7 @@ const Analysis = () => {
                             <p className='text text-justify mb-4'>El promedio se refiere al promedio acumulado de {resultsList.length === 1 ? 'la' : 'las'} {resultsList.length} {resultsList.length === 1 ? 'empresa' : 'empresas'} que han respondido el autodiagnóstico{formData[0].value !== '' ? `, de tamaño ${formData[0].value}` : null} {(formData[0].value !== '' && formData[1].value !== '') ? ' y ' : null} {formData[1].value !== '' ? `del sector ${formData[1].value}` : null}.</p>
                             <ul className='pl-4'>
                                 {radar2.map((dim: any, i: number) => (
-                                    <li key={i} className='text list-disc text-justify'>En el stakeholder <span className='bold'>"{dim.dimension},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(dim.resultado, dim.promedio))}`}>{getPercentage(dim.resultado, dim.promedio).toFixed(0)}%</span> superior al promedio, (resultado: <span className='bold'>{dim.resultado}</span>; promedio: <span className='bold'>{dim.promedio.toFixed(0)}</span>).</li>
+                                    <li key={i} className='text list-disc text-justify'>En el stakeholder <span className='bold'>"{dim.dimension},"</span> te encuentras <span className={`bold ${getLabelColor(getPercentage(dim.resultado, dim.promedio))}`}>{formatNumber(getPercentage(dim.resultado, dim.promedio))}%</span> superior al promedio, (resultado: <span className='bold'>{dim.resultado}</span>; promedio: <span className='bold'>{formatNumber(dim.promedio)}</span>).</li>
                                 ))}
                             </ul>
                         </div>

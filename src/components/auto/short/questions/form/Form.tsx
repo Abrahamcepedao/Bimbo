@@ -262,7 +262,7 @@ const Form = () =>  {
                     <Stepper activeStep={activeStep} orientation="vertical">
                         {stkhs_short.map((stkh, index) => (
                             <Step key={index}>
-                                <StepLabel><p className='bold text-xl opacity-90 text-white_primary'>{stkh.name} ({stkh.id})</p></StepLabel>
+                                <StepLabel><p className='bold text-xl opacity-90 text-white_primary'>{stkh.name} ({stkh.id}) {stkh.name === 'Medioambiente' ? ' - Cuidado de la casa común' : null}</p></StepLabel>
                                 <StepContent>
                                     <div>
                                         {stkh.questions.map((question, i) => (

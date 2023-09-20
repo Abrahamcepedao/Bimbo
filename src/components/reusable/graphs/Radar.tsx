@@ -54,7 +54,6 @@ const Radar = ({ data }: Props) => {
 
     const LabelComponent = ({ id, x, y, anchor }: GridLabelProps) => {
       const { percentage, status } = getPercentage(id);
-      console.log(id, x, y, anchor);
       return (
         <g transform={`translate(${x}, ${y})`}>
           <g transform={`translate(${anchor === 'end' ? -100 : anchor === 'middle' ? -40 : 0}, -20)`}>

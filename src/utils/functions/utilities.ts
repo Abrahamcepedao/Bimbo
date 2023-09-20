@@ -29,8 +29,19 @@ function formatDateToYYYYMMDD(timestamp: number): string {
   return `${year}-${month}-${day}`;
 }
 
+/**
+ * Formats a number to a string.
+ * 
+ * @param value - The number to format.
+ */
+function formatNumber(value: number): string {
+  if (Number.isInteger(value)) return value.toString(); // It's a whole number, return as-is
+  else return value.toFixed(2); // It has decimal places, round to 2 decimal places
+}
+
 export {
     validateEmail,
     openInNewTab,
-    formatDateToYYYYMMDD
+    formatDateToYYYYMMDD,
+    formatNumber
 }

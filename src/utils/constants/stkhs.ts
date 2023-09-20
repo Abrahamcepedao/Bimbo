@@ -1177,7 +1177,7 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No unimos a cárteles ilegales.' } 
         ]},
     ]},
-    { id: 'GF', name: 'Generaciones Futuras', questions: [
+    { id: 'GF', name: 'Medioambiente', questions: [
        { id: 'GF_1', dim: 'etica', question: '¿Desarrolla la empresa programas de formación para el respeto y cuidado de la casa común (medio ambiente) en la elaboración, distribución y uso de sus productos?', answers: [ 
             {id: '5', value: 5, answer: 'Es muy importante para la empresa y tenemos un programa en operación que se actualiza anualmente.' }, 
             {id: '4', value: 4, answer: 'Si, tenemos un programa pero no funciona al 100%.' }, 

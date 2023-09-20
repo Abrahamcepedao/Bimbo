@@ -31,7 +31,7 @@ const stkhs_short: IStkh[] = [
         { id: 'CP_2', dim: 'etica', question: '¿La empresa realiza prácticas de sana competencia?', answers: [ {id: '3', answer: 'Siempre', value: 3 }, {id: '2', answer: 'Ocasionalmente', value: 2 }, {id: '1', answer: 'Rara vez', value: 1 } ] },
         { id: 'CP_3', dim: 'calidad', question: '¿La empresa participa en organizaciones gremiales que contribuyan al desarrollo de la industria?', answers: [ {id: '3', answer: 'Siempre', value: 3 }, {id: '2', answer: 'Ocasionalmente', value: 2 }, {id: '1', answer: 'Rara vez', value: 1 } ] }
     ]},
-    { id: 'GF', name: 'Generaciones Futuras', questions: [
+    { id: 'GF', name: 'Medioambiente', questions: [
         { id: 'GF_1', dim: 'riqueza', question: '¿La empresa destina recursos significativos al cuidado de la “casa común” (el medio ambiente)?', answers: [ {id: '3', answer: 'Más allá de lo establecido en ley', value: 3 }, {id: '2', answer: 'Conforme a la ley', value: 2 }, {id: '1', answer: 'No contamos con programas de cuidado de la casa común', value: 1 } ] },
         { id: 'GF_2', dim: 'etica', question: '¿La empresa cuida los efectos de su actividad en el medio ambiente?', answers: [ {id: '3', answer: 'Siempre', value: 3 }, {id: '2', answer: 'Ocasionalmente', value: 2 }, {id: '1', answer: 'Rara vez', value: 1 } ] },
         { id: 'GF_3', dim: 'calidad', question: '¿La empresa realiza acciones para la mejora del medio ambiente?', answers: [ {id: '3', answer: 'Siempre', value: 3 }, {id: '2', answer: 'Ocasionalmente', value: 2 }, {id: '1', answer: 'Rara vez', value: 1 } ] }

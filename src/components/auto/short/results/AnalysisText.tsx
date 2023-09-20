@@ -55,7 +55,7 @@ const AnalysisText = ({ isAnalysis, results}: Props) => {
                     <p key={i} className="text">{text}{(results === '2' && i === resultsText[results].texts.length - 1) ? <Link href='https://bit.ly/3spE2Z1' target="_blank" className="link">https://bit.ly/3spE2Z1</Link> : null}</p>
                 ))}
                 <div className="pt-8 max-w-2xl m-auto grid sm:grid-cols-2 gap-4">
-                    <Button text="Terminar análisis" variant="filled" onClick={() => push('/')}/>
+                    <Button text={isAnalysis ? 'Volver al inicio' : 'Terminar análisis'} variant="filled" onClick={() => push('/')}/>
                     <Button text="Continuar con protocolo" variant="gradient" onClick={() => push(isAnalysis ? '/auto/profound/results' : '/auto/profound/select_stkhs')}/>
                 </div>
             </div>
