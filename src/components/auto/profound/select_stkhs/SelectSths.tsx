@@ -83,8 +83,7 @@ const SelectStkhs = () =>  {
     }
 
     //handl submit
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmit = async () => {
         if(!validateForm()) return 
         let temp = (formData[0].value as ICheckItem[]).filter(stkh => stkh.checked).map(stkh => stkh.label)
         let stkhsIds = stkhs.filter(stkh => temp.includes(stkh.name)).map(stkh => stkh.id)
@@ -94,24 +93,24 @@ const SelectStkhs = () =>  {
     }
 
     return (
-        <div className='max-w-xl m-auto pb-12'>
+        <div className='max-w-xl m-auto p-2 pb-12'>
             <Info/>
             <h5 className='subtitle_2 text-left'>Selecciona los grupos de interés</h5>
-            <form className='grid grid-cols-2 gap-4' onSubmit={handleSubmit}>
+            <div className='mb-4'>
                 {(!loading && formData.length !== 0) && formData.map((inp, i) => (
                     <div key={i} className={`${inp.colSpan}`}>
                         <Check inp={inp} onChange={handleCheckChange} />
                     </div>
                 ))}
-                <div className='sm:col-span-2'>
-                    <Button text='Continuar' type='submit' variant='gradient'/>
+            </div>
+            <div className=''>
+                <Button text='Continuar' onClick={handleSubmit} variant='gradient'/>
+            </div>
+            {loading && (
+                <div className=''>
+                    <Loader/>
                 </div>
-                {loading && (
-                    <div className='sm:col-span-2'>
-                        <Loader/>
-                    </div>
-                )}
-            </form>
+            )}
         </div>
     )
 }

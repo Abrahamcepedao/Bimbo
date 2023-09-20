@@ -21,7 +21,7 @@ const Footer = () => {
                     <IconButton><EmailRoundedIcon className='icon'/></IconButton>
                 </div>
                 <div>
-                    <Link href='/aviso' className='bold underline text-white_primary'>
+                    <Link href='/aviso' className='bold text-xs sm:text-sm underline text-white_primary'>
                         Aviso de privacidad
                     </Link>
                 </div>
