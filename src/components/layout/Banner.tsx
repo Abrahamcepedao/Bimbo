@@ -43,6 +43,10 @@ const Banner = () => {
             if(path === '/auto/profound/results/transformation') setSubtitle('Transformación')
         } else if (path === '/aviso') setSubtitle('Aviso de privacidad')
         else if(path === '/checklist') setSubtitle('Estado actual de la empresa')
+        else {
+            setTitle('Protocolo de Responsabilidad Social Empresarial Centrada en la Persona ®️')
+            setSubtitle('Primer paso de las empresas hacia la responsabilidad social empresarial')
+        }
     }, [path])
 
     return (
