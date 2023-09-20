@@ -44,7 +44,7 @@ const Select = ({ inp, onChange }: Props) => {
                     aria-expanded={open ? 'true' : undefined}
                 >
                     <p className='text-base text-white_primary'>{inp.value as string}</p>
-                    <ArrowDropDownRoundedIcon/>
+                    <ArrowDropDownRoundedIcon className='text-white_primary'/>
                 </div>
             </div>
 
