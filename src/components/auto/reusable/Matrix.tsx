@@ -83,9 +83,9 @@ const Matrix = ({ table, scale }: Props) => {
                             {/* <td className={`m_tbl_td ${calculateColor(item.riqueza, item.riqueza_max)}`}>{item.riqueza}/{item.riqueza_max}</td>
                             <td className={`m_tbl_td ${calculateColor(item.etica, item.etica_max)}`}>{item.etica}/{item.etica_max}</td>
                             <td className={`m_tbl_td ${calculateColor(item.calidad, item.calidad_max)}`}>{item.calidad}/{item.calidad_max}</td> */}
-                            <td className={`m_tbl_td ${calculateColor(scale === 1 ? getPercentage(item.riqueza, item.riqueza_max!): item.riqueza)}`}>{scale === 1 ? getPercentageTxt(item.riqueza, item.riqueza_max!) : item.riqueza}</td>
-                            <td className={`m_tbl_td ${calculateColor(scale === 1 ? getPercentage(item.etica, item.etica_max!): item.etica)}`}>{scale === 1 ? getPercentageTxt(item.etica, item.etica_max!) : item.etica}</td>
-                            <td className={`m_tbl_td ${calculateColor(scale === 1 ? getPercentage(item.calidad, item.calidad_max!): item.calidad)}`}>{scale === 1 ? getPercentageTxt(item.calidad, item.calidad_max!) : item.calidad}</td>
+                            <td className={`m_tbl_td w-[120px] sm:w-[160px] ${calculateColor(scale === 1 ? getPercentage(item.riqueza, item.riqueza_max!): item.riqueza)}`}>{scale === 1 ? getPercentageTxt(item.riqueza, item.riqueza_max!) : item.riqueza}</td>
+                            <td className={`m_tbl_td w-[120px] sm:w-[160px] ${calculateColor(scale === 1 ? getPercentage(item.etica, item.etica_max!): item.etica)}`}>{scale === 1 ? getPercentageTxt(item.etica, item.etica_max!) : item.etica}</td>
+                            <td className={`m_tbl_td w-[120px] sm:w-[160px] ${calculateColor(scale === 1 ? getPercentage(item.calidad, item.calidad_max!): item.calidad)}`}>{scale === 1 ? getPercentageTxt(item.calidad, item.calidad_max!) : item.calidad}</td>
                             <td/>
                             <td className={`m_tbl_td ${calculateSostenibilidad(scale === 1 ? getPercentage(item.sum_total, item.sum_total_max!): item.sum_total)}`}>{scale === 1 ? getPercentageTxt(item.sum_total, item.sum_total_max!) : item.sum_total}</td>
                             <td/>

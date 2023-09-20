@@ -34,7 +34,6 @@ const formationLinks = [
     { text: 'Perdiguero, Tomás y García Reche, Andrés. La Responsabilidad Social de las Empresas y los nuevos desafíos de la gestión Empresarial, Editores, PUV, 2005.' },
 ]
 
-
 const Bibliography = () => {
     //router
     const { push } = useRouter()
@@ -45,7 +44,7 @@ const Bibliography = () => {
                 <h3 className="subtitle_2 underline">Bibliografía</h3>
                 {formationLinks.map((link, i) => (
                     <div key={i} className='mb-4'>
-                        <p>{link.url && (<Link href={link.url} className='link'>Enlace</Link>)} – {link.text}</p>
+                        <p className="text-white_primary">{link.url && (<Link href={link.url} className='link'>Enlace</Link>)} – {link.text}</p>
                     </div>
                 ))}
                 <Button text="Continuar" variant="gradient" onClick={() => push('/auto/profound/results/transformation')}/>

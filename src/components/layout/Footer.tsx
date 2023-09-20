@@ -12,7 +12,7 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <div className="bg-back_primary p-8">
+        <div className="bg-back_primary px-2 py-8">
             <div className="max-w-4xl m-auto border-t border-white flex_b_center">
                 <div className='grid grid-cols-4 gap-2'>
                     <IconButton><FacebookIcon className='icon'/></IconButton>
@@ -21,7 +21,7 @@ const Footer = () => {
                     <IconButton><EmailRoundedIcon className='icon'/></IconButton>
                 </div>
                 <div>
-                    <Link href='/aviso' className='bold underline'>
+                    <Link href='/aviso' className='bold underline text-white_primary'>
                         Aviso de privacidad
                     </Link>
                 </div>

@@ -31,7 +31,7 @@ const Formation = () => {
                 ))}
                 {formationLinks.map((link, i) => (
                     <div key={i} className='mb-4'>
-                        <p><Link href={link.url} className='link'>{link.text}</Link> – {link.desc}</p>
+                        <p className="text-white_primary"><Link href={link.url} className='link'>{link.text}</Link> – {link.desc}</p>
                     </div>
                 ))}
                 <Button text="Continuar" variant="gradient" onClick={() => push('/auto/profound/results/bibliography')}/>

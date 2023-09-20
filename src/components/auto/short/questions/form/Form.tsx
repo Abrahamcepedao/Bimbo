@@ -103,7 +103,8 @@ const Form = () =>  {
                     stkhId: stkh.id,
                     questionId: question.id,
                     dimId: question.dim || '',
-                    answerId: question.answers[num].id,
+                    //answerId: question.answers[num].id,
+                    answerId: '',
                     value: question.answers[num].value
                 })
             })
