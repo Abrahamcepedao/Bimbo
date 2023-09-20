@@ -29,7 +29,7 @@ export default function RadioInp({ answer, answers, onChange }: Props) {
                 {answers.map((item, i) => (
                     <div key={i} className='flex justify-start items-start mb-4'>
                         <Radio value={item.id} style={{ color: answer.answerId === item.id ? "rgb(36, 153, 239)" : '#F0F5FE' }} />
-                        <p className='pt-2'>{item.answer}</p>
+                        <p className='pt-2 text-white_primary'>{item.answer}</p>
                     </div>
                 ))}
 
