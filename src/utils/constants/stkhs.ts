@@ -52,11 +52,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'Los conflictos de interés son ignorados.' } 
         ]},
         /* { id: 'AI_8', dim: 'etica', question: '¿La congruencia e impacto con que se viven los principios y valores de la empresa son motivo de orgullo para los accionistas e inversionistas?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]}, */
         { id: 'AI_7', dim: 'etica', question: 'A través del cumplimiento de nuestro propósito y de nuestro modelo de gestión, damos motivos para que los accionistas se sientan orgullosos, más allá de la generación de valor económico', answers: [ 
             {id: '5', value: 5, answer: 'La cultura de la empresa, sus actividades y principios nos hacen estar orgullosos.' }, 
@@ -187,11 +187,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No, los colaboradores no son tomados en cuenta.' } 
         ]},
         { id: 'CB_5', dim: 'etica', question: '¿La organización cuenta con mecanismos concretos para medir la congruencia entre el decir y hacer del grupo ejecutivo?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CB_6', dim: 'etica', question: '¿La empresa respeta la libertad de credo de sus colaboradores?', answers: [ 
             {id: '5', value: 5, answer: 'Si, no se discrimina a nadie por su religión e incluso se promueve que los colaboradores vivan su fe.' }, 
@@ -432,11 +432,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'Un análisis como este se considera irrelevante.' } 
         ]},
         /* { id: 'CB_40', dim: 'riqueza', question: '¿Existe un semáforo del bienestar de los colaboradores?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]}, */
         { id: 'CB_40', dim: 'riqueza', question: '¿Existe una política de compensación extraordinaria ligada a resultados para los colaboradores?', answers: [ 
             {id: '5', value: 5, answer: 'Si, la política de compensación de resultados es parte de las prestaciones del colaborador y su plan de carrera.' }, 
@@ -490,10 +490,10 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No es un tema relevante para la empresa, mientras nos vendan a buen precio no importa su competencia.' } 
         ]},
         { id: 'PV_4', dim: 'etica', question: '¿Cuenta la empresa con instrumentos que aseguran el respeto de la propiedad intelectual de los proveedores?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
             {id: '1', value: 1, answer: 'No, ese no es un tema propio de la empresa.' } 
         ]},
         { id: 'PV_5', dim: 'etica', question: '¿Existen programas de trabajo con proveedores para el mejoramiento mutuo y la congruencia con sus principios y códigos de conducta?', answers: [ 
@@ -546,11 +546,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No es un tema que nos preocupe.' } 
         ]},
         { id: 'PV_12', dim: 'calidad', question: '¿Existen programas o estrategias que incentiven las buenas prácticas laborales entre sus proveedores?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' }
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' }
         ]},
         { id: 'PV_13', dim: 'calidad', question: '¿Cuenta la empresa con procesos claros y transparentes para la selección, contratación y evaluación de proveedores', answers: [ 
             {id: '5', value: 5, answer: 'Si, y ha resultado muy productivo y transparente, es parte de nuestro proceso cotidiano.' }, 
@@ -602,11 +602,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No, lo que importa es quien tenga el mejor precio.' } 
         ]},
         { id: 'PV_20', dim: 'riqueza', question: '¿Se desarrollan sistemáticamente acciones proactivas y recurrentes para detectar las necesidades de sus proveedores y contribuir a su desarrollo?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'PV_21', dim: 'riqueza', question: '¿Existen mecanismos que le permitan a la empresa conocer Óomo es evaluada por sus proveedores?', answers: [ 
             {id: '5', value: 5, answer: 'Sí, la opinión de todo stakeholder es importante para nosotros ya que nos interesa su desarrollo.' }, 
@@ -758,11 +758,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No es un tema que consideremos relevante.' } 
         ]},
         /* { id: 'CL_19', dim: 'calidad', question: '¿Cuentan con mecanismos permanentes para la evaluación de la satisfacción de sus clientes, consumidores y distribuidores?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]}, */
         { id: 'CL_19', dim: 'calidad', question: '¿Cuenta la empresa con una política de atención a clientes, incluyendo encuestas de satisfacción y manejo de quejas y reclamaciones?', answers: [ 
             {id: '5', value: 5, answer: 'Tenemos una política establecida, la satisfacción y atención de clientes es muy importante para la empresa.' }, 
@@ -858,11 +858,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No lo consideramos un tema relevante.' } 
         ]},
         /* { id: 'GO_4', dim: 'etica', question: '¿Participa la empresa en programas de gobierno para el desarrollo y bieestar social de las comunidades cercanas a su ubicacion?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]}, */
         { id: 'GO_5', dim: 'etica', question: 'La empresa colabora con las autoridades en todo aquello que es de su competencia para contribuir al bienestar de la sociedad?', answers: [ 
             {id: '5', value: 5, answer: 'Sí, la empresa participa permanentemene  junto con las autoridades en diversos proyectos sociales.' }, 
@@ -944,60 +944,60 @@ const stkhs: IStkh[] = [
     ]},
     { id: 'CO', name: 'Comunidad', questions: [
         { id: 'CO_1', dim: 'etica', question: '¿Se Incluye en la gestión empresarial el desarrollo de las familias de los colaboradores y la comunidad?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_2', dim: 'etica', question: '¿Se aplica un mecanismo frecuente de información y retroalimentación, hacia y desde estos grupos: familia, vecino,  poblados, consuimdores, etc.?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_3', dim: 'etica', question: '¿Se analiza el posible impacto social negativo de las decisiones y en su caso se asumen responsablemente las consecuencias?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_4', dim: 'etica', question: '¿Cuenta la empresa con un programa de voluntariado interno que promueva el desarrollo de sus miembros y de la comunidad cercana, fortaleciendo el tejido social?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_5', dim: 'etica', question: 'Se icentiva y promueve a proveedores de nuesta localidad a trabajar con la empresa, favoreciéndolos siempre y cuando consigan al menos las mismas condiciones que los de otras localidades', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_6', dim: 'calidad', question: '¿La empresa cuenta con mecanismos documentados que  promuevan y permitan la participación de sus colaboradores e inversión en proyectos de participación cívica, gremiales y sociales?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_7', dim: 'calidad', question: '¿La empresa participa en asociaciones del sector para promover agendas en función del Bien Común de la comunidad cercana o, en su caso, de la región?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_8', dim: 'calidad', question: '¿La empresa cuenta con una política de relación y cooperación con las OSC´s para colaborar en proyectos comunes?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_9', dim: 'calidad', question: '¿Evalúa la empresa el impacto de su participación social y gremial?', answers: [ 
             {id: '5', value: 5, answer: 'Sí, se elabora un informe anual en el cual se evalúa el impacto de nuestra participación social.' }, 
@@ -1007,11 +1007,11 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No lo consideramos relevante.' } 
         ]},
         { id: 'CO_10', dim: 'calidad', question: '¿Existe un informe específico, con indicadores de impacto, de las causas sociales y gremiales apoyadas por la empresa?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_11', dim: 'calidad', question: 'Nos aseguramos que el  talento adecuado llegue a cada puesto de trabajo, eliminando por completo cualquier barrera que pueda dificultar o impedir el acceso a dichos puestos a personas de grupos minoritarios o en condiciones de desventaja', answers: [ 
             {id: '5', value: 5, answer: 'En el proceso de selección de las personas, una vez cumplido el perfil y capacidades, el color de su piel, apariencia física, preferencia religiosa o sexual NO influye institucionalmente en la decisión, hay una política cuyo cumplimiento se vigila formal y periódicamente y se difunde proactivamente en todos los medios empleados para el reclutamiento.' }, 
@@ -1021,25 +1021,25 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'En el proceso de selección de las personas, una vez cumplido el perfil y capacidades, el color de su piel, apariencia física, preferencia religiosa o sexual es determinante en la decisión y todo mundo sabe que no debe contratar personas que tienen ciertas características.' } 
         ]},
         { id: 'CO_12', dim: 'riqueza', question: '¿La organización cuenta con un censo que brinde información de las necesidades materiales y sociales de la(s) comunidad(es) en la(s) que está(n) insertos??', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_13', dim: 'riqueza', question: '¿Realiza la empresa sus actividades en condiciones y ambiente de trabajo que respete y mejore el entorno social y cultural de la comunidad?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_14', dim: 'riqueza', question: '¿La empresa implementa una política que contribuye al desarrollo de nuevas empresas y la mejora del ambiente empresarial en la comunidad?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_15', dim: 'riqueza', question: '¿Pone la empresa al servicio de la comunidad bienes propios?', answers: [ 
             {id: '5', value: 5, answer: 'Sí, y se ejerce mediante un programa anual aprobado por el consejo de administración y en el que pueden participar todos los colaboradores que lo deseen.' }, 
@@ -1049,18 +1049,18 @@ const stkhs: IStkh[] = [
             {id: '1', value: 1, answer: 'No lo consideramos relevante.' } 
         ]},
         { id: 'CO_16', dim: 'riqueza', question: '¿Existe en la empresa un mecanismo que le permita conocer como la evalúa la comunidad?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_17', dim: 'riqueza', question: '¿Han realizado un censo del impacto social y cultural que se genera alrededor de su actividad?', answers: [ 
-            {id: '5', value: 5, answer: 'Superior5' }, 
-            {id: '4', value: 4, answer: 'Superior4' }, 
-            {id: '3', value: 3, answer: 'Superior3' }, 
-            {id: '2', value: 2, answer: 'Promedio' }, 
-            {id: '1', value: 1, answer: 'Inferior' } 
+            {id: '5', value: 5, answer: 'Esta operando bien y se mejora contínuamente' }, 
+            {id: '4', value: 4, answer: 'Se tiene en práctica pero no se evalúa' }, 
+            {id: '3', value: 3, answer: 'Se tiene pero no se práctica' }, 
+            {id: '2', value: 2, answer: 'Se tiene pero no es conocida' }, 
+            {id: '1', value: 1, answer: 'No se tiene' } 
         ]},
         { id: 'CO_18', dim: 'riqueza', question: 'Privilegiamos en la medida de lo razonable, siempre contratar a personas de nuestra localidad', answers: [ 
             {id: '5', value: 5, answer: 'Para inversiones de crecimiento en la empresa o para nuevas inversiones en otros negocios, procuro hacerlo, en igualdad de circunstancias en cuanto a capacidades y disponibilidad, en la comunidad donde creció mi empresa para dar más empleo en ese lugar.' }, 
