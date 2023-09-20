@@ -69,9 +69,9 @@ const SelectStkhs = () =>  {
         tempStkhs.forEach(stkh => {
             if(stkh.checked) count++
         })
-        if(count < 3) {
+        if(count < 1) {
             valid = false
-            message.error('Debes seleccionar al menos 3 grupos de interés')
+            message.error('Debes seleccionar al menos 1 grupo de interés')
         }
         return valid
     }
