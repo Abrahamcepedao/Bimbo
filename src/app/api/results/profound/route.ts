@@ -13,11 +13,11 @@ export async function GET(req: NextRequest) {
     if (!tempResult) {
       return NextResponse.json({ status: 400, error: 'There are no results' });
     }
-    console.log(tempResult)
+    //console.log(tempResult)
 
     return NextResponse.json({ status: 200, data: tempResult });
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     return NextResponse.json({ status: 500, error: 'Internal Server Error' });
   }
 }

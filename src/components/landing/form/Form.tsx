@@ -154,7 +154,7 @@ const Form = () =>  {
                 body: JSON.stringify(temp)
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 dispatch(setReduxUser(temp))
                 localStorage.setItem('user', JSON.stringify(data.data))

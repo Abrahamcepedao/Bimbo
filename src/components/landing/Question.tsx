@@ -80,7 +80,7 @@ const Question = () =>  {
 
             return null
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             message.error('Ocurrió un error al obtener los datos del usuario')
             return null
         }
@@ -99,7 +99,7 @@ const Question = () =>  {
             if(data.status === 200) return data.data as IResults[]
             return []
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             message.error('Ocurrió un error al obtener los resultados cortos')
             return []
         }
@@ -118,7 +118,7 @@ const Question = () =>  {
             if(data.status === 200) return data.data as IResults[]
             return []
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             message.error('Ocurrió un error al obtener los resultados cortos')
             return []
         }
@@ -134,8 +134,8 @@ const Question = () =>  {
         
         const shortResults: IResults[] = await handleGetShortResults()
         const profoundResults: IResults[] = await handleGetProfoundResults()
-        console.log(shortResults)
-        console.log(profoundResults)
+        //console.log(shortResults)
+        //console.log(profoundResults)
         dispatch(setReduxUser(res))
         dispatch(setReduxHasHistory(true))
         dispatch(setReduxShortResults(shortResults))

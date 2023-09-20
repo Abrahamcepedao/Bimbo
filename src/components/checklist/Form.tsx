@@ -78,7 +78,7 @@ const Form = () => {
 
     //handle save checklist
     const handleSaveChecklist = async () => {
-        console.log(checklistData)
+        //console.log(checklistData)
 
         if (!validateForm()) return message.error('Debes responder todas las preguntas')
             
@@ -95,7 +95,7 @@ const Form = () => {
                 body: JSON.stringify({ checklist: checklistData, mail: reduxUser?.mail})
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 dispatch(setReduxUser({...reduxUser!, checklist: checklistData}))
                 localStorage.setItem('user', JSON.stringify({...reduxUser!, checklist: checklistData}))

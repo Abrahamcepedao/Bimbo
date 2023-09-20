@@ -16,13 +16,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ status: 400, error: 'Results already created' });
     }
 
-    console.log(id, mail, type, company_size, sector, createdAt, results)
+    //console.log(id, mail, type, company_size, sector, createdAt, results)
     const result = new Results({id, mail, type, company_size, sector, createdAt, results })
-    console.log(result)
+    //console.log(result)
     await result.save()
     return NextResponse.json({ status: 200, message: 'success' });
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     return NextResponse.json({ status: 500, error: 'Internal Server Error' });
   }
 }

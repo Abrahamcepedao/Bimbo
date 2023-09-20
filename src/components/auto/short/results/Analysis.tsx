@@ -108,7 +108,7 @@ const Analysis = () => {
         verifyIsAnalysis()
         verifyHasHistory()
         verifyShortResults()
-        console.log(results)
+        //console.log(results)
         if(reduxResults.length !== 0 && reduxIsAnalisis && table.data.length === 0) {
             setupHistorySelect()
         } else if(reduxHasHistory && reduxResults.length !== 0 && reduxUser !== null && table.data.length === 0) {
@@ -137,7 +137,7 @@ const Analysis = () => {
     const verifyAnswers = () => {
         if(reduxAnswers.length === 0){
             let temp: IQuestionAnswer[] = JSON.parse(localStorage.getItem('answers_short') as string) || []
-            console.log(temp)
+            //console.log(temp)
             if(temp.length !== 0) {
                 dispatch(setReduxAnswersShort(temp))
             }
@@ -234,7 +234,7 @@ const Analysis = () => {
                 createdAt: reduxAnswersId,
                 results: tempTable,
             }
-            console.log(temp)
+            //console.log(temp)
             const res = await fetch('/api/results/short/add', {
                 method: 'POST',
                 headers: {
@@ -243,7 +243,7 @@ const Analysis = () => {
                 body: JSON.stringify(temp)
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 message.success('Resultados guardados')
                 return true
@@ -255,7 +255,7 @@ const Analysis = () => {
             return false
 
         } catch(err) {
-            console.log(err)
+            //console.log(err)
             return false
         }
     }
@@ -270,13 +270,13 @@ const Analysis = () => {
                 },
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 return data.data
             }
             return []
         } catch(err) {
-            console.log(err)
+            //console.log(err)
             return []
         }
     }
@@ -317,7 +317,7 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
-        console.log(tempRdar1)
+        //console.log(tempRdar1)
         setRadar1(tempRdar1)
         handleSetupStkh(arr, res)
     }
@@ -377,7 +377,7 @@ const Analysis = () => {
 
     //setup table with results history
     const setupTableHistory = (num: number, res?: IResults[]) => {
-        console.log(reduxResults[num])
+        //console.log(reduxResults[num])
         setTable(reduxResults[num].results)
         handleSetupHistoryData(reduxResults[num].results, res)
     }
@@ -394,7 +394,7 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
-        console.log(tempRdar1)
+        //console.log(tempRdar1)
         setRadar1(tempRdar1)
         handleSetupHistoryStkh(table, res)
     }
@@ -412,7 +412,7 @@ const Analysis = () => {
             }
             tempRdar2.push(tempObj)
         })
-        console.log(tempRdar2)
+        //console.log(tempRdar2)
         setRadar2(tempRdar2)
         setLoading(false)
     }
@@ -452,7 +452,7 @@ const Analysis = () => {
             sum_riqueza: data.reduce((a, b) => a + (b.riqueza || 0), 0),
             sum_total: Math.round(data.reduce((a, b) => a + (b.sum_total || 0), 0) / 72 * 100),
         }
-        console.log(temp)
+        //console.log(temp)
         setTable(temp)
         await handleAddResults(temp)
         handleSetupData(arr)

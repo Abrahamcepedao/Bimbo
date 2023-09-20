@@ -125,15 +125,15 @@ const Analysis = () => {
         verifyUser()
         verifyAnswers()
         verifySelectedStkhs()
-        console.log(reduxHasHistory, reduxResults, reduxUser, table.data)
+        //console.log(reduxHasHistory, reduxResults, reduxUser, table.data)
         if(reduxResults.length !== 0 && reduxIsAnalisis && table.data.length === 0) {
-            console.log('here1')
+            //console.log('here1')
             setupHistorySelect()
         } else if(reduxHasHistory && reduxResults.length !== 0 && reduxUser !== null && table.data.length === 0) {
-            console.log('here2')
+            //console.log('here2')
             setupHistorySelect()
         } else if(reduxAnswers.length !== 0 && reduxSelectedstkhs.length !== 0 && reduxUser !== null && reduxAnswersId !== -1 && table.data.length === 0) {
-            console.log('here3')
+            //console.log('here3')
             createTableData(reduxAnswers, stkhs.filter((el) => reduxSelectedstkhs.includes(el.id)))
         }
     }, [reduxAnswers, reduxUser, reduxAnswersId, reduxIsAnalisis, reduxHasHistory, reduxResults])
@@ -177,7 +177,7 @@ const Analysis = () => {
     const verifySelectedStkhs = () => {
         if(reduxSelectedstkhs.length === 0) {
             let temp: string[] = JSON.parse(localStorage.getItem('selectedStkhs') as string) || []
-            console.log(temp)
+            //console.log(temp)
             if(temp.length !== 0) {
                 dispatch(setReduxSelectedStkhs(temp))
             } 
@@ -260,7 +260,7 @@ const Analysis = () => {
                 createdAt: reduxAnswersId,
                 results: tempTable,
             }
-            console.log(temp)
+            //console.log(temp)
             const res = await fetch('/api/results/profound/add', {
                 method: 'POST',
                 headers: {
@@ -269,7 +269,7 @@ const Analysis = () => {
                 body: JSON.stringify(temp)
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 return message.success('Resultados guardados')
             }
@@ -284,7 +284,7 @@ const Analysis = () => {
             
 
         } catch(err) {
-            console.log(err)
+            //console.log(err)
         }
     }
 
@@ -298,13 +298,13 @@ const Analysis = () => {
                 },
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 return data.data
             }
             return []
         } catch(err) {
-            console.log(err)
+            //console.log(err)
             return []
         }
     }
@@ -364,7 +364,7 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
-        console.log(tempRdar1)
+        //console.log(tempRdar1)
         setRadar1(tempRdar1)
         handleSetupStkh(arr, res, stkhs_short)
     }
@@ -382,7 +382,7 @@ const Analysis = () => {
             }
             tempRdar2.push(tempObj)
         })
-        console.log(tempRdar2)
+        //console.log(tempRdar2)
         setRadar2(tempRdar2)
         setLoading(false)
     }
@@ -415,15 +415,15 @@ const Analysis = () => {
 
     //setup table with results history
     const setupTableHistory = (num: number) => {
-        console.log(reduxResults[num])
+        //console.log(reduxResults[num])
         setTable(reduxResults[num].results)
         let tempStkhs: string[] = []
         reduxResults[num].results.data.forEach((el) => {
             if(!tempStkhs.includes(el.stkh)) tempStkhs.push(el.stkh)
         })
-        console.log(tempStkhs)
+        //console.log(tempStkhs)
         let stkhs_short = stkhs.filter((el) => tempStkhs.includes(el.name))
-        console.log(stkhs_short)
+        //console.log(stkhs_short)
         setSelectedStkhs(stkhs_short)
         handleSetupHistoryData(reduxResults[num].results, stkhs_short)
     }
@@ -431,7 +431,7 @@ const Analysis = () => {
     //handle setup dimensions
     const handleSetupHistoryDimensions = (table: ITable, res: IResults[], stkhs_short: IStkh[]) => {
         let tempRdar1: any[] = []
-        console.log(table)
+        //console.log(table)
         Object.keys(dimensiones).forEach((dim: string) => {
             let tempObj = {
                 dimension: dimensiones[dim as 'riqueza'],
@@ -441,7 +441,7 @@ const Analysis = () => {
             }
             tempRdar1.push(tempObj)
         })
-        console.log(tempRdar1)
+        //console.log(tempRdar1)
         setRadar1(tempRdar1)
         handleSetupHistoryStkh(table, res, stkhs_short)
     }
@@ -450,12 +450,12 @@ const Analysis = () => {
     const handleSetupHistoryStkh = (table: ITable, res: IResults[], stkhs_short: IStkh[]) => {
 
         let tempRdar2: any[] = []
-        console.log(stkhs_short)
-        console.log(table)
-        console.log(table.data.filter((el) => el.stkh === 'Colaboradores')[0]?.sum_total)
-        console.log(table.data.filter((el) => el.stkh === 'Colaboradores')[0]?.sum_total_max)
+        //console.log(stkhs_short)
+        //console.log(table)
+        //console.log(table.data.filter((el) => el.stkh === 'Colaboradores')[0]?.sum_total)
+        //console.log(table.data.filter((el) => el.stkh === 'Colaboradores')[0]?.sum_total_max)
         stkhs_short.forEach((stkh) => {
-            console.log((table.data.filter((el) => el.stkh === stkh.name)[0]?.sum_total / table.data.filter((el) => el.stkh === stkh.name)[0]?.sum_total_max!))
+            //console.log((table.data.filter((el) => el.stkh === stkh.name)[0]?.sum_total / table.data.filter((el) => el.stkh === stkh.name)[0]?.sum_total_max!))
             let tempObj = {
                 dimension: stkh.name,
                 promedio: res.length !== 0 ? calculateAvgResultsStkh(stkh.name, res) : 0,
@@ -464,7 +464,7 @@ const Analysis = () => {
             }
             tempRdar2.push(tempObj)
         })
-        console.log(tempRdar2)
+        //console.log(tempRdar2)
         setRadar2(tempRdar2)
         setLoading(false)
     }

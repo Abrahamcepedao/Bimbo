@@ -127,7 +127,7 @@ const Form = () =>  {
     //handle add results to database
     const handleAddResults = async (result: IResults) => {
         try {
-            console.log(result)
+            //console.log(result)
             const res = await fetch('/api/results/short/add', {
                 method: 'POST',
                 headers: {
@@ -136,7 +136,7 @@ const Form = () =>  {
                 body: JSON.stringify(result)
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 return message.success('Resultados guardados')
             }
@@ -151,7 +151,7 @@ const Form = () =>  {
             
 
         } catch(err) {
-            console.log(err)
+            //console.log(err)
         }
     }
 
@@ -172,7 +172,7 @@ const Form = () =>  {
                 results: temp
             }
             temp2.push(result)
-            console.log(temp2)
+            //console.log(temp2)
 
             let res = await handleAddResults(result)
             if(res) {
@@ -215,7 +215,7 @@ const Form = () =>  {
             sum_riqueza: data.reduce((a, b) => a + (b.riqueza || 0), 0),
             sum_total: Math.round(data.reduce((a, b) => a + (b.sum_total || 0), 0) / 72 * 100),
         }
-        console.log(temp)
+        //console.log(temp)
         return temp
     }
 
@@ -233,7 +233,7 @@ const Form = () =>  {
         let question_index = stkhs_short[activeStep].questions.findIndex((item) => item.id === question_id)
         temp[i].values = stkhs_short[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.values || null
 
-        console.log(temp)
+        //console.log(temp)
         setAnswers(temp)
 
         verifyDisabled(temp, temp[i].stkhId)

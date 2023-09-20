@@ -100,7 +100,7 @@ const Form = () =>  {
     const verifySelectedStkhs = () => {
         if(reduxSelectedstkhs.length === 0) {
             let temp: string[] = JSON.parse(localStorage.getItem('selectedStkhs') as string) || []
-            console.log(temp)
+            //console.log(temp)
             if(temp.length !== 0) {
                 dispatch(setReduxSelectedStkhs(temp))
                 setupAnswers(temp)
@@ -111,7 +111,7 @@ const Form = () =>  {
     //setup form
     const setupAnswers = (arr: string[]) => {
         //set answer
-        console.log(arr)
+        //console.log(arr)
         let temp: IQuestionAnswer[] = []
         stkhs.filter((el) => arr.includes(el.id)).forEach((stkh: IStkh) => {
             stkh.questions.forEach((question) => {
@@ -125,7 +125,7 @@ const Form = () =>  {
                 })
             })
         })
-        console.log(temp)
+        //console.log(temp)
         setSelectedStkhs(stkhs.filter((el) => arr.includes(el.id)))
         setAnswers(temp)
         setLoading(false)
@@ -146,7 +146,7 @@ const Form = () =>  {
     //handle add results to database
     const handleAddResults = async (result: IResults) => {
         try {
-            console.log(result)
+            //console.log(result)
             const res = await fetch('/api/results/profound/add', {
                 method: 'POST',
                 headers: {
@@ -155,7 +155,7 @@ const Form = () =>  {
                 body: JSON.stringify(result)
             })
             const data = await res.json()
-            console.log(data)
+            //console.log(data)
             if(data.status === 200) {
                 return message.success('Resultados guardados')
             }
@@ -170,7 +170,7 @@ const Form = () =>  {
             
 
         } catch(err) {
-            console.log(err)
+            //console.log(err)
         }
     }
 
@@ -192,7 +192,7 @@ const Form = () =>  {
                 results: temp
             }
             temp2.push(result)
-            console.log(temp2)
+            //console.log(temp2)
 
             let res = await handleAddResults(result)
             if(res) {
@@ -242,7 +242,7 @@ const Form = () =>  {
             sum_total: data.reduce((a, b) => a + (b.sum_total || 0), 0),
             sum_total_max: data.reduce((a, b) => a + (b.sum_total_max || 0), 0),
         }
-        console.log(temp)
+        //console.log(temp)
         return temp
     }
 

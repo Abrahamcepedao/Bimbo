@@ -28,6 +28,7 @@ const Banner = () => {
 
     //useEffect - subtitle
     useEffect(() => {
+        console.log(path)
         if (path.includes('short')) {
             setTitle('Autodiagnóstico de Sostenibilidad y Congruencia ®️')
             if(path === '/auto/short') setSubtitle('Introducción de autodiagnóstico')
@@ -43,7 +44,10 @@ const Banner = () => {
             if(path === '/auto/profound/results/transformation') setSubtitle('Transformación')
         } else if (path === '/aviso') setSubtitle('Aviso de privacidad')
         else if(path === '/checklist') setSubtitle('Estado actual de la empresa')
-        else {
+        else if(path === '/'){
+            setTitle('Protocolo de Responsabilidad Social Empresarial Centrada en la Persona ®️')
+            setSubtitle('Primer paso de las empresas hacia la responsabilidad social empresarial')
+        } else {
             setTitle('Protocolo de Responsabilidad Social Empresarial Centrada en la Persona ®️')
             setSubtitle('Primer paso de las empresas hacia la responsabilidad social empresarial')
         }
