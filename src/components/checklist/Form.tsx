@@ -54,7 +54,7 @@ const Form = () => {
             if (temp) {
                 dispatch(setReduxUser(temp))
                 setLoading(false)
-            } else push('/')
+            } //else push('/')
         }
     }
 
@@ -118,9 +118,9 @@ const Form = () => {
                     {/* header */}
                     <div className="min-w-[500px]">
                         <div className="grid grid-cols-6 gap-4">
-                            <div></div>
+                            <div className="col-span-4"></div>
                             {checklist_answers.map((item, i) => (
-                                <div key={i} className="flex_c_center text-center">
+                                <div key={i} className="flex_c_center text-center col-span-1">
                                     <p className="text text-xs sm:text-base mb-0">{item.answer}</p>
                                 </div>
                             ))}
@@ -129,10 +129,10 @@ const Form = () => {
                         {/* body */}
                         {checklistData.map((item, i) => (
                             <div key={i} className="grid grid-cols-6 gap-4 mt-4">
-                                <div  className="flex_b_center ">
+                                <div  className="flex_b_center w-full col-span-4">
                                     <p className="text bold text-xs sm:text-base">{item.title}</p>
                                 </div>
-                                <div className="col-span-5">
+                                <div className="col-span-2">
                                     <RadioCheck answer={item} answers={checklist_answers} onChange={handleSelectChecklist}/>
                                 </div>
                             </div>

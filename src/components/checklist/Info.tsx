@@ -41,8 +41,8 @@ const Info = () => {
                             <h4 className="subtitle_2 underline mb-4">{point.title}:</h4>
                             <ul className="pl-4">
                                 {point.points.map((p: IPoint, j) => (
-                                    <li key={j} className="mb-2 list-disc">
-                                        <b>{p.title}</b>: {p.text}
+                                    <li key={j} className="mb-2 list-disc text">
+                                        <b className="bold">{p.title}</b>: {p.text}
                                     </li>
                                 ))}
                             </ul>
