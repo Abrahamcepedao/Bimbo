@@ -62,7 +62,7 @@ const Form = () => {
             if (temp) {
                 dispatch(setReduxUser(temp))
                 setLoading(false)
-            } //else push('/')
+            } else push('/')
         }
     }
 
@@ -133,7 +133,7 @@ const Form = () => {
             <div className="max-w-6xl m-auto">
                 <div className="overflow-x-scroll">
                     {/* header */}
-                    <div className="min-w-[500px]">
+                    <div className="min-w-[750px]">
                         <div className="grid grid-cols-7 gap-4">
                             <div className="text-center col-span-2 checkbox_container flex_c_center">
                                 <p className="text text-xs sm:text-base mb-0">Elmento de gestión</p>
