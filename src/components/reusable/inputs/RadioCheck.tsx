@@ -23,7 +23,7 @@ export default function RadioCheck({ answer, answers, onChange }: Props) {
             name="type"
             value={answer.answer}
             onChange={(e) => onChange(e, answer.id)}
-            className='grid grid-cols-2 gap-4 w-full h-full'
+            className='grid grid-cols-5 gap-4 w-full h-full'
         >
             {/* <FormControlLabel value="0" control={<Radio style={{ color: formData.type === "0" ? "rgb(36, 153, 239)" : '#F0F5FE' }} />} label="Administrador" /> */}
             {answers.map((item, i) => (

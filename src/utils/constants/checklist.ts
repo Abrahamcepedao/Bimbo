@@ -14,9 +14,20 @@ const checklist: IChecklistItem[] = [
     { id: '10', title: 'Proyectos de filantropía con participación del personal.', answer: -1 },
 ]
 
+/* const checklist_answers: IChecklistAnswer[] = [
+    { id: 0, answer: 'No se tiene' },
+    { id: 1, answer: 'Se tiene pero no se conoce' },
+    { id: 2, answer: 'Se tiene y se conoce' },
+    { id: 3, answer: 'Se tiene y se practica pero se evalúa' },
+    { id: 4, answer: 'Esta formalizado, se practica y se evalúa' },
+] */
+
 const checklist_answers: IChecklistAnswer[] = [
-    { id: 1, answer: 'Sí' },
-    { id: 0, answer: 'No' },
+    { id: 0, answer: 'Ninguno' },
+    { id: 1, answer: 'Consciente' },
+    { id: 2, answer: 'Conocido' },
+    { id: 3, answer: 'Aplicado' },
+    { id: 4, answer: 'Optimizado' },
 ]
 
 export { checklist, checklist_answers }

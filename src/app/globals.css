@@ -98,9 +98,16 @@
     @apply bg-trans_gray opacity-60 p-4 rounded-md max-w-2xl m-auto w-full;
   }
 
+  .checkbox_container {
+    @apply bg-trans_gray opacity-60 p-4 rounded-md;
+  }
+
   /* <-------flex--------> */
   .flex_b_center {
     @apply flex justify-between items-center;
+  }
+  .flex_e_center {
+    @apply flex justify-end items-center;
   }
   .flex_c_center {
     @apply flex justify-center items-center;
