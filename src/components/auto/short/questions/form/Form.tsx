@@ -98,14 +98,14 @@ const Form = () =>  {
         let temp: IQuestionAnswer[] = []
         stkhs_short.forEach((stkh: IStkh) => {
             stkh.questions.forEach((question) => {
-                let num = Math.floor(Math.random() * 3)
+                //let num = Math.floor(Math.random() * 3)
                 temp.push({
                     stkhId: stkh.id,
                     questionId: question.id,
                     dimId: question.dim || '',
                     //answerId: question.answers[num].id,
                     answerId: '',
-                    value: question.answers[num].value
+                    value: -1
                 })
             })
         })
@@ -161,6 +161,8 @@ const Form = () =>  {
         let id: number = Date.now()
         if(reduxHasHistory) {
             setLoading(true)
+            console.log('has history')
+            console.log(arr)
             let temp: ITable = createTableData(arr)
             let temp2: IResults[] = [...reduxResults]
             let result = {
@@ -232,9 +234,7 @@ const Form = () =>  {
         let i = temp.findIndex((item) => item.questionId === question_id)
         temp[i].answerId = e.currentTarget.value
         let question_index = stkhs_short[activeStep].questions.findIndex((item) => item.id === question_id)
-        temp[i].values = stkhs_short[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.values || null
-
-        //console.log(temp)
+        temp[i].value = stkhs_short[activeStep].questions[question_index].answers.find((item) => item.id === e.currentTarget.value)?.value || -1
         setAnswers(temp)
 
         verifyDisabled(temp, temp[i].stkhId)
