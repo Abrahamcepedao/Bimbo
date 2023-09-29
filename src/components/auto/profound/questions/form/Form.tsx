@@ -115,14 +115,14 @@ const Form = () =>  {
         let temp: IQuestionAnswer[] = []
         stkhs.filter((el) => arr.includes(el.id)).forEach((stkh: IStkh) => {
             stkh.questions.forEach((question) => {
-                let num = Math.floor(Math.random() * 3)
+                //let num = Math.floor(Math.random() * 3)
                 temp.push({
                     stkhId: stkh.id,
                     questionId: question.id,
                     dimId: question.dim,
                     //answerId: question.answers[num].id,
                     answerId: '',
-                    value: question.answers[num].value
+                    value: -1
                 })
             })
         })
