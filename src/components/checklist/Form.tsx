@@ -39,6 +39,9 @@ const Form = () => {
     //checklist
     const [checklistData, setCheckListData] = useState<IChecklistItem[]>(checklist)
 
+    //useState - points
+    const [points, setPoints] = useState<any>(0)
+
     //useState - loading
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -47,6 +50,11 @@ const Form = () => {
         verifyUser()
     }, [])
 
+    //useEffect - checklist
+    useEffect(() => {
+       calculatePoints()
+    }, [checklistData])
+
     //verify user
     const verifyUser = () => {
         if (!reduxUser) {
@@ -54,7 +62,7 @@ const Form = () => {
             if (temp) {
                 dispatch(setReduxUser(temp))
                 setLoading(false)
-            } else push('/')
+            } //else push('/')
         }
     }
 
@@ -65,6 +73,15 @@ const Form = () => {
             return item
         })
         setCheckListData(newChecklist)
+    }
+
+    //calculate points
+    const calculatePoints = () => {
+        let sum = 0
+        checklistData.forEach(item => {
+            if(item.answer !== -1) sum += item.answer * 2.5
+        })
+        setPoints(sum)
     }
 
     //validate form
@@ -113,14 +130,16 @@ const Form = () => {
 
     return (
         <div className="p-4">
-            <div className="max-w-2xl m-auto">
+            <div className="max-w-6xl m-auto">
                 <div className="overflow-x-scroll">
                     {/* header */}
                     <div className="min-w-[500px]">
-                        <div className="grid grid-cols-6 gap-4">
-                            <div></div>
+                        <div className="grid grid-cols-7 gap-4">
+                            <div className="text-center col-span-2 checkbox_container flex_c_center">
+                                <p className="text text-xs sm:text-base mb-0">Elmento de gestión</p>
+                            </div>
                             {checklist_answers.map((item, i) => (
-                                <div key={i} className="flex_c_center text-center">
+                                <div key={i} className="text-center col-span-1 checkbox_container flex_c_center">
                                     <p className="text text-xs sm:text-base mb-0">{item.answer}</p>
                                 </div>
                             ))}
@@ -128,15 +147,24 @@ const Form = () => {
 
                         {/* body */}
                         {checklistData.map((item, i) => (
-                            <div key={i} className="grid grid-cols-6 gap-4 mt-4">
-                                <div  className="flex_b_center ">
-                                    <p className="text bold text-xs sm:text-base">{item.title}</p>
+                            <div key={i} className="grid grid-cols-7 gap-4 mt-4">
+                                <div  className="flex_b_center w-full col-span-2 checkbox_container">
+                                    <p className="text text-xs sm:text-base mb-0">{item.title}</p>
                                 </div>
                                 <div className="col-span-5">
                                     <RadioCheck answer={item} answers={checklist_answers} onChange={handleSelectChecklist}/>
                                 </div>
                             </div>
                         ))}
+                        <div className="grid grid-cols-7 gap-4 mt-4">
+                            <div  className="col-span-5"></div>
+                            <div className="checkbox_container flex_c_center">
+                                    <p className="text bold text-sm sm:text-lg mb-0">Porcentaje: </p>
+                                </div>
+                            <div className="flex_c_center checkbox_container">
+                                <p className="text bold text-sm sm:text-lg mb-0">{points}%</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="w-full mb-12 sm:hidden">

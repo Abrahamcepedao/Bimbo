@@ -39,7 +39,7 @@ const Banner = () => {
             if(path === '/auto/profound') setSubtitle('Cuestionario de análisis a profundo')
             if(path === '/auto/profound/select_stkhs') setSubtitle('Selección de stakeholders a analizar')
             if(path === '/auto/profound/results') setSubtitle('Resultados del análisis a profundidad de ' + user?.company)
-            if(path === '/auto/profound/results/formation') setSubtitle('Formación')
+            if(path === '/auto/profound/results/formation') setSubtitle('Programas de Formación USEM 2023')
             if(path === '/auto/profound/results/bibliography') setSubtitle('Bibliografía')
             if(path === '/auto/profound/results/transformation') setSubtitle('Transformación')
         } else if (path === '/aviso') setSubtitle('Aviso de privacidad')
