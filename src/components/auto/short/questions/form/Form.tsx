@@ -257,7 +257,7 @@ const Form = () =>  {
 
     return (
         <div className='max-w-2xl m-auto'>
-            <div>
+            <div className='p-2'>
                 <p className='text'>Por favor contesta las preguntas de cada grupo de interés:</p>
                 {!loading ? (
                     <Stepper activeStep={activeStep} orientation="vertical">

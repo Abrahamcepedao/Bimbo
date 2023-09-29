@@ -10,7 +10,13 @@ import Link from 'next/link'
 //components
 import Button from '@/components/reusable/buttons/Button'
 
+//redux
+import { useSelector, useDispatch } from 'react-redux'
+import {  selectProfoundResults, setReduxProfoundResults } from '@/app/GlobalRedux/Features/results/resultsSlice'
+
 //interfaces
+import { IResults } from '@/utils/interfaces/types'
+
 interface Props {
     isAnalysis: boolean,
     results: '0' | '1' | '2', // 0 = red, 1 = yellow, 2 = green
@@ -46,6 +52,26 @@ const AnalysisText = ({ isAnalysis, results}: Props) => {
     //router
     const { push } = useRouter()
 
+    //redux
+    const dispatch = useDispatch()
+    const reduxResults: IResults[] = useSelector(selectProfoundResults)
+
+
+    //useEffect - verify profound results
+    useEffect(() => {
+        verifyProfoundResults()
+    }, [])
+
+    //verify profound results
+    const verifyProfoundResults = () => {
+        if(reduxResults.length === 0) {
+            let temp: IResults[] = JSON.parse(localStorage.getItem('profound_results') as string) || []
+            if(temp.length !== 0) {
+                dispatch(setReduxProfoundResults(temp))
+            }
+        }
+    }
+
     return (
         <div className="py-8 px-4">
             <div className="max-w-2xl m-auto text-justify">
@@ -56,7 +82,7 @@ const AnalysisText = ({ isAnalysis, results}: Props) => {
                 ))}
                 <div className="pt-8 max-w-2xl m-auto grid sm:grid-cols-2 gap-4">
                     <Button text={isAnalysis ? 'Volver al inicio' : 'Terminar análisis'} variant="filled" onClick={() => push('/')}/>
-                    <Button text="Continuar con protocolo" variant="gradient" onClick={() => push(isAnalysis ? '/auto/profound/results' : '/auto/profound/select_stkhs')}/>
+                    <Button text={(isAnalysis || reduxResults.length === 0) ? 'Contestar protocolo' : "Continuar con protocolo"} variant="gradient" onClick={() => push((isAnalysis || reduxResults.length === 0) ? '/auto/profound/select_stkhs' : '/auto/profound/select_stkhs')}/>
                 </div>
             </div>
         </div>
